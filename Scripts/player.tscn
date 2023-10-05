@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm2tyoya3d5cj"]
+
+[ext_resource type="Texture2D" uid="uid://b057ryu4ph3ju" path="res://Art/Main character/Asmon_front.png" id="1_iy8co"]
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_yvt51"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yo0w6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_iy8co")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_yvt51")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(241, 146)
+scale = Vector2(0.154297, 0.130859)
+sprite_frames = SubResource("SpriteFrames_yo0w6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
