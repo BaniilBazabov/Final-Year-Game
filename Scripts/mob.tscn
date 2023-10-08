@@ -1,0 +1,104 @@
+[gd_scene load_steps=14 format=3 uid="uid://bpfcbmbhb0pw0"]
+
+[ext_resource type="Texture2D" uid="uid://duvhbc716jy5e" path="res://Art/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="1_ajugw"]
+[ext_resource type="Script" path="res://Scripts/Mob.cs" id="1_bd88h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a062k"]
+atlas = ExtResource("1_ajugw")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unqq3"]
+atlas = ExtResource("1_ajugw")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2xkk"]
+atlas = ExtResource("1_ajugw")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inlpt"]
+atlas = ExtResource("1_ajugw")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tiipr"]
+atlas = ExtResource("1_ajugw")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q34p"]
+atlas = ExtResource("1_ajugw")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_083yu"]
+atlas = ExtResource("1_ajugw")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6b2gr"]
+atlas = ExtResource("1_ajugw")
+region = Rect2(192, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_184tn"]
+atlas = ExtResource("1_ajugw")
+region = Rect2(240, 96, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ktgs1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a062k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unqq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2xkk")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inlpt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tiipr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q34p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_083yu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b2gr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_184tn")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1ka2"]
+size = Vector2(20, 33)
+
+[node name="Mob" type="RigidBody2D"]
+position = Vector2(354, 209)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_bd88h")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ktgs1")
+animation = &"right"
+frame = 1
+frame_progress = 0.321569
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 3.5)
+shape = SubResource("RectangleShape2D_v1ka2")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-5, 3.50001)
+scale = Vector2(1, 1.65)
