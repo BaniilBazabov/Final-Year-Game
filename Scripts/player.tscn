@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cm2tyoya3d5cj"]
+[gd_scene load_steps=5 format=3 uid="uid://cm2tyoya3d5cj"]
 
 [ext_resource type="Texture2D" uid="uid://b057ryu4ph3ju" path="res://Art/Main character/Asmon_front.png" id="1_iy8co"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_yvt51"]
@@ -19,6 +19,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sp60r"]
+radius = 20.0
+height = 64.0
+
 [node name="Player" type="Area2D"]
 script = ExtResource("1_yvt51")
 
@@ -28,3 +32,7 @@ scale = Vector2(0.154297, 0.130859)
 sprite_frames = SubResource("SpriteFrames_yo0w6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(243, 148)
+shape = SubResource("CapsuleShape2D_sp60r")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
