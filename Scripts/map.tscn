@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://mumn61tikydr"]
+[gd_scene load_steps=9 format=3 uid="uid://mumn61tikydr"]
 
 [ext_resource type="Texture2D" uid="uid://cqabbaxfhai4j" path="res://Art/Sprout Lands - Sprites - Basic pack/Tilesets/Grass.png" id="1_e2kpu"]
+[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_jxpgr"]
+[ext_resource type="PackedScene" uid="uid://bpfcbmbhb0pw0" path="res://Scripts/mob.tscn" id="2_2ktv2"]
 [ext_resource type="PackedScene" uid="uid://cm2tyoya3d5cj" path="res://Scripts/player.tscn" id="2_6powr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xl6yi"]
@@ -83,7 +85,15 @@ texture = ExtResource("1_e2kpu")
 sources/0 = SubResource("TileSetAtlasSource_xl6yi")
 sources/1 = SubResource("TileSetAtlasSource_o6x2m")
 
-[node name="Game" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_wegnl"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 178, 135, 0, 0, 0, 0, 1653, 156, 0, 0, 0, 0, 1660, 883, 0, 0, 0, 0, 178, 879, 0, 0, 0, 0, 178, 135)
+}
+point_count = 5
+
+[node name="Game" type="Node"]
+script = ExtResource("1_jxpgr")
+MobScene = ExtResource("2_2ktv2")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_g2c3b")
@@ -92,3 +102,29 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 1, 131072, 1, 0, 196608,
 
 [node name="Player" parent="." instance=ExtResource("2_6powr")]
 position = Vector2(707, 436)
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(967, 511)
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_wegnl")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2(178, 135)
+rotation = 0.0142363
+
+[node name="Mob" parent="." instance=ExtResource("2_2ktv2")]
+
+[connection signal="Hit" from="Player" to="." method="GameOver"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

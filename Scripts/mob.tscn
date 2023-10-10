@@ -92,13 +92,14 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ktgs1")
 animation = &"right"
-frame = 1
-frame_progress = 0.321569
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5, 3.5)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_v1ka2")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(-5, 3.50001)
 scale = Vector2(1, 1.65)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
