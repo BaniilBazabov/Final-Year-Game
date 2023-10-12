@@ -9,7 +9,7 @@ public partial class Game : Node
 
 	public override void _Ready()
 	{
-		NewGame();
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,15 +18,20 @@ public partial class Game : Node
 	}
 	private void GameOver()
 	{
+		GetNode<Hud>("HUD").ShowGameOver();
 		GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
 	}
-	public void NewGame()
+	private void NewGame()
 	{
+		var hud = GetNode<Hud>("HUD");
+		hud.UpdateScore(_score);
+		hud.ShowMessage("Get Ready!");
 		_score = 0;
 		var player = GetNode<Player>("Player");
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		player.Start(startPosition.Position);
+		GetNode<Timer>("StartTimer").Start();
 	}
 	private void _on_mob_timer_timeout()
 	{
@@ -48,6 +53,7 @@ public partial class Game : Node
 	private void _on_score_timer_timeout()
 	{
 		_score++;
+		GetNode<Hud>("HUD").UpdateScore(_score);
 	}
 
 
@@ -58,7 +64,6 @@ public partial class Game : Node
 	}
 	
 }
-
 
 
 

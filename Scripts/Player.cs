@@ -19,6 +19,7 @@ public partial class Player : Area2D
 	public void Start(Vector2 position)
 	{
 		Position = position;
+		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
 	}
 
@@ -67,6 +68,7 @@ public partial class Player : Area2D
 	
 	private void _on_body_entered(PhysicsBody2D body)
 	{
+		Hide();
 		EmitSignal(SignalName.Hit);
 		// Must be deferred as we can't change physics properties on a physics callback.
 		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
