@@ -21,7 +21,7 @@ public partial class Hud : CanvasLayer
 		message.Text = text;
 		message.Show();
 
-		GetNode<Timer>("RoundTime").Start();
+		GetNode<Timer>("MessageTimer").Start();
 	}
 
 	async public void ShowGameOver()
@@ -46,14 +46,14 @@ public partial class Hud : CanvasLayer
 	
 	private void _on_message_timer_timeout()
 	{
-		GetNode<Button>("Start").Hide();
-		EmitSignal(SignalName.StartGame);
+		GetNode<Label>("Message").Hide();
 	}
 
 
 	private void _on_start_pressed()
 	{
-		GetNode<Label>("Message").Hide();
+		GetNode<Button>("Start").Hide();
+		EmitSignal(SignalName.StartGame);
 	}
 }
 

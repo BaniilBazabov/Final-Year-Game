@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_jxpgr"]
 [ext_resource type="PackedScene" uid="uid://bpfcbmbhb0pw0" path="res://Scripts/mob.tscn" id="2_2ktv2"]
 [ext_resource type="PackedScene" uid="uid://cm2tyoya3d5cj" path="res://Scripts/player.tscn" id="2_6powr"]
-[ext_resource type="PackedScene" uid="uid://co5q52eqt8ayc" path="res://Scripts/hud.tscn" id="5_3438i"]
+[ext_resource type="PackedScene" uid="uid://dgmlr8la41g78" path="res://Scripts/hud.tscn" id="5_3438i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xl6yi"]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://co5q52eqt8ayc"]
+[gd_scene load_steps=3 format=3 uid="uid://dgmlr8la41g78"]
 
 [ext_resource type="Script" path="res://Scripts/Hud.cs" id="1_4jrct"]
 [ext_resource type="FontFile" uid="uid://d1s5ipgjhyxi1" path="res://Fonts/YoungSerif-Regular.ttf" id="1_20vlh"]
