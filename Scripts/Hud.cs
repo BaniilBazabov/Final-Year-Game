@@ -28,7 +28,7 @@ public partial class Hud : CanvasLayer
 	{
 		ShowMessage("Game Over");
 
-		var roundTime = GetNode<Timer>("RoundTime");
+		var roundTime = GetNode<Timer>("MessageTimer");
 		await ToSignal(roundTime, Timer.SignalName.Timeout);
 
 		var message = GetNode<Label>("Message");

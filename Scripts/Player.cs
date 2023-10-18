@@ -59,11 +59,24 @@ public partial class Player : Area2D
 		{
 			animatedSprite2D.Stop();
 		}
+		 
+		if (velocity.X != 0 || velocity.Y != 0)
+		{
+			animatedSprite2D.Animation = "right";
+			animatedSprite2D.FlipV = false;
+			// See the note below about boolean assignment.
+			animatedSprite2D.FlipH = velocity.X < 0;
+		}
+		else
+		{
+			animatedSprite2D.Animation = "Idle";
+		}
+		
 		
 		Position += velocity * (float)delta;
 		Position = new Vector2(
-		x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
-		y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y));
+		x: Mathf.Clamp(Position.X, -100, ScreenSize.X),
+		y: Mathf.Clamp(Position.Y, -100, ScreenSize.Y));
 	}
 	
 	private void _on_body_entered(PhysicsBody2D body)
