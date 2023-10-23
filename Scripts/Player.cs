@@ -74,9 +74,6 @@ public partial class Player : Area2D
 		
 		
 		Position += velocity * (float)delta;
-		Position = new Vector2(
-		x: Mathf.Clamp(Position.X, -100, ScreenSize.X),
-		y: Mathf.Clamp(Position.Y, -100, ScreenSize.Y));
 	}
 	
 	private void _on_body_entered(PhysicsBody2D body)

@@ -174,11 +174,14 @@ position = Vector2(259.5, 172)
 scale = Vector2(1.4625, 1.65)
 sprite_frames = SubResource("SpriteFrames_yo0w6")
 animation = &"left"
-frame_progress = 0.177118
+frame_progress = 0.280881
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(261, 168)
 shape = SubResource("CapsuleShape2D_sp60r")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(258, 174)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
