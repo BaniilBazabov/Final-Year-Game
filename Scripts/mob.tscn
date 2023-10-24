@@ -90,6 +90,7 @@ script = ExtResource("1_bd88h")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ktgs1")
 animation = &"right"
 
@@ -100,6 +101,6 @@ shape = SubResource("RectangleShape2D_v1ka2")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(-5, 3.50001)
-scale = Vector2(1, 1.65)
+scale = Vector2(2, 3.3)
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
