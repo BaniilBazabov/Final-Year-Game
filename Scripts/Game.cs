@@ -35,17 +35,7 @@ public partial class Game : Node
 	}
 	private void _on_mob_timer_timeout()
 	{
-		var player = GetNode<Player>("Player");
 		Mob mob = MobScene.Instantiate<Mob>();
-		var mobSpawnLocation = GetNode<PathFollow2D>("MobPath/MobSpawnLocation");
-		mobSpawnLocation.ProgressRatio = GD.Randf();
-
-		float direction = mobSpawnLocation.Rotation;
-		mob.Position = mobSpawnLocation.Position;
-
-		var velocity = new Vector2(200, 0);
-		mob.LinearVelocity = velocity.Rotated(direction);
-
 		AddChild(mob);
 	}
 

@@ -84,7 +84,6 @@ size = Vector2(20, 33)
 
 [node name="Mob" type="RigidBody2D"]
 position = Vector2(354, 209)
-collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_bd88h")
 metadata/_edit_group_ = true
