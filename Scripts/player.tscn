@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://cm2tyoya3d5cj"]
+[gd_scene load_steps=27 format=3 uid="uid://cm2tyoya3d5cj"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_yvt51"]
 [ext_resource type="Texture2D" uid="uid://o0tclsa5cvle" path="res://Art/Main character/Character _Idle.png" id="2_ifg37"]
 [ext_resource type="Texture2D" uid="uid://ddu6x5k8blk22" path="res://Art/Main character/Character _Walk.png" id="3_ftwls"]
+[ext_resource type="Script" path="res://Scripts/Health.cs" id="4_f7prn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpbym"]
 atlas = ExtResource("2_ifg37")
@@ -163,25 +164,30 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sp60r"]
-radius = 20.0
-height = 138.0
+radius = 27.0
+height = 104.0
 
 [node name="Player" type="Area2D"]
+position = Vector2(598, 253)
 script = ExtResource("1_yvt51")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(259.5, 172)
-scale = Vector2(1.4625, 1.65)
+position = Vector2(3, -2)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_yo0w6")
 animation = &"left"
-frame_progress = 0.280881
+frame_progress = 0.791721
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(261, 168)
+position = Vector2(1, -3)
 shape = SubResource("CapsuleShape2D_sp60r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(258, 174)
+position = Vector2(-1, -2)
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("4_f7prn")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

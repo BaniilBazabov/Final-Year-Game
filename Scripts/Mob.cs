@@ -4,7 +4,7 @@ using System;
 public partial class Mob : RigidBody2D 
 {
 	private Node2D player;
-	private float speed = 5f;
+	private double speed = 50.0;
 	private void _on_visible_on_screen_enabler_2d_screen_exited()
 	{
 		QueueFree();
@@ -25,9 +25,10 @@ public partial class Mob : RigidBody2D
 		if(player != null)
 		{
 			Vector2 direction = (player.GlobalPosition - GlobalPosition).Normalized();
+			Vector2 velocity = direction * (float)(speed * delta);
 
 			// Move the mob towards the player
-			ApplyCentralImpulse(direction * speed);
+			GlobalPosition += velocity;
 		}
 	}
 
