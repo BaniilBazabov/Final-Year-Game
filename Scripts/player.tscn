@@ -172,12 +172,15 @@ position = Vector2(598, 253)
 script = ExtResource("1_yvt51")
 metadata/_edit_group_ = true
 
+[node name="Health" type="Node2D" parent="." groups=["player"]]
+script = ExtResource("4_f7prn")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -2)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_yo0w6")
 animation = &"left"
-frame_progress = 0.791721
+frame_progress = 0.0191325
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -186,8 +189,5 @@ shape = SubResource("CapsuleShape2D_sp60r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -2)
-
-[node name="Health" type="Node2D" parent="."]
-script = ExtResource("4_f7prn")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

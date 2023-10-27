@@ -8,6 +8,7 @@ public partial class Player : Area2D
 
 	[Export]
 	public int Speed { get; set; } = 400; // How fast the player will move (pixels/sec).
+	public int health { get; set; } = 500;
 
 	public Vector2 ScreenSize; // Size of the game window.
 	// Called when the node enters the scene tree for the first time.
@@ -78,9 +79,6 @@ public partial class Player : Area2D
 	
 	private void _on_body_entered(PhysicsBody2D body)
 	{
-		Hide();
-		EmitSignal(SignalName.Hit);
-		// Must be deferred as we can't change physics properties on a physics callback.
-		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		
 	}
 }

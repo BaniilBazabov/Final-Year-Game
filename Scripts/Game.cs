@@ -16,7 +16,7 @@ public partial class Game : Node
 	public override void _Process(double delta)
 	{
 	}
-	private void GameOver()
+	public void GameOver()
 	{
 		GetNode<Hud>("HUD").ShowGameOver();
 		GetNode<Timer>("MobTimer").Stop();

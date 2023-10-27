@@ -5,6 +5,7 @@ public partial class Mob : RigidBody2D
 {
 	private Node2D player;
 	private double speed = 50.0;
+	private int damage = 100 ;
 	private void _on_visible_on_screen_enabler_2d_screen_exited()
 	{
 		QueueFree();
@@ -22,14 +23,28 @@ public partial class Mob : RigidBody2D
 	{
 		player = GetTree().Root.GetNode<Node2D>("Game/Player");
 
-		if(player != null)
+		if (player != null)
 		{
-			Vector2 direction = (player.GlobalPosition - GlobalPosition).Normalized();
-			Vector2 velocity = direction * (float)(speed * delta);
+			Vector2 direction = player.GlobalPosition - GlobalPosition;
+			float distanceToPlayer = direction.Length();
 
-			// Move the mob towards the player
-			GlobalPosition += velocity;
+			if (distanceToPlayer <= 1)
+			{
+				Attack();
+			} else {
+				// If not attacking, move the mob towards the player
+				direction = direction.Normalized();
+				Vector2 velocity = direction * (float)(speed * delta);
+				GlobalPosition += velocity;
+			}
 		}
+
+	}
+
+	public void Attack()
+	{
+		player = GetTree().Root.GetNode<Node2D>("Game/Player");
+		player.GetNode<Health>("Health").Damage(damage);
 	}
 
 
