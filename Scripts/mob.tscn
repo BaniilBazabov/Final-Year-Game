@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bpfcbmbhb0pw0"]
+[gd_scene load_steps=14 format=3 uid="uid://bpfcbmbhb0pw0"]
 
 [ext_resource type="Texture2D" uid="uid://duvhbc716jy5e" path="res://Art/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="1_ajugw"]
 [ext_resource type="Script" path="res://Scripts/Mob.cs" id="1_bd88h"]
-[ext_resource type="Script" path="res://Scripts/Health.cs" id="1_u3bg3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a062k"]
 atlas = ExtResource("1_ajugw")
@@ -91,7 +90,6 @@ script = ExtResource("1_bd88h")
 metadata/_edit_group_ = true
 
 [node name="Health" type="Node2D" parent="."]
-script = ExtResource("1_u3bg3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)

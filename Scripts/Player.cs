@@ -77,8 +77,4 @@ public partial class Player : Area2D
 		Position += velocity * (float)delta;
 	}
 	
-	private void _on_body_entered(PhysicsBody2D body)
-	{
-		
-	}
 }

@@ -1,8 +1,9 @@
 using Godot;
 using System;
 
-public partial class Health : Node2D
+public partial class PlayerHealth : Node2D
 {
+	
 	[Export] public float max_health = 500f;
 	float health;
 
@@ -22,7 +23,7 @@ public partial class Health : Node2D
 
 		if(health <= 0)
 		{
-			GetParent().QueueFree();
+			GetTree().Root.GetNode<Game>("Game").GameOver();			
 		}
 	}
 }

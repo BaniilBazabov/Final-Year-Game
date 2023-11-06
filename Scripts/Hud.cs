@@ -2,10 +2,7 @@ using Godot;
 using System;
 
 public partial class Hud : CanvasLayer
-{
-	[Signal]
-	public delegate void StartGameEventHandler();
-	
+{	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -35,7 +32,7 @@ public partial class Hud : CanvasLayer
 		message.Text = "Press the Start button to begin!";
 		message.Show();
 
-		await ToSignal(GetTree().CreateTimer(1.0), SceneTreeTimer.SignalName.Timeout);
+		await ToSignal(GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
 		GetNode<Button>("Start").Show();
 	}
 
@@ -53,7 +50,8 @@ public partial class Hud : CanvasLayer
 	private void _on_start_pressed()
 	{
 		GetNode<Button>("Start").Hide();
-		EmitSignal(SignalName.StartGame);
+		GetTree().Root.GetNode<Game>("Game").NewGame();
+		
 	}
 }
 

@@ -5,7 +5,7 @@ public partial class Mob : RigidBody2D
 {
 	private Node2D player;
 	private double speed = 50.0;
-	private int damage = 100 ;
+	private float damage = 100f;
 	private void _on_visible_on_screen_enabler_2d_screen_exited()
 	{
 		QueueFree();
@@ -13,7 +13,7 @@ public partial class Mob : RigidBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		var animatedSprite2D = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
 		string[] mobTypes = animatedSprite2D.SpriteFrames.GetAnimationNames();
 		animatedSprite2D.Play(mobTypes[GD.Randi()% mobTypes.Length]);
 	}
@@ -31,7 +31,9 @@ public partial class Mob : RigidBody2D
 			if (distanceToPlayer <= 1)
 			{
 				Attack();
-			} else {
+			} 
+			else 
+			{
 				// If not attacking, move the mob towards the player
 				direction = direction.Normalized();
 				Vector2 velocity = direction * (float)(speed * delta);
@@ -44,7 +46,7 @@ public partial class Mob : RigidBody2D
 	public void Attack()
 	{
 		player = GetTree().Root.GetNode<Node2D>("Game/Player");
-		player.GetNode<Health>("Health").Damage(damage);
+		player.GetNode<PlayerHealth>("PlayerHealth").Damage(damage);
 	}
 
 
