@@ -6,6 +6,7 @@ public partial class Mob : RigidBody2D
 	private Node2D player;
 	private double speed = 50.0;
 	private float damage = 100f;
+
 	private void _on_visible_on_screen_enabler_2d_screen_exited()
 	{
 		QueueFree();
@@ -28,7 +29,7 @@ public partial class Mob : RigidBody2D
 			Vector2 direction = player.GlobalPosition - GlobalPosition;
 			float distanceToPlayer = direction.Length();
 
-			if (distanceToPlayer <= 1)
+			if (distanceToPlayer <= 10)
 			{
 				Attack();
 			} 
