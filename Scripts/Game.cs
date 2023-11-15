@@ -28,9 +28,13 @@ public partial class Game : Node
 		hud.UpdateScore(_score);
 		hud.ShowMessage("Get Ready!");
 		_score = 0;
+
 		var player = GetNode<Player>("Player");
+		var playerHealth = player.GetNode<PlayerHealth>("PlayerHealth");
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		player.Start(startPosition.Position);
+		playerHealth.health = playerHealth.max_health;
+		
 		GetNode<Timer>("StartTimer").Start();
 	}
 	private void _on_mob_timer_timeout()

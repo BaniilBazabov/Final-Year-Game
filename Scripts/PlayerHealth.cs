@@ -6,7 +6,7 @@ public partial class PlayerHealth : Node2D
 {
 	
 	[Export] public float max_health = 500f;
-	float health;
+	[Export] public float health;
 	ProgressBar bar;
 	public override void _Ready()
 	{
@@ -18,6 +18,7 @@ public partial class PlayerHealth : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) 
 	{
+		UpdateHealthBar();
 	}
 
 	public void Damage(float damage) 

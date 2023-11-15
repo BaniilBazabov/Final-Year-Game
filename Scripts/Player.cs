@@ -8,7 +8,6 @@ public partial class Player : Area2D
 
 	[Export]
 	public int Speed { get; set; } = 400; // How fast the player will move (pixels/sec).
-	public int health { get; set; } = 500;
 
 	public Vector2 ScreenSize; // Size of the game window.
 	// Called when the node enters the scene tree for the first time.
