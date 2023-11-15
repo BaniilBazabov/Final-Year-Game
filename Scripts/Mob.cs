@@ -7,6 +7,8 @@ public partial class Mob : RigidBody2D
 	private double speed = 50.0;
 	private float damage = 100f;
 
+	private Timer attackCooldown;
+
 	private void _on_visible_on_screen_enabler_2d_screen_exited()
 	{
 		QueueFree();
@@ -17,6 +19,7 @@ public partial class Mob : RigidBody2D
 		var animatedSprite2D = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
 		string[] mobTypes = animatedSprite2D.SpriteFrames.GetAnimationNames();
 		animatedSprite2D.Play(mobTypes[GD.Randi()% mobTypes.Length]);
+		attackCooldown = GetNode<Timer>("AttackCooldown");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,8 +49,12 @@ public partial class Mob : RigidBody2D
 
 	public void Attack()
 	{
-		player = GetTree().Root.GetNode<Node2D>("Game/Player");
-		player.GetNode<PlayerHealth>("PlayerHealth").Damage(damage);
+		if(attackCooldown.IsStopped())
+		{
+			player = GetTree().Root.GetNode<Node2D>("Game/Player");
+			player.GetNode<PlayerHealth>("PlayerHealth").Damage(damage);
+			attackCooldown.Start();
+		}
 	}
 
 

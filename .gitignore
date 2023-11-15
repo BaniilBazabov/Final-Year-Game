@@ -1,2 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
+Final-year-game.csproj/
+.vscode/launch.json/
+.vscode/tasks.json/
+Final-year-game.csproj/
+
