@@ -6,14 +6,16 @@ public partial class Player : Area2D
 	[Signal]
 	public delegate void HitEventHandler();
 
-	[Export]
-	public int Speed { get; set; } = 400; // How fast the player will move (pixels/sec).
+	public int Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
+	private Timer attackCooldown;
+	AnimatedSprite2D attackAnimation;
 
 	public Vector2 ScreenSize; // Size of the game window.
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		ScreenSize = GetViewportRect().Size;
+		attackCooldown = GetNode<Timer>("AttackCooldown");
 	}
 	
 	public void Start(Vector2 position)
@@ -49,31 +51,49 @@ public partial class Player : Area2D
 		}
 
 		var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-
+		
 		if (velocity.Length() > 0)
 		{
 			velocity = velocity.Normalized() * Speed;
 			animatedSprite2D.Play();
+			GD.Print(velocity);
 		}
 		else
 		{
-			animatedSprite2D.Stop();
+			animatedSprite2D.Play("Idle");
 		}
 		 
 		if (velocity.X != 0 || velocity.Y != 0)
 		{
 			animatedSprite2D.Animation = "right";
-			animatedSprite2D.FlipV = false;
-			// See the note below about boolean assignment.
 			animatedSprite2D.FlipH = velocity.X < 0;
 		}
-		else
-		{
-			animatedSprite2D.Animation = "Idle";
-		}
-		
 		
 		Position += velocity * (float)delta;
+
+		Attack();
+	}
+
+	public void Attack()
+	{
+		if(attackCooldown.IsStopped())
+		{
+			GD.Print("I ran");
+			PlayAttackAnimationAtMouse();
+			attackCooldown.Start();
+		}
+	}
+
+	private void PlayAttackAnimationAtMouse()
+	{
+		attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
+		Vector2 mousePosition = GetGlobalMousePosition();
+
+		// Set the AnimatedSprite position to the mouse location
+		attackAnimation.GlobalPosition = mousePosition;
+
+		// Play the attack effect animation
+		attackAnimation.Play();
 	}
 	
 }
