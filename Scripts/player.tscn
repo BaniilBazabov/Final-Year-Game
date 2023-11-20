@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cm2tyoya3d5cj"]
+[gd_scene load_steps=37 format=3 uid="uid://cm2tyoya3d5cj"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_yvt51"]
 [ext_resource type="Script" path="res://Scripts/PlayerHealth.cs" id="2_12dej"]
@@ -217,10 +217,12 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6yprb"]
+radius = 36.0139
+
 [node name="Player" type="Area2D"]
-position = Vector2(527, 245)
+position = Vector2(592, 242)
 script = ExtResource("1_yvt51")
-metadata/_edit_group_ = true
 
 [node name="PlayerHealth" type="Node2D" parent="." groups=["player"]]
 script = ExtResource("2_12dej")
@@ -233,7 +235,7 @@ offset_bottom = -63.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_i1pwp")
 theme_override_styles/fill = SubResource("StyleBoxFlat_okshd")
-step = 10.0
+step = 1.0
 value = 100.0
 fill_mode = 1
 
@@ -262,3 +264,12 @@ sprite_frames = SubResource("SpriteFrames_ci4ft")
 animation = &"oneshot"
 frame = 4
 frame_progress = 1.0
+
+[node name="AttackZone" type="Area2D" parent="."]
+position = Vector2(-85, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
+shape = SubResource("CircleShape2D_6yprb")
+debug_color = Color(0.156863, 0.392157, 1, 0.419608)
+
+[connection signal="area_shape_entered" from="AttackZone" to="." method="_on_attack_zone_area_shape_entered"]

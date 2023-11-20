@@ -9,6 +9,7 @@ public partial class Player : Area2D
 	public int Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
 	private Timer attackCooldown;
 	AnimatedSprite2D attackAnimation;
+	private float damage = 50;
 
 	public Vector2 ScreenSize; // Size of the game window.
 	// Called when the node enters the scene tree for the first time.
@@ -56,7 +57,6 @@ public partial class Player : Area2D
 		{
 			velocity = velocity.Normalized() * Speed;
 			animatedSprite2D.Play();
-			GD.Print(velocity);
 		}
 		else
 		{
@@ -76,7 +76,7 @@ public partial class Player : Area2D
 
 	public void Attack()
 	{
-		if(attackCooldown.IsStopped())
+		if (attackCooldown.IsStopped())
 		{
 			AnimatedSprite2D attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
 			Vector2 mousePosition = GetGlobalMousePosition();
@@ -84,14 +84,29 @@ public partial class Player : Area2D
 
 			Vector2 direction = (mousePosition - playerPosition).Normalized();
 			float maxAttackRange = 150.0f;
-
+			Area2D attackZone = GetNode<Area2D>("AttackZone");
 			Vector2 targetPosition = playerPosition + direction * Mathf.Min(playerPosition.DistanceTo(mousePosition), maxAttackRange);
 			attackAnimation.GlobalPosition = targetPosition;
+			attackZone.GlobalPosition = attackAnimation.GlobalPosition;
 
 			attackAnimation.Play("oneshot");
 			attackCooldown.Start();
 		}
 	}
 
-	
+	private void _on_attack_zone_area_shape_entered(Rid area_rid, Area2D area, long area_shape_index, long local_shape_index)
+	{
+		foreach (Node2D mob in area.GetOverlappingBodies())
+	{
+		if (mob is Mob)
+		{
+			GD.Print("Mob is actually detected");
+			Mob mobInstance = (Mob)mob;
+			mobInstance.takeDamage(damage);
+		}
+	}
+	}
 }
+
+
+

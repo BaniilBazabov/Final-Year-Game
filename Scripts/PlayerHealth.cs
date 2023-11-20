@@ -5,7 +5,7 @@ using System.Threading;
 public partial class PlayerHealth : Node2D
 {
 	
-	[Export] public float max_health = 500f;
+	[Export] public float max_health = 50000f;
 	[Export] public float health;
 	ProgressBar bar;
 	public override void _Ready()

@@ -1,8 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bpfcbmbhb0pw0"]
+[gd_scene load_steps=16 format=3 uid="uid://bpfcbmbhb0pw0"]
 
 [ext_resource type="Texture2D" uid="uid://duvhbc716jy5e" path="res://Art/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="1_ajugw"]
 [ext_resource type="Script" path="res://Scripts/Mob.cs" id="1_bd88h"]
 [ext_resource type="Script" path="res://Scripts/MobHealth.cs" id="2_lb07o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajgor"]
+bg_color = Color(1, 0, 0.654902, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a062k"]
 atlas = ExtResource("1_ajugw")
@@ -81,30 +84,41 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v1ka2"]
-size = Vector2(38, 62)
+size = Vector2(47, 62)
 
 [node name="Mob" type="RigidBody2D" groups=["enemy"]]
 position = Vector2(354, 212)
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_bd88h")
-metadata/_edit_group_ = true
 
 [node name="MobHealth" type="Node2D" parent="."]
 script = ExtResource("2_lb07o")
 
+[node name="MobHealthBar" type="ProgressBar" parent="MobHealth"]
+offset_left = -35.0
+offset_top = -28.0
+offset_right = 15.0
+offset_bottom = -24.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_ajgor")
+value = 100.0
+fill_mode = 1
+show_percentage = false
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-8, -3)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ktgs1")
 animation = &"right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-9, 8)
+position = Vector2(-13.5, 8)
 shape = SubResource("RectangleShape2D_v1ka2")
+debug_color = Color(1, 0, 0.168627, 0.419608)
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-position = Vector2(-9, 7.50001)
-scale = Vector2(1.9, 3.05)
+position = Vector2(-13.5, 7.50001)
+scale = Vector2(2.35, 3.05)
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true

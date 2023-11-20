@@ -1,11 +1,13 @@
 using Godot;
 using System;
+using System.Diagnostics.Metrics;
 
 public partial class Mob : RigidBody2D 
 {
 	private Node2D player;
 	private double speed = 50.0;
 	private float damage = 50f;
+	private MobHealth mobHealth;
 
 	private Timer attackCooldown;
 
@@ -20,6 +22,7 @@ public partial class Mob : RigidBody2D
 		string[] mobTypes = animatedSprite2D.SpriteFrames.GetAnimationNames();
 		animatedSprite2D.Play(mobTypes[GD.Randi()% mobTypes.Length]);
 		attackCooldown = GetNode<Timer>("AttackCooldown");
+		mobHealth = GetNodeOrNull<MobHealth>("MobHealth");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,6 +58,11 @@ public partial class Mob : RigidBody2D
 			player.GetNode<PlayerHealth>("PlayerHealth").Damage(damage);
 			attackCooldown.Start();
 		}
+	}
+
+	public void takeDamage(float damage)
+	{
+		mobHealth?.Damage(damage);
 	}
 
 

@@ -24,24 +24,23 @@ public partial class MobHealth : Node2D
 	public void Damage(float damage) 
 	{
 		health -= damage;
-
-		if (health <= 0)
-		{
-			Dispawn();
-		}
-
 		UpdateMobHealthBar();
 	}
 
-	private void Dispawn()
-	{
-		QueueFree(); // This is a simple example; you might want to handle this differently based on your game logic.
-	}
-
-	private void UpdateMobHealthBar()
+	private async void UpdateMobHealthBar()
 	{
 		float healthPercentage = Mathf.Clamp(health / maxHealth * 100, 0, 100);
 
 		bar.Value = healthPercentage;
+		if (healthPercentage == 0f)
+		{
+			await ToSignal(GetTree().CreateTimer(1.0), "timeout"); // Delay for 1 second
+			Despawn();
+		}
 	}
+
+	private void Despawn()
+	{
+		QueueFree();
+	}	
 }
