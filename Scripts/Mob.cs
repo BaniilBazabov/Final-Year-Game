@@ -4,12 +4,14 @@ using System.Diagnostics.Metrics;
 
 public partial class Mob : RigidBody2D 
 {
-	private Node2D player;
+	private Player player;
 	private double speed = 50.0;
 	private float damage = 50f;
-	private MobHealth mobHealth;
-
 	private Timer attackCooldown;
+
+	[Export] public float maxHealth = 100f;
+	public float health;
+	ProgressBar bar;
 
 	private void _on_visible_on_screen_enabler_2d_screen_exited()
 	{
@@ -21,14 +23,20 @@ public partial class Mob : RigidBody2D
 		var animatedSprite2D = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
 		string[] mobTypes = animatedSprite2D.SpriteFrames.GetAnimationNames();
 		animatedSprite2D.Play(mobTypes[GD.Randi()% mobTypes.Length]);
+
+		player = GetTree().Root.GetNode<Player>("Game/Player");
+
 		attackCooldown = GetNode<Timer>("AttackCooldown");
-		mobHealth = GetNodeOrNull<MobHealth>("MobHealth");
+		health = maxHealth;
+		bar = GetNode<ProgressBar>("MobHealthBar");
+		UpdateMobHealthBar();
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		player = GetTree().Root.GetNode<Node2D>("Game/Player");
+		UpdateMobHealthBar();
 
 		if (player != null)
 		{
@@ -54,16 +62,32 @@ public partial class Mob : RigidBody2D
 	{
 		if(attackCooldown.IsStopped())
 		{
-			player = GetTree().Root.GetNode<Node2D>("Game/Player");
-			player.GetNode<PlayerHealth>("PlayerHealth").Damage(damage);
+			player.Damage(damage);
 			attackCooldown.Start();
 		}
 	}
 
-	public void takeDamage(float damage)
+	public void Damage(float damage) 
 	{
-		mobHealth?.Damage(damage);
+		health -= damage;
+		UpdateMobHealthBar();
 	}
+
+	private void UpdateMobHealthBar()
+	{
+		float healthPercentage = Mathf.Clamp(health / maxHealth * 100, 0, 100);
+
+		bar.Value = healthPercentage;
+		if (healthPercentage == 0f)
+		{
+			Despawn();
+		}
+	}
+
+	private void Despawn()
+	{
+		QueueFree();
+	}	
 
 
 }

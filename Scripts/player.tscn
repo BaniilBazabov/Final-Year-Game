@@ -1,7 +1,6 @@
-[gd_scene load_steps=37 format=3 uid="uid://cm2tyoya3d5cj"]
+[gd_scene load_steps=36 format=3 uid="uid://cm2tyoya3d5cj"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_yvt51"]
-[ext_resource type="Script" path="res://Scripts/PlayerHealth.cs" id="2_12dej"]
 [ext_resource type="Texture2D" uid="uid://b51il3pn3kb4u" path="res://Art/Main character/Character _ Weapon_Idle.png" id="3_5r1xl"]
 [ext_resource type="Texture2D" uid="uid://crakqps0021m1" path="res://Art/Main character/Character _ Weapon Animations.png" id="4_uvmad"]
 [ext_resource type="Texture2D" uid="uid://clwuabk4jn6q2" path="res://Art/effects/Yellow Effect Bullet Impact Explosion 32x32.png" id="5_kkrau"]
@@ -221,17 +220,14 @@ animations = [{
 radius = 36.0139
 
 [node name="Player" type="Area2D"]
-position = Vector2(592, 242)
+position = Vector2(592, 240)
 script = ExtResource("1_yvt51")
 
-[node name="PlayerHealth" type="Node2D" parent="." groups=["player"]]
-script = ExtResource("2_12dej")
-
-[node name="HealthBar" type="ProgressBar" parent="PlayerHealth"]
-offset_left = -54.0
-offset_top = -70.0
-offset_right = 55.0
-offset_bottom = -63.0
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -50.0
+offset_top = -79.0
+offset_right = 59.0
+offset_bottom = -56.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_i1pwp")
 theme_override_styles/fill = SubResource("StyleBoxFlat_okshd")
@@ -258,7 +254,7 @@ wait_time = 1.5
 one_shot = true
 
 [node name="AttackAnimation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-128, -11)
+position = Vector2(-83, 3)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ci4ft")
 animation = &"oneshot"

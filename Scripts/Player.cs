@@ -6,6 +6,9 @@ public partial class Player : Area2D
 	[Signal]
 	public delegate void HitEventHandler();
 
+	[Export] public float max_health = 50000f;
+	[Export] public float health;
+	ProgressBar bar;
 	public int Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
 	private Timer attackCooldown;
 	AnimatedSprite2D attackAnimation;
@@ -15,6 +18,10 @@ public partial class Player : Area2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		health = max_health;
+		bar = GetNode<ProgressBar>("HealthBar");
+		UpdateHealthBar();
+
 		ScreenSize = GetViewportRect().Size;
 		attackCooldown = GetNode<Timer>("AttackCooldown");
 	}
@@ -24,6 +31,7 @@ public partial class Player : Area2D
 		Position = position;
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+		UpdateHealthBar();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -97,14 +105,33 @@ public partial class Player : Area2D
 	private void _on_attack_zone_area_shape_entered(Rid area_rid, Area2D area, long area_shape_index, long local_shape_index)
 	{
 		foreach (Node2D mob in area.GetOverlappingBodies())
-	{
-		if (mob is Mob)
 		{
-			GD.Print("Mob is actually detected");
-			Mob mobInstance = (Mob)mob;
-			mobInstance.takeDamage(damage);
+			if (mob is Mob)
+			{
+				GD.Print("Mob is actually detected");
+				Mob mobInstance = (Mob)mob;
+				mobInstance.Damage(damage);
+			}
 		}
 	}
+
+	public void Damage(float damage) 
+	{
+		health -= damage;
+
+		if(health <= 0)
+		{
+			GetTree().Root.GetNode<Game>("Game").GameOver();			
+		}
+
+		UpdateHealthBar();
+	}
+
+	private void UpdateHealthBar()
+	{
+		float healthPercentage = health / max_health*100;
+
+		bar.Value = healthPercentage;
 	}
 }
 

@@ -30,10 +30,9 @@ public partial class Game : Node
 		_score = 0;
 
 		var player = GetNode<Player>("Player");
-		var playerHealth = player.GetNode<PlayerHealth>("PlayerHealth");
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		player.Start(startPosition.Position);
-		playerHealth.health = playerHealth.max_health;
+		player.health = player.max_health;
 		
 		GetNode<Timer>("StartTimer").Start();
 	}
