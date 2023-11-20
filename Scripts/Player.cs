@@ -78,22 +78,20 @@ public partial class Player : Area2D
 	{
 		if(attackCooldown.IsStopped())
 		{
-			GD.Print("I ran");
-			PlayAttackAnimationAtMouse();
+			AnimatedSprite2D attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
+			Vector2 mousePosition = GetGlobalMousePosition();
+			Vector2 playerPosition = GlobalPosition;
+
+			Vector2 direction = (mousePosition - playerPosition).Normalized();
+			float maxAttackRange = 150.0f;
+
+			Vector2 targetPosition = playerPosition + direction * Mathf.Min(playerPosition.DistanceTo(mousePosition), maxAttackRange);
+			attackAnimation.GlobalPosition = targetPosition;
+
+			attackAnimation.Play("oneshot");
 			attackCooldown.Start();
 		}
 	}
 
-	private void PlayAttackAnimationAtMouse()
-	{
-		attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
-		Vector2 mousePosition = GetGlobalMousePosition();
-
-		// Set the AnimatedSprite position to the mouse location
-		attackAnimation.GlobalPosition = mousePosition;
-
-		// Play the attack effect animation
-		attackAnimation.Play();
-	}
 	
 }

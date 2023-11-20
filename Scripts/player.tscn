@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cm2tyoya3d5cj"]
+[gd_scene load_steps=36 format=3 uid="uid://cm2tyoya3d5cj"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_yvt51"]
 [ext_resource type="Script" path="res://Scripts/PlayerHealth.cs" id="2_12dej"]
@@ -190,6 +190,10 @@ region = Rect2(576, 352, 32, 32)
 atlas = ExtResource("5_kkrau")
 region = Rect2(608, 352, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_upd0v"]
+atlas = ExtResource("5_kkrau")
+region = Rect2(0, 438, 160, 73)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ci4ft"]
 animations = [{
 "frames": [{
@@ -204,10 +208,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qguwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upd0v")
 }],
-"loop": true,
-"name": &"default",
-"speed": 5.0
+"loop": false,
+"name": &"oneshot",
+"speed": 10.0
 }]
 
 [node name="Player" type="Area2D"]
@@ -245,11 +252,13 @@ shape = SubResource("CapsuleShape2D_sp60r")
 position = Vector2(-1, -2)
 
 [node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 1.5
 one_shot = true
 
 [node name="AttackAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(-128, -11)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ci4ft")
-frame_progress = 0.158404
-speed_scale = 0.7
+animation = &"oneshot"
+frame = 4
+frame_progress = 1.0
