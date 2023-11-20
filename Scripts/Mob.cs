@@ -5,7 +5,7 @@ public partial class Mob : RigidBody2D
 {
 	private Node2D player;
 	private double speed = 50.0;
-	private float damage = 100f;
+	private float damage = 50f;
 
 	private Timer attackCooldown;
 

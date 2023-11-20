@@ -1,4 +1,4 @@
-# Godot 4+ specific ignores
+.vscode/
 .godot/
 Final-year-game.csproj/
 .vscode/
