@@ -6,7 +6,7 @@ public partial class Player : Area2D
 	[Signal]
 	public delegate void HitEventHandler();
 
-	[Export] public float max_health = 50000f;
+	[Export] public float max_health = 500f;
 	[Export] public float health;
 	ProgressBar bar;
 	public int Speed { get; set; } = 300; // How fast the player will move (pixels/sec).

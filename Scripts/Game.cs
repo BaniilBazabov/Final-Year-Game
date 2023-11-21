@@ -6,10 +6,11 @@ public partial class Game : Node
 	[Export]
 	public PackedScene MobScene { get; set; }
 	private int _score;
+	Player player;
 
 	public override void _Ready()
 	{
-		
+		player = GetNode<Player>("Player");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,6 +22,7 @@ public partial class Game : Node
 		GetNode<Hud>("HUD").ShowGameOver();
 		GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
+		player.Hide();
 	}
 	public void NewGame()
 	{
@@ -29,10 +31,10 @@ public partial class Game : Node
 		hud.ShowMessage("Get Ready!");
 		_score = 0;
 
-		var player = GetNode<Player>("Player");
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		player.Start(startPosition.Position);
 		player.health = player.max_health;
+		player.Show();
 		
 		GetNode<Timer>("StartTimer").Start();
 	}
