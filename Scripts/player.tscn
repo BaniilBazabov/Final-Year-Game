@@ -268,9 +268,5 @@ metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
 position = Vector2(-0.5, 1)
-scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_6yprb")
 debug_color = Color(0.156863, 0.392157, 1, 0.419608)
-
-[connection signal="area_shape_entered" from="AttackZone" to="." method="_on_attack_zone_area_shape_entered"]
-[connection signal="area_shape_exited" from="AttackZone" to="." method="_on_attack_zone_area_shape_exited"]

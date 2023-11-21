@@ -6,13 +6,14 @@ public partial class Player : Area2D
 	[Signal]
 	public delegate void HitEventHandler();
 
-	[Export] public float max_health = 500f;
+	[Export] public float max_health = 5000f;
 	[Export] public float health;
+	[Export] float maxAttackRange = 220.0f;
 	ProgressBar bar;
 	public int Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
 	private Timer attackCooldown;
 	AnimatedSprite2D attackAnimation;
-	private float damage = 50;
+	private float damage = 100;
 
 	public Vector2 ScreenSize; // Size of the game window.
 	// Called when the node enters the scene tree for the first time.
@@ -78,8 +79,25 @@ public partial class Player : Area2D
 		}
 		
 		Position += velocity * (float)delta;
-
+		
+		MoveAttackZone();
 		Attack();
+	}
+
+	private void MoveAttackZone()
+	{
+		AnimatedSprite2D attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
+		Area2D attackZone = GetNode<Area2D>("AttackZone");
+
+		Vector2 mousePosition = GetGlobalMousePosition();
+		Vector2 playerPosition = GlobalPosition;
+
+		Vector2 direction = (mousePosition - playerPosition).Normalized();
+		Vector2 targetPosition = playerPosition + direction * Mathf.Min(playerPosition.DistanceTo(mousePosition), maxAttackRange);
+
+		attackAnimation.GlobalPosition = targetPosition;
+		attackZone.GlobalPosition = targetPosition;
+
 	}
 
 	public void Attack()
@@ -87,16 +105,7 @@ public partial class Player : Area2D
 		if (attackCooldown.IsStopped())
 		{
 			AnimatedSprite2D attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
-			Vector2 mousePosition = GetGlobalMousePosition();
-			Vector2 playerPosition = GlobalPosition;
-
-			Vector2 direction = (mousePosition - playerPosition).Normalized();
-			float maxAttackRange = 150.0f;
 			Area2D attackZone = GetNode<Area2D>("AttackZone");
-			Vector2 targetPosition = playerPosition + direction * Mathf.Min(playerPosition.DistanceTo(mousePosition), maxAttackRange);
-			attackAnimation.GlobalPosition = targetPosition;
-			attackZone.GlobalPosition = attackAnimation.GlobalPosition;
-
 			foreach (Node2D mob in attackZone.GetOverlappingBodies())
 			{
 				if (mob is Mob)
