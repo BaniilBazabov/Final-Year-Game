@@ -97,21 +97,18 @@ public partial class Player : Area2D
 			attackAnimation.GlobalPosition = targetPosition;
 			attackZone.GlobalPosition = attackAnimation.GlobalPosition;
 
+			foreach (Node2D mob in attackZone.GetOverlappingBodies())
+			{
+				if (mob is Mob)
+				{
+					GD.Print("Mob is actually detected");
+					Mob mobInstance = (Mob)mob;
+					mobInstance.Damage(damage);
+				}
+			}
+
 			attackAnimation.Play("oneshot");
 			attackCooldown.Start();
-		}
-	}
-
-	private void _on_attack_zone_area_shape_entered(Rid area_rid, Area2D area, long area_shape_index, long local_shape_index)
-	{
-		foreach (Node2D mob in area.GetOverlappingBodies())
-		{
-			if (mob is Mob)
-			{
-				GD.Print("Mob is actually detected");
-				Mob mobInstance = (Mob)mob;
-				mobInstance.Damage(damage);
-			}
 		}
 	}
 
@@ -134,6 +131,4 @@ public partial class Player : Area2D
 		bar.Value = healthPercentage;
 	}
 }
-
-
 
