@@ -9,6 +9,7 @@ public partial class Player : Area2D
 	[Export] public float max_health = 5000f;
 	[Export] public float health;
 	[Export] float maxAttackRange = 220.0f;
+	[Export] float experience;
 	ProgressBar bar;
 	public int Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
 	private Timer attackCooldown;

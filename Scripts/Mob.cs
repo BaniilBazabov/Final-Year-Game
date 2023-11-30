@@ -8,6 +8,7 @@ public partial class Mob : RigidBody2D
 	private double speed = 50.0;
 	private float damage = 50f;
 	private Timer attackCooldown;
+	private float expDrop = 100f;
 
 	[Export] public float maxHealth = 100f;
 	public float health;
