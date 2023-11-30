@@ -6,10 +6,10 @@ public partial class Player : Area2D
 	[Signal]
 	public delegate void HitEventHandler();
 
-	[Export] public float max_health = 5000f;
+	[Export] public float max_health = 1000f;
 	[Export] public float health;
-	[Export] float maxAttackRange = 220.0f;
-	[Export] float experience;
+	[Export] float attackRange = 220.0f;
+	[Export] float experience = 0f;
 	ProgressBar bar;
 	public int Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
 	private Timer attackCooldown;
@@ -81,6 +81,7 @@ public partial class Player : Area2D
 		
 		Position += velocity * (float)delta;
 		
+		GetXp();
 		MoveAttackZone();
 		Attack();
 	}
@@ -94,7 +95,7 @@ public partial class Player : Area2D
 		Vector2 playerPosition = GlobalPosition;
 
 		Vector2 direction = (mousePosition - playerPosition).Normalized();
-		Vector2 targetPosition = playerPosition + direction * Mathf.Min(playerPosition.DistanceTo(mousePosition), maxAttackRange);
+		Vector2 targetPosition = playerPosition + direction * Mathf.Min(playerPosition.DistanceTo(mousePosition), attackRange);
 
 		attackAnimation.GlobalPosition = targetPosition;
 		attackZone.GlobalPosition = targetPosition;
@@ -111,7 +112,6 @@ public partial class Player : Area2D
 			{
 				if (mob is Mob)
 				{
-					GD.Print("Mob is actually detected");
 					Mob mobInstance = (Mob)mob;
 					mobInstance.Damage(damage);
 				}
@@ -136,9 +136,27 @@ public partial class Player : Area2D
 
 	private void UpdateHealthBar()
 	{
-		float healthPercentage = health / max_health*100;
+		float healthPercentage = health / max_health * 100;
 
 		bar.Value = healthPercentage;
 	}
+
+	public void GetXp()
+	{
+		Area2D pickUpZone = GetNode<Area2D>("PickUpZone");
+		foreach (RigidBody2D xpdrop in pickUpZone.GetOverlappingBodies())
+		{
+			if(xpdrop is Xpdrop)
+			{
+				Xpdrop expdrop = (Xpdrop)xpdrop;
+				experience += 10;
+				expdrop.Despawn();
+				GD.Print(experience);
+			}
+		}
+		
+	}
+
+
 }
 

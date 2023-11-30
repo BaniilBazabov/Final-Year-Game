@@ -1,15 +1,16 @@
 using Godot;
 using System;
 using System.Diagnostics.Metrics;
+using System.Xml.Linq;
 
 public partial class Mob : RigidBody2D 
 {
+	[Export]
+	public PackedScene XpScene { get; set; }
 	private Player player;
 	private double speed = 50.0;
 	private float damage = 50f;
 	private Timer attackCooldown;
-	private float expDrop = 100f;
-
 	[Export] public float maxHealth = 100f;
 	public float health;
 	ProgressBar bar;
@@ -31,7 +32,6 @@ public partial class Mob : RigidBody2D
 		health = maxHealth;
 		bar = GetNode<ProgressBar>("MobHealthBar");
 		UpdateMobHealthBar();
-		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -73,15 +73,19 @@ public partial class Mob : RigidBody2D
 		health -= damage;
 		UpdateMobHealthBar();
 	}
-
+	private bool xpdropped = false;
 	private void UpdateMobHealthBar()
 	{
 		float healthPercentage = Mathf.Clamp(health / maxHealth * 100, 0, 100);
 
 		bar.Value = healthPercentage;
-		if (healthPercentage == 0f)
+		if (healthPercentage == 0f && !xpdropped)
 		{
+			Xpdrop xpdrop = XpScene.Instantiate<Xpdrop>();
+			GetNode<Game>("../").AddChild(xpdrop);
+			xpdrop.GlobalPosition = GlobalPosition;
 			Despawn();
+			xpdropped = true;
 		}
 	}
 

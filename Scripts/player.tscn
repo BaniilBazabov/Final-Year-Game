@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cm2tyoya3d5cj"]
+[gd_scene load_steps=37 format=3 uid="uid://cm2tyoya3d5cj"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_yvt51"]
 [ext_resource type="Texture2D" uid="uid://b51il3pn3kb4u" path="res://Art/Main character/Character _ Weapon_Idle.png" id="3_5r1xl"]
@@ -219,8 +219,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_6yprb"]
 radius = 36.0139
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_siena"]
+radius = 96.0
+
 [node name="Player" type="Area2D"]
-position = Vector2(592, 240)
+position = Vector2(592, 239)
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_yvt51")
 metadata/_edit_group_ = true
 
@@ -270,3 +275,14 @@ metadata/_edit_group_ = true
 position = Vector2(-0.5, 1)
 shape = SubResource("CircleShape2D_6yprb")
 debug_color = Color(0.156863, 0.392157, 1, 0.419608)
+
+[node name="PickUpZone" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="PickUpRange" type="CollisionShape2D" parent="PickUpZone"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(3, -4)
+shape = SubResource("CircleShape2D_siena")
+debug_color = Color(0.858824, 0, 0.882353, 0.419608)

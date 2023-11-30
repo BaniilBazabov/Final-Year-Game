@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy5dp63vmnt1n"]
+
+[ext_resource type="Script" path="res://Scripts/Xpdrop.cs" id="1_hioo6"]
+[ext_resource type="Texture2D" uid="uid://lxee8wbs8ub0" path="res://Art/Droppables/xpRed.png" id="1_p1rmt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xvu2"]
+size = Vector2(20, 33.4167)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q260y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_p1rmt")
+}],
+"loop": true,
+"name": &"drproper",
+"speed": 5.0
+}]
+
+[node name="XpDrop" type="RigidBody2D"]
+position = Vector2(39, 5.5)
+scale = Vector2(0.75, 0.75)
+collision_layer = 2
+collision_mask = 2
+mass = 0.01
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_hioo6")
+metadata/_edit_group_ = true
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.95831)
+shape = SubResource("RectangleShape2D_3xvu2")
+
+[node name="RedDrPropper" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 8.125)
+scale = Vector2(1, 0.8375)
+sprite_frames = SubResource("SpriteFrames_q260y")
+animation = &"drproper"
