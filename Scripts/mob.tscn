@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bpfcbmbhb0pw0"]
+[gd_scene load_steps=18 format=3 uid="uid://bpfcbmbhb0pw0"]
 
 [ext_resource type="Texture2D" uid="uid://duvhbc716jy5e" path="res://Art/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="1_ajugw"]
 [ext_resource type="Script" path="res://Scripts/Mob.cs" id="1_bd88h"]
+[ext_resource type="Texture2D" uid="uid://lxee8wbs8ub0" path="res://Art/Droppables/xpRed.png" id="3_yt3mo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajnq1"]
 bg_color = Color(0.882353, 0.258824, 1, 1)
@@ -85,6 +86,20 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v1ka2"]
 size = Vector2(36, 67)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdwlb"]
+size = Vector2(20, 28.7501)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f3efr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_yt3mo")
+}],
+"loop": true,
+"name": &"drproper",
+"speed": 5.0
+}]
+
 [node name="Mob" type="RigidBody2D" groups=["enemy"]]
 position = Vector2(354, 209)
 gravity_scale = 0.0
@@ -116,5 +131,21 @@ scale = Vector2(1.9, 3.5)
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="XpDrop" type="Area2D" parent="."]
+position = Vector2(39, 5.5)
+scale = Vector2(0.75, 0.75)
+metadata/_edit_group_ = true
+
+[node name="HitBox" type="CollisionShape2D" parent="XpDrop"]
+position = Vector2(0, 5.625)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_wdwlb")
+
+[node name="RedDrPropper" type="AnimatedSprite2D" parent="XpDrop"]
+position = Vector2(0, 8.125)
+scale = Vector2(1, 0.8375)
+sprite_frames = SubResource("SpriteFrames_f3efr")
+animation = &"drproper"
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
