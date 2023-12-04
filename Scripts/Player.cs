@@ -10,6 +10,9 @@ public partial class Player : Area2D
 	[Export] public float health;
 	[Export] float attackRange = 220.0f;
 	[Export] float experience = 0f;
+	private float level = 1f;
+	private float experienceForNextLevel = 100f;
+	private float experienceScalingFactor = 1.15f;
 	ProgressBar bar;
 	public int Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
 	private Timer attackCooldown;
@@ -149,12 +152,25 @@ public partial class Player : Area2D
 			if(xpdrop is Xpdrop)
 			{
 				Xpdrop expdrop = (Xpdrop)xpdrop;
-				experience += 10;
+				experience += expdrop.red_xp;
+				if (experience >= experienceForNextLevel)
+				{
+					LevelUp();
+				}
 				expdrop.Despawn();
 				GD.Print(experience);
 			}
 		}
-		
+	}
+
+	 private void LevelUp()
+	{
+		level++;
+		GD.Print($"Level Up! New Level: {level}");
+
+		// Adjust experience threshold for the next level
+		experienceForNextLevel = (experienceScalingFactor * experienceForNextLevel) + (experienceForNextLevel * 0.5f);
+		GD.Print($"Experience Required for Next Level: {experienceForNextLevel}");
 	}
 
 
