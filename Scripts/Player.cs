@@ -10,6 +10,7 @@ public partial class Player : Area2D
 	[Export] public float health;
 	[Export] float attackRange = 220.0f;
 	[Export] float experience = 0f;
+	private CanvasLayer levelUpMenu;
 	private float level = 1f;
 	private float experienceForNextLevel = 100f;
 	private float experienceScalingFactor = 1.15f;
@@ -163,14 +164,20 @@ public partial class Player : Area2D
 		}
 	}
 
-	 private void LevelUp()
+	private void LevelUp()
 	{
 		level++;
+		ShowLevelUpMenu();
 		GD.Print($"Level Up! New Level: {level}");
 
 		// Adjust experience threshold for the next level
 		experienceForNextLevel = (experienceScalingFactor * experienceForNextLevel) + (experienceForNextLevel * 0.5f);
 		GD.Print($"Experience Required for Next Level: {experienceForNextLevel}");
+	}
+
+	private void ShowLevelUpMenu()
+	{
+		levelUpMenu = GetNode<CanvasLayer>("LevelUpMenu");
 	}
 
 
