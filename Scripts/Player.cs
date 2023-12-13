@@ -9,13 +9,26 @@ public partial class Player : Area2D
 	[Export] public float max_health = 1000f;
 	[Export] public float health;
 	[Export] float attackRange = 220.0f;
-	[Export] float experience = 0f;
-	private CanvasLayer levelUpMenu;
+	public int Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
+	ProgressBar bar;
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	private LevelUpMenu levelUpMenu;
+	private LevelUpScreen levelUpScreen;
+	Button upgradeButton1;
+	Button upgradeButton2;
+	Button upgradeButton3;
+	Button upgradeButton4;
+	
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private float level = 1f;
+	[Export] float experience = 0f;
 	private float experienceForNextLevel = 100f;
 	private float experienceScalingFactor = 1.15f;
-	ProgressBar bar;
-	public int Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	private Timer attackCooldown;
 	AnimatedSprite2D attackAnimation;
 	private float damage = 100;
@@ -30,6 +43,18 @@ public partial class Player : Area2D
 
 		ScreenSize = GetViewportRect().Size;
 		attackCooldown = GetNode<Timer>("AttackCooldown");
+		levelUpMenu = GetNode<LevelUpMenu>("LevelUpMenu");
+		levelUpScreen = levelUpMenu.GetNode<LevelUpScreen>("LevelUpScreen");
+
+		upgradeButton1 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/SkillOne");
+		upgradeButton2 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/SkillTwo");
+		upgradeButton3 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/SkillThree");
+		upgradeButton4 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/SkillFour");
+
+		upgradeButton1.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
+		upgradeButton2.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
+		upgradeButton3.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
+		upgradeButton4.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
 	}
 	
 	public void Start(Vector2 position)
@@ -177,7 +202,14 @@ public partial class Player : Area2D
 
 	private void ShowLevelUpMenu()
 	{
-		levelUpMenu = GetNode<CanvasLayer>("LevelUpMenu");
+		
+		levelUpScreen.ShowMenu();
+	}
+
+	private void _onUpgradeButtonPressed()
+	{
+		levelUpScreen.HideMenu();
+
 	}
 
 

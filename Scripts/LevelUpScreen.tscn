@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dvrinj5e401we"]
+[gd_scene load_steps=2 format=3 uid="uid://dvrinj5e401we"]
+
+[ext_resource type="Texture2D" uid="uid://dmq8xbwt0apf2" path="res://icon.svg" id="1_kfsyd"]
 
 [node name="LevelUpScreen" type="Control"]
 layout_mode = 3
@@ -40,15 +42,19 @@ horizontal_alignment = 1
 [node name="SkillOne" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Skill 1"
+icon = ExtResource("1_kfsyd")
 
 [node name="SkillTwo" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Skill 2"
+icon = ExtResource("1_kfsyd")
 
 [node name="SkillThree" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Skill 3"
+icon = ExtResource("1_kfsyd")
 
 [node name="SkillFour" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Skill 4"
+icon = ExtResource("1_kfsyd")
