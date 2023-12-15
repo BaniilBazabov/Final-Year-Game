@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvrinj5e401we"]
+[gd_scene load_steps=4 format=3 uid="uid://dvrinj5e401we"]
 
+[ext_resource type="Texture2D" uid="uid://cbfunueyy3x5t" path="res://Art/Skills/BonkHammer.png" id="1_6jvxd"]
 [ext_resource type="Texture2D" uid="uid://dmq8xbwt0apf2" path="res://icon.svg" id="1_kfsyd"]
+[ext_resource type="Texture2D" uid="uid://c6m5bocf0p0sc" path="res://Art/Skills/hairPreservedSprinkles.png" id="2_nry4p"]
 
 [node name="LevelUpScreen" type="Control"]
 layout_mode = 3
@@ -41,13 +43,15 @@ horizontal_alignment = 1
 
 [node name="SkillOne" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
-text = "Skill 1"
-icon = ExtResource("1_kfsyd")
+text = "Bonking Hammer
+\\ Increase the damage by 10% /"
+icon = ExtResource("1_6jvxd")
 
 [node name="SkillTwo" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
-text = "Skill 2"
-icon = ExtResource("1_kfsyd")
+text = "Hair Preserved
+\\ Increases the HP by 10% /"
+icon = ExtResource("2_nry4p")
 
 [node name="SkillThree" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
