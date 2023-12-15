@@ -3,12 +3,9 @@ using System;
 
 public partial class LevelUpMenu : CanvasLayer
 {
-	[Export]
-	public PackedScene levelUpScreenScene{ get; set; }
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		levelUpScreenScene = GD.Load<PackedScene>("res://Scripts/LevelUpScreen.tscn");
 	}
 
 	

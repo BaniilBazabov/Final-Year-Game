@@ -292,7 +292,6 @@ debug_color = Color(0.858824, 0, 0.882353, 0.419608)
 
 [node name="LevelUpMenu" type="CanvasLayer" parent="."]
 script = ExtResource("5_tey47")
-levelUpScreenScene = ExtResource("5_i6dmp")
 
 [node name="LevelUpScreen" parent="LevelUpMenu" instance=ExtResource("5_i6dmp")]
 offset_left = 4.0

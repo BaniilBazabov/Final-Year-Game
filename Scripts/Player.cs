@@ -15,10 +15,6 @@ public partial class Player : Area2D
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private LevelUpMenu levelUpMenu;
 	private LevelUpScreen levelUpScreen;
-	Button upgradeButton1;
-	Button upgradeButton2;
-	Button upgradeButton3;
-	Button upgradeButton4;
 	
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,16 +41,6 @@ public partial class Player : Area2D
 		attackCooldown = GetNode<Timer>("AttackCooldown");
 		levelUpMenu = GetNode<LevelUpMenu>("LevelUpMenu");
 		levelUpScreen = levelUpMenu.GetNode<LevelUpScreen>("LevelUpScreen");
-
-		upgradeButton1 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/SkillOne");
-		upgradeButton2 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/SkillTwo");
-		upgradeButton3 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/SkillThree");
-		upgradeButton4 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/SkillFour");
-
-		upgradeButton1.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
-		upgradeButton2.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
-		upgradeButton3.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
-		upgradeButton4.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
 	}
 	
 	public void Start(Vector2 position)
@@ -202,16 +188,7 @@ public partial class Player : Area2D
 
 	private void ShowLevelUpMenu()
 	{
-		
 		levelUpScreen.ShowMenu();
 	}
-
-	private void _onUpgradeButtonPressed()
-	{
-		levelUpScreen.HideMenu();
-
-	}
-
-
 }
 
