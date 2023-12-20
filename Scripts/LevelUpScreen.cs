@@ -17,10 +17,11 @@ public partial class LevelUpScreen : Control
 		upgradeButton3 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/Skill3");
 		upgradeButton4 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/Skill4");
 
-		upgradeButton1.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
-		upgradeButton2.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
-		upgradeButton3.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
-		upgradeButton4.Connect(Button.SignalName.Pressed, new Callable(this, "_onUpgradeButtonPressed"));
+		upgradeButton1.Connect(Button.SignalName.Pressed, new Callable(this, MethodName._onUpgradeButtonPressed1));
+		upgradeButton2.Connect(Button.SignalName.Pressed, new Callable(this, MethodName._onUpgradeButtonPressed2));
+		upgradeButton3.Connect(Button.SignalName.Pressed, new Callable(this, MethodName._onUpgradeButtonPressed3));
+		upgradeButton4.Connect(Button.SignalName.Pressed, new Callable(this, MethodName._onUpgradeButtonPressed4));
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,48 +49,38 @@ public partial class LevelUpScreen : Control
 
 	private List<Upgrade> allUpgrades = new List<Upgrade>
 	{
-		new Upgrade("res://Art/Skills/BonkHammer.png", "Bonking Hammer ", "Increases your damage from all sources by 10%", 1, 5),
-		new Upgrade("res://Art/Skills/hairPreservedSprinkles.png", "Hair Preserved ", "Increases your HP by 10%", 1, 5),
-		new Upgrade("res://icon.svg", "Placeholder 1", "ToBeReplaced 1", 1, 5),
-		new Upgrade("res://icon.svg", "Placeholder 2", "ToBeReplaced 2", 1, 5),
-		new Upgrade("res://icon.svg", "Placeholder 3", "ToBeReplaced 3", 1, 5),
-		new Upgrade("res://icon.svg", "Placeholder 4", "ToBeReplaced 4", 1, 5),
+		new Upgrade("res://Art/Skills/BonkHammer.png", "Bonking Hammer ", "Increases your damage from all sources by 10%", 0, 5),
+		new Upgrade("res://Art/Skills/hairPreservedSprinkles.png", "Hair Preserved ", "Increases your HP by 10%", 0, 5),
+		new Upgrade("res://icon.svg", "Placeholder 1", "ToBeReplaced 1", 0, 5),
+		new Upgrade("res://icon.svg", "Placeholder 2", "ToBeReplaced 2", 0, 5),
+		new Upgrade("res://icon.svg", "Placeholder 3", "ToBeReplaced 3", 0, 5),
+		new Upgrade("res://icon.svg", "Placeholder 4", "ToBeReplaced 4", 0, 5),
 	};
 
 	private List<Upgrade> availableUpgrades = new List<Upgrade>();
 
 	public void ShowMenu()
 	{
-		Randomize(allUpgrades);
+		allUpgrades = Randomize(allUpgrades);
+		availableUpgrades.Clear();
+		// Assign upgrades to buttons based on tier
 		foreach (Upgrade upgrade in allUpgrades)
 		{
-			GD.Print(upgrade.Name);
+			// Check if the upgrade's tier is less than or equal to its max tier
+			if (upgrade.Tier < upgrade.MaxTier)
+			{
+				// Assign the upgrade to the list of available upgrades
+				availableUpgrades.Add(upgrade);
+			}
 		}
-		
-		// availableUpgrades = allUpgrades.GetRange(0, 3);
-		// // Assign upgrades to buttons based on tier
-		// foreach (Upgrade upgrade in allUpgrades)
-		// {
-		// 	// Check if the upgrade's tier is less than or equal to its max tier
-		// 	if (upgrade.Tier <= upgrade.MaxTier)
-		// 	{
-		// 		// Assign the upgrade to the list of available upgrades
-		// 		availableUpgrades.Add(upgrade);
 
-		// 		// Increment the tier for the next availability
-		// 		upgrade.Tier++;
-		// 	}
-		// }
-
-		// // Assign upgrades to buttons
-		// for (int i = 0; i < availableUpgrades.Count; i++)
-		// {
-		// 	Button button = GetNode<Button>($"UpgradeButton{i + 1}");
-		// 	button.Text = availableUpgrades[i].Name;
-		// 	// Set the icon and explanation text as needed
-		// 	// button.Icon = LoadIcon(availableUpgrades[i].IconPath);
-		// 	// button.ExplanationText = availableUpgrades[i].Description;
-		// }
+		// Assign upgrades to buttons
+		for (int i = 0; i < 4; i++)
+		{
+			Button button = GetNode<Button>($"/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/Skill{i + 1}");
+			button.Text = $"{availableUpgrades[i].Name}\nTier: {availableUpgrades[i].Tier+1}\n{availableUpgrades[i].Description}";
+			button.Icon = (Texture2D)GD.Load(availableUpgrades[i].IconPath);
+		}
 
 		Show();
 	}
@@ -99,8 +90,39 @@ public partial class LevelUpScreen : Control
 		Hide();
 	}
 
-	private void _onUpgradeButtonPressed()
+	private void _onUpgradeButtonPressed1()
 	{
+        Upgrade prevUpgrade = availableUpgrades[0];
+        allUpgrades.Remove(prevUpgrade);
+		prevUpgrade.Tier++;
+		allUpgrades.Add(prevUpgrade);
+		HideMenu();
+	}
+
+	private void _onUpgradeButtonPressed2()
+	{
+		Upgrade prevUpgrade = availableUpgrades[1];
+        allUpgrades.Remove(prevUpgrade);
+		prevUpgrade.Tier++;
+		allUpgrades.Add(prevUpgrade);
+		HideMenu();
+	}
+
+	private void _onUpgradeButtonPressed3()
+	{
+		Upgrade prevUpgrade = availableUpgrades[2];
+        allUpgrades.Remove(prevUpgrade);
+		prevUpgrade.Tier++;
+		allUpgrades.Add(prevUpgrade);
+		HideMenu();
+	}
+
+	private void _onUpgradeButtonPressed4()
+	{
+		Upgrade prevUpgrade = availableUpgrades[3];
+        allUpgrades.Remove(prevUpgrade);
+		prevUpgrade.Tier++;
+		allUpgrades.Add(prevUpgrade);
 		HideMenu();
 	}
 
