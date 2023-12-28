@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_yvt51"]
 [ext_resource type="Texture2D" uid="uid://b51il3pn3kb4u" path="res://Art/Main character/Character _ Weapon_Idle.png" id="3_5r1xl"]
 [ext_resource type="Texture2D" uid="uid://crakqps0021m1" path="res://Art/Main character/Character _ Weapon Animations.png" id="4_uvmad"]
-[ext_resource type="PackedScene" uid="uid://dvrinj5e401we" path="res://Scripts/LevelUpScreen.tscn" id="5_i6dmp"]
+[ext_resource type="PackedScene" path="res://Scripts/LevelUpScreen.tscn" id="5_i6dmp"]
 [ext_resource type="Texture2D" uid="uid://clwuabk4jn6q2" path="res://Art/effects/Yellow Effect Bullet Impact Explosion 32x32.png" id="5_kkrau"]
 [ext_resource type="Script" path="res://Scripts/LevelUpMenu.cs" id="5_tey47"]
 [ext_resource type="Script" path="res://Scripts/LevelUpScreen.cs" id="7_ao8wp"]

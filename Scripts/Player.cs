@@ -6,10 +6,10 @@ public partial class Player : Area2D
 	[Signal]
 	public delegate void HitEventHandler();
 
-	[Export] public float max_health = 1000f;
-	[Export] public float health;
-	[Export] float attackRange = 220.0f;
-	public int Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
+	public float max_health { get; set; } = 1000f;
+	public float health;
+	public float attackRange { get; set; } = 220.0f;
+	public float Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
 	ProgressBar bar;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,15 +19,15 @@ public partial class Player : Area2D
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private float level = 1f;
-	[Export] float experience = 0f;
+	float experience = 0f;
 	private float experienceForNextLevel = 100f;
 	private float experienceScalingFactor = 1.15f;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private Timer attackCooldown;
+	private Timer attackCooldown { get; set; }
 	AnimatedSprite2D attackAnimation;
-	private float damage = 100;
+	public float damage { get; set; } = 50;
 
 	public Vector2 ScreenSize; // Size of the game window.
 	// Called when the node enters the scene tree for the first time.
@@ -137,6 +137,12 @@ public partial class Player : Area2D
 		}
 	}
 
+	public float DecreaseAttackCooldown(float amount)
+	{
+		attackCooldown.WaitTime -= amount;
+		return (float)attackCooldown.WaitTime;
+	}
+
 	public void Damage(float damage) 
 	{
 		health -= damage;
@@ -184,10 +190,12 @@ public partial class Player : Area2D
 		// Adjust experience threshold for the next level
 		experienceForNextLevel = (experienceScalingFactor * experienceForNextLevel) + (experienceForNextLevel * 0.5f);
 		GD.Print($"Experience Required for Next Level: {experienceForNextLevel}");
+		GD.Print($"Damage:{damage} and Health: {health}");
 	}
 
 	private void ShowLevelUpMenu()
 	{
+		levelUpScreen.Initialize(this);
 		levelUpScreen.ShowMenu();
 	}
 }

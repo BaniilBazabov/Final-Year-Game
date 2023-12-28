@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brqlvxb2e6wl"
-path="res://.godot/imported/IMG_20231213_173758.jpg-d589d42b3de54782a3c10669ecd65532.ctex"
+uid="uid://ckdp640mc46rf"
+path="res://.godot/imported/SpeedyFit.png-87d71829ca974c098381984173dfb995.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/IMG_20231213_173758.jpg"
-dest_files=["res://.godot/imported/IMG_20231213_173758.jpg-d589d42b3de54782a3c10669ecd65532.ctex"]
+source_file="res://Art/Skills/SpeedyFit.png"
+dest_files=["res://.godot/imported/SpeedyFit.png-87d71829ca974c098381984173dfb995.ctex"]
 
 [params]
 

@@ -8,6 +8,13 @@ public partial class LevelUpScreen : Control
 	Button upgradeButton2;
 	Button upgradeButton3;
 	Button upgradeButton4;
+
+	private Player player;
+
+	public void Initialize(Player player)
+    {
+        this.player = player;
+    }
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -21,6 +28,8 @@ public partial class LevelUpScreen : Control
 		upgradeButton2.Connect(Button.SignalName.Pressed, new Callable(this, MethodName._onUpgradeButtonPressed2));
 		upgradeButton3.Connect(Button.SignalName.Pressed, new Callable(this, MethodName._onUpgradeButtonPressed3));
 		upgradeButton4.Connect(Button.SignalName.Pressed, new Callable(this, MethodName._onUpgradeButtonPressed4));
+
+		player = GetTree().Root.GetNode<Player>("Game/Player");
 		
 	}
 
@@ -49,12 +58,14 @@ public partial class LevelUpScreen : Control
 
 	private List<Upgrade> allUpgrades = new List<Upgrade>
 	{
-		new Upgrade("res://Art/Skills/BonkHammer.png", "Bonking Hammer ", "Increases your damage from all sources by 10%", 0, 5),
-		new Upgrade("res://Art/Skills/hairPreservedSprinkles.png", "Hair Preserved ", "Increases your HP by 10%", 0, 5),
+		new Upgrade("res://Art/Skills/BonkHammer.png", "Bonking Hammer", "Increases your damage from all sources by 10%", 0, 5),
+		new Upgrade("res://Art/Skills/hairPreservedSprinkles.png", "Hair Preserved", "Increases your HP by 10%", 0, 5),
+		new Upgrade("res://Art/Skills/BonkHammerAS.png", "Bonking Speed", "Increases your Attack Speed by 10%", 0, 5),
+		new Upgrade("res://Art/Skills/GoldenHands.png", "Golden Hands", "Increases your Pick Up Range by 10%", 0, 5),
+		new Upgrade("res://Art/Skills/SpeedyFit.png", "Fashion Statement", "Increases your Movement Speed by 10%", 0, 5),
 		new Upgrade("res://icon.svg", "Placeholder 1", "ToBeReplaced 1", 0, 5),
 		new Upgrade("res://icon.svg", "Placeholder 2", "ToBeReplaced 2", 0, 5),
 		new Upgrade("res://icon.svg", "Placeholder 3", "ToBeReplaced 3", 0, 5),
-		new Upgrade("res://icon.svg", "Placeholder 4", "ToBeReplaced 4", 0, 5),
 	};
 
 	private List<Upgrade> availableUpgrades = new List<Upgrade>();
@@ -92,8 +103,9 @@ public partial class LevelUpScreen : Control
 
 	private void _onUpgradeButtonPressed1()
 	{
-        Upgrade prevUpgrade = availableUpgrades[0];
-        allUpgrades.Remove(prevUpgrade);
+		Upgrade prevUpgrade = availableUpgrades[0];
+		updateStats(prevUpgrade.Name);
+		allUpgrades.Remove(prevUpgrade);
 		prevUpgrade.Tier++;
 		allUpgrades.Add(prevUpgrade);
 		HideMenu();
@@ -102,7 +114,8 @@ public partial class LevelUpScreen : Control
 	private void _onUpgradeButtonPressed2()
 	{
 		Upgrade prevUpgrade = availableUpgrades[1];
-        allUpgrades.Remove(prevUpgrade);
+		updateStats(prevUpgrade.Name);
+		allUpgrades.Remove(prevUpgrade);
 		prevUpgrade.Tier++;
 		allUpgrades.Add(prevUpgrade);
 		HideMenu();
@@ -111,7 +124,8 @@ public partial class LevelUpScreen : Control
 	private void _onUpgradeButtonPressed3()
 	{
 		Upgrade prevUpgrade = availableUpgrades[2];
-        allUpgrades.Remove(prevUpgrade);
+		updateStats(prevUpgrade.Name);
+		allUpgrades.Remove(prevUpgrade);
 		prevUpgrade.Tier++;
 		allUpgrades.Add(prevUpgrade);
 		HideMenu();
@@ -120,10 +134,38 @@ public partial class LevelUpScreen : Control
 	private void _onUpgradeButtonPressed4()
 	{
 		Upgrade prevUpgrade = availableUpgrades[3];
-        allUpgrades.Remove(prevUpgrade);
+		updateStats(prevUpgrade.Name);
+		allUpgrades.Remove(prevUpgrade);
 		prevUpgrade.Tier++;
 		allUpgrades.Add(prevUpgrade);
 		HideMenu();
+	}
+
+	private void updateStats(string nameOfUpgrade)
+	{
+		switch(nameOfUpgrade)
+		{
+			case "Bonking Hammer":
+			player.damage *= 1.1f;
+			GD.Print("More dmg addded");
+			break;
+
+			case "Hair Preserved":
+			player.health *= 1.1f;
+			GD.Print("More HP addded");
+			break;
+
+			case "Bonking Speed":
+			GD.Print(player.DecreaseAttackCooldown(.25f));
+			break;
+
+			case "Fashion Statement":
+			GD.Print(player.Speed *= 1.1f);
+			break;
+			
+			default:
+			break;
+		}
 	}
 
 	public static List<T> Randomize<T>(List<T> list)
