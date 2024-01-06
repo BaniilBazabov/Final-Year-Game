@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_yvt51"]
 [ext_resource type="Texture2D" uid="uid://b51il3pn3kb4u" path="res://Art/Main character/Character _ Weapon_Idle.png" id="3_5r1xl"]
 [ext_resource type="Texture2D" uid="uid://crakqps0021m1" path="res://Art/Main character/Character _ Weapon Animations.png" id="4_uvmad"]
-[ext_resource type="PackedScene" path="res://Scripts/LevelUpScreen.tscn" id="5_i6dmp"]
+[ext_resource type="PackedScene" uid="uid://cslkcm20evst0" path="res://Scripts/LevelUpScreen.tscn" id="5_i6dmp"]
 [ext_resource type="Texture2D" uid="uid://clwuabk4jn6q2" path="res://Art/effects/Yellow Effect Bullet Impact Explosion 32x32.png" id="5_kkrau"]
 [ext_resource type="Script" path="res://Scripts/LevelUpMenu.cs" id="5_tey47"]
 [ext_resource type="Script" path="res://Scripts/LevelUpScreen.cs" id="7_ao8wp"]
@@ -230,7 +230,13 @@ position = Vector2(592, 239)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_yvt51")
-metadata/_edit_group_ = true
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -637.0
+offset_top = 326.0
+offset_right = -532.0
+offset_bottom = 353.0
+text = "1000/1000"
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -50.0
@@ -257,6 +263,9 @@ shape = SubResource("CapsuleShape2D_sp60r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, -2)
+
+[node name="RegenCooldown" type="Timer" parent="."]
+one_shot = true
 
 [node name="AttackCooldown" type="Timer" parent="."]
 wait_time = 1.5

@@ -12,9 +12,9 @@ public partial class LevelUpScreen : Control
 	private Player player;
 
 	public void Initialize(Player player)
-    {
-        this.player = player;
-    }
+	{
+		this.player = player;
+	}
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -63,7 +63,7 @@ public partial class LevelUpScreen : Control
 		new Upgrade("res://Art/Skills/BonkHammerAS.png", "Bonking Speed", "Increases your Attack Speed by 10%", 0, 5),
 		new Upgrade("res://Art/Skills/GoldenHands.png", "Golden Hands", "Increases your Pick Up Range by 10%", 0, 5),
 		new Upgrade("res://Art/Skills/SpeedyFit.png", "Fashion Statement", "Increases your Movement Speed by 10%", 0, 5),
-		new Upgrade("res://icon.svg", "Placeholder 1", "ToBeReplaced 1", 0, 5),
+		new Upgrade("res://Art/Skills/HairPreservedRegen.png", "Hair Regeneration", "Increases your HP regeneration by 5", 0, 5),
 		new Upgrade("res://icon.svg", "Placeholder 2", "ToBeReplaced 2", 0, 5),
 		new Upgrade("res://icon.svg", "Placeholder 3", "ToBeReplaced 3", 0, 5),
 	};
@@ -161,6 +161,16 @@ public partial class LevelUpScreen : Control
 
 			case "Fashion Statement":
 			GD.Print(player.Speed *= 1.1f);
+			break;
+
+			case "Hair Regeneration":
+			GD.Print(player.RegenAmount += 5f);
+			GD.Print("Player Regen = " + player.RegenAmount);
+			break;
+
+			case "Golden Hands":
+			player.IncreasePickUpRange();
+			GD.Print("Increased pickuprange by 10%");
 			break;
 			
 			default:

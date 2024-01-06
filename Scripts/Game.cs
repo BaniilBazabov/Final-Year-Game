@@ -33,7 +33,7 @@ public partial class Game : Node
 
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		player.Start(startPosition.Position);
-		player.health = player.max_health;
+		player.health = player.Max_health;
 		player.Show();
 		
 		GetNode<Timer>("StartTimer").Start();

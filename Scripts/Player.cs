@@ -6,15 +6,19 @@ public partial class Player : Area2D
 	[Signal]
 	public delegate void HitEventHandler();
 
-	public float max_health { get; set; } = 1000f;
+	public float Max_health { get; set; } = 1000f;
+	public Label HpLabel;
 	public float health;
-	public float attackRange { get; set; } = 220.0f;
+	public float RegenAmount { get; set; } = 5f;
+	public float AttackRange { get; set; } = 220.0f;
+	public Vector2 pickUpRangeScale = new(1.15f, 1.15f);
 	public float Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
 	ProgressBar bar;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private LevelUpMenu levelUpMenu;
 	private LevelUpScreen levelUpScreen;
+	private Area2D pickUpZone;
 	
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,7 +29,8 @@ public partial class Player : Area2D
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	private Timer attackCooldown { get; set; }
+	private Timer AttackCooldown { get; set; }
+	private Timer RegenCooldown { get; set; }
 	AnimatedSprite2D attackAnimation;
 	public float damage { get; set; } = 50;
 
@@ -33,14 +38,17 @@ public partial class Player : Area2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		health = max_health;
+		health = Max_health;
 		bar = GetNode<ProgressBar>("HealthBar");
 		UpdateHealthBar();
 
 		ScreenSize = GetViewportRect().Size;
-		attackCooldown = GetNode<Timer>("AttackCooldown");
+		AttackCooldown = GetNode<Timer>("AttackCooldown");
+		RegenCooldown = GetNode<Timer>("RegenCooldown");
+		HpLabel = GetNode<Label>("HealthLabel");
 		levelUpMenu = GetNode<LevelUpMenu>("LevelUpMenu");
 		levelUpScreen = levelUpMenu.GetNode<LevelUpScreen>("LevelUpScreen");
+		pickUpZone = GetNode<Area2D>("PickUpZone");
 	}
 	
 	public void Start(Vector2 position)
@@ -99,6 +107,7 @@ public partial class Player : Area2D
 		GetXp();
 		MoveAttackZone();
 		Attack();
+		RegenHealth();
 	}
 
 	private void MoveAttackZone()
@@ -110,7 +119,7 @@ public partial class Player : Area2D
 		Vector2 playerPosition = GlobalPosition;
 
 		Vector2 direction = (mousePosition - playerPosition).Normalized();
-		Vector2 targetPosition = playerPosition + direction * Mathf.Min(playerPosition.DistanceTo(mousePosition), attackRange);
+		Vector2 targetPosition = playerPosition + direction * Mathf.Min(playerPosition.DistanceTo(mousePosition), AttackRange);
 
 		attackAnimation.GlobalPosition = targetPosition;
 		attackZone.GlobalPosition = targetPosition;
@@ -119,7 +128,7 @@ public partial class Player : Area2D
 
 	public void Attack()
 	{
-		if (attackCooldown.IsStopped())
+		if (AttackCooldown.IsStopped())
 		{
 			AnimatedSprite2D attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
 			Area2D attackZone = GetNode<Area2D>("AttackZone");
@@ -133,14 +142,14 @@ public partial class Player : Area2D
 			}
 
 			attackAnimation.Play("oneshot");
-			attackCooldown.Start();
+			AttackCooldown.Start();
 		}
 	}
 
 	public float DecreaseAttackCooldown(float amount)
 	{
-		attackCooldown.WaitTime -= amount;
-		return (float)attackCooldown.WaitTime;
+		AttackCooldown.WaitTime -= amount;
+		return (float)AttackCooldown.WaitTime;
 	}
 
 	public void Damage(float damage) 
@@ -157,14 +166,32 @@ public partial class Player : Area2D
 
 	private void UpdateHealthBar()
 	{
-		float healthPercentage = health / max_health * 100;
+		float healthPercentage = health / Max_health * 100;
 
 		bar.Value = healthPercentage;
 	}
 
+	private void RegenHealth()
+	{
+		if (RegenCooldown.IsStopped() && health != Max_health && health < Max_health)
+		{
+			health += RegenAmount;
+			UpdateHealthBar();
+			HpLabel.Text = $"{health}/{Max_health}";
+			RegenCooldown.Start();
+		}
+		
+	}
+
+	public void IncreasePickUpRange()
+	{
+		pickUpZone.Scale *= pickUpRangeScale;
+		
+
+	}
+
 	public void GetXp()
 	{
-		Area2D pickUpZone = GetNode<Area2D>("PickUpZone");
 		foreach (RigidBody2D xpdrop in pickUpZone.GetOverlappingBodies())
 		{
 			if(xpdrop is Xpdrop)
@@ -188,7 +215,7 @@ public partial class Player : Area2D
 		GD.Print($"Level Up! New Level: {level}");
 
 		// Adjust experience threshold for the next level
-		experienceForNextLevel = (experienceScalingFactor * experienceForNextLevel) + (experienceForNextLevel * 0.5f);
+		experienceForNextLevel = experienceScalingFactor * experienceForNextLevel;
 		GD.Print($"Experience Required for Next Level: {experienceForNextLevel}");
 		GD.Print($"Damage:{damage} and Health: {health}");
 	}

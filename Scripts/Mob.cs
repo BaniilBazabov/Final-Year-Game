@@ -44,7 +44,7 @@ public partial class Mob : RigidBody2D
 			Vector2 direction = player.GlobalPosition - GlobalPosition;
 			float distanceToPlayer = direction.Length();
 
-			if (distanceToPlayer <= 10)
+			if (distanceToPlayer <= 7)
 			{
 				Attack();
 			} 
