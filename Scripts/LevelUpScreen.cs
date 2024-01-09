@@ -72,6 +72,7 @@ public partial class LevelUpScreen : Control
 
 	public void ShowMenu()
 	{
+		GetTree().Paused = true;
 		allUpgrades = Randomize(allUpgrades);
 		availableUpgrades.Clear();
 		// Assign upgrades to buttons based on tier
@@ -109,6 +110,7 @@ public partial class LevelUpScreen : Control
 		prevUpgrade.Tier++;
 		allUpgrades.Add(prevUpgrade);
 		HideMenu();
+		GetTree().Paused = false;
 	}
 
 	private void _onUpgradeButtonPressed2()
@@ -119,6 +121,7 @@ public partial class LevelUpScreen : Control
 		prevUpgrade.Tier++;
 		allUpgrades.Add(prevUpgrade);
 		HideMenu();
+		GetTree().Paused = false;
 	}
 
 	private void _onUpgradeButtonPressed3()
@@ -129,6 +132,7 @@ public partial class LevelUpScreen : Control
 		prevUpgrade.Tier++;
 		allUpgrades.Add(prevUpgrade);
 		HideMenu();
+		GetTree().Paused = false;
 	}
 
 	private void _onUpgradeButtonPressed4()
@@ -139,6 +143,7 @@ public partial class LevelUpScreen : Control
 		prevUpgrade.Tier++;
 		allUpgrades.Add(prevUpgrade);
 		HideMenu();
+		GetTree().Paused = false;
 	}
 
 	private void updateStats(string nameOfUpgrade)

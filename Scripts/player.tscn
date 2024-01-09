@@ -300,6 +300,7 @@ shape = SubResource("CircleShape2D_siena")
 debug_color = Color(0.858824, 0, 0.882353, 0.419608)
 
 [node name="LevelUpMenu" type="CanvasLayer" parent="."]
+process_mode = 2
 script = ExtResource("5_tey47")
 
 [node name="LevelUpScreen" parent="LevelUpMenu" instance=ExtResource("5_i6dmp")]
