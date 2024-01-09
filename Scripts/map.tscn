@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://mumn61tikydr"]
+[gd_scene load_steps=13 format=3 uid="uid://mumn61tikydr"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_jxpgr"]
 [ext_resource type="PackedScene" uid="uid://bpfcbmbhb0pw0" path="res://Scripts/mob.tscn" id="2_2ktv2"]
@@ -6,6 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://cy5dp63vmnt1n" path="res://Scripts/xpdrop.tscn" id="3_4f8p4"]
 [ext_resource type="Texture2D" uid="uid://b373yp1qfa42a" path="res://Art/TilesetPack/TX Tileset Grass.png" id="3_26ol1"]
 [ext_resource type="PackedScene" uid="uid://dgmlr8la41g78" path="res://Scripts/hud.tscn" id="5_3438i"]
+[ext_resource type="PackedScene" uid="uid://cjc1yph6eueua" path="res://Scripts/pauseMenu.tscn" id="7_a5pnm"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_g6bud"]
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_l5lfw"]
+events = [SubResource("InputEventKey_g6bud")]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c208t"]
 texture = ExtResource("3_26ol1")
@@ -279,6 +286,32 @@ point_count = 5
 script = ExtResource("1_jxpgr")
 MobScene = ExtResource("2_2ktv2")
 
+[node name="PauseMenu" parent="." instance=ExtResource("7_a5pnm")]
+metadata/_edit_group_ = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="PauseMenu"]
+offset_right = 1283.0
+offset_bottom = 722.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="MenuLabel" type="Label" parent="PauseMenu/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Pause Menu"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="PauseMenu/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_l5lfw")
+text = "Continue Playing
+"
+
+[node name="Exit" type="Button" parent="PauseMenu/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
 [node name="XpDrop" parent="." instance=ExtResource("3_4f8p4")]
 position = Vector2(393, 214.5)
 
@@ -294,7 +327,7 @@ layer_0/tile_data = PackedInt32Array(-2752567, 0, 0, -2687031, 0, 1, -2621495, 0
 [node name="Player" parent="." instance=ExtResource("2_6powr")]
 light_mask = 3
 visibility_layer = 3
-position = Vector2(28, 7)
+position = Vector2(111, -61)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -317,6 +350,14 @@ position = Vector2(178, 132)
 
 [node name="HUD" parent="." instance=ExtResource("5_3438i")]
 
+[connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Continue" to="." method="_UnpauseGame"]
+[connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Exit" to="." method="CloseGame"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+
+[editable path="PauseMenu"]
+[editable path="XpDrop"]
+[editable path="Mob"]
+[editable path="Player"]
+[editable path="HUD"]

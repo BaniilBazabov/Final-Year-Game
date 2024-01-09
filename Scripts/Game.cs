@@ -7,15 +7,39 @@ public partial class Game : Node
 	public PackedScene MobScene { get; set; }
 	private int _score;
 	Player player;
+	private bool paused =  false;
+	PauseMenu pauseMenu;
 
 	public override void _Ready()
 	{
 		player = GetNode<Player>("Player");
+		pauseMenu = GetNode<PauseMenu>("PauseMenu");
+		pauseMenu.Hide();
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if(Input.IsActionJustPressed("pause_menu"))
+		{
+			_PauseGame();
+		}
+	}
+	private void _PauseGame()
+	{
+		GetTree().Paused = true;
+		pauseMenu.Show();
+	}
+	public void _UnpauseGame()
+	{
+		GetTree().Paused = false;
+		pauseMenu.Hide();
+	}
+
+	public void CloseGame()
+	{
+		GetTree().Quit();
 	}
 	public void GameOver()
 	{
@@ -59,6 +83,3 @@ public partial class Game : Node
 	}
 	
 }
-
-
-
