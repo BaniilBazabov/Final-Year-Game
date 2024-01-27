@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://mumn61tikydr"]
+[gd_scene load_steps=12 format=3 uid="uid://mumn61tikydr"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_jxpgr"]
 [ext_resource type="PackedScene" uid="uid://bpfcbmbhb0pw0" path="res://Scripts/mob.tscn" id="2_2ktv2"]
@@ -276,12 +276,6 @@ texture = ExtResource("3_26ol1")
 [sub_resource type="TileSet" id="TileSet_atcij"]
 sources/0 = SubResource("TileSetAtlasSource_c208t")
 
-[sub_resource type="Curve2D" id="Curve2D_wegnl"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 178, 132, 0, 0, 0, 0, 1666, 132, 0, 0, 0, 0, 1677, 895, 0, 0, 0, 0, 182, 898, 0, 0, 0, 0, 178, 135)
-}
-point_count = 5
-
 [node name="Game" type="Node"]
 script = ExtResource("1_jxpgr")
 MobScene = ExtResource("2_2ktv2")
@@ -340,13 +334,6 @@ one_shot = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(904, 505)
-
-[node name="MobPath" type="Path2D" parent="."]
-position = Vector2(-449, -341)
-curve = SubResource("Curve2D_wegnl")
-
-[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2(178, 132)
 
 [node name="HUD" parent="." instance=ExtResource("5_3438i")]
 

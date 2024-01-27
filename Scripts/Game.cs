@@ -64,9 +64,40 @@ public partial class Game : Node
 	}
 	private void _on_mob_timer_timeout()
 	{
+		Vector2 playerPosition = GetNode<Player>("Player").Position;
+
+		Camera2D camera = GetNode<Camera2D>("Player/Camera2D");
+		Rect2 viewportRect = camera.GetViewportRect();
+
+		Vector2 SpawnPosition = CalculateRandomSpawnPosition(viewportRect, playerPosition);
+
 		Mob mob = MobScene.Instantiate<Mob>();
+		mob.Position = SpawnPosition;
 		AddChild(mob);
 	}
+
+	private Vector2 CalculateRandomSpawnPosition(Rect2 viewportRect, Vector2 playerPosition)
+	{
+		float bufferDistance = 150.0f;
+
+		Rect2 spawnArea = new Rect2(
+			viewportRect.Position - new Vector2(bufferDistance, bufferDistance),
+			viewportRect.Size + new Vector2(bufferDistance * 2, bufferDistance * 2)
+		);
+
+		Vector2 spawnPosition;
+		do
+		{
+			spawnPosition = new Vector2(
+				(float)GD.Randf() * spawnArea.Size[0] + spawnArea.Position[0],
+				(float)GD.Randf() * spawnArea.Size[1] + spawnArea.Position[1]
+			);
+		} while (spawnPosition.DistanceTo(playerPosition) < bufferDistance);
+
+		return spawnPosition;
+	}
+
+
 
 
 	private void _on_score_timer_timeout()

@@ -1,7 +1,6 @@
 using Godot;
 using System;
-using System.Diagnostics.Metrics;
-using System.Xml.Linq;
+
 
 public partial class Mob : RigidBody2D 
 {
@@ -15,10 +14,6 @@ public partial class Mob : RigidBody2D
 	public float health;
 	ProgressBar bar;
 
-	private void _on_visible_on_screen_enabler_2d_screen_exited()
-	{
-		QueueFree();
-	}
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -44,7 +39,7 @@ public partial class Mob : RigidBody2D
 			Vector2 direction = player.GlobalPosition - GlobalPosition;
 			float distanceToPlayer = direction.Length();
 
-			if (distanceToPlayer <= 7)
+			if (distanceToPlayer <= 5)
 			{
 				Attack();
 			} 
