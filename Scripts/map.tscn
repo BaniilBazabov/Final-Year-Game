@@ -284,8 +284,9 @@ MobScene = ExtResource("2_2ktv2")
 metadata/_edit_group_ = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="PauseMenu"]
-offset_right = 1283.0
-offset_bottom = 722.0
+offset_left = -1.0
+offset_right = 1919.0
+offset_bottom = 1080.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer2"]
 layout_mode = 2
