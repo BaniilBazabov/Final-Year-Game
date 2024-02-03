@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Player : Area2D
+public partial class Player : CharacterBody2D
 {
 	[Signal]
 	public delegate void HitEventHandler();
@@ -19,6 +19,7 @@ public partial class Player : Area2D
 	private LevelUpMenu levelUpMenu;
 	private LevelUpScreen levelUpScreen;
 	private Area2D pickUpZone;
+	private  Vector2 currentVelocity;
 	
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,52 +63,61 @@ public partial class Player : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		var velocity = Vector2.Zero; // The player's movement vector.
+		base._Process(delta);
+		handleInput();
+		Velocity = currentVelocity;
+		MoveAndSlide();
 
-		if (Input.IsActionPressed("move_right"))
-		{
-			velocity.X += 1;
-		}
+		// if (Input.IsActionPressed("move_right"))
+		// {
+		// 	velocity.X += 1;
+		// }
 
-		if (Input.IsActionPressed("move_left"))
-		{
-			velocity.X -= 1;
-		}
+		// if (Input.IsActionPressed("move_left"))
+		// {
+		// 	velocity.X -= 1;
+		// }
 
-		if (Input.IsActionPressed("move_down"))
-		{
-			velocity.Y += 1;
-		}
+		// if (Input.IsActionPressed("move_down"))
+		// {
+		// 	velocity.Y += 1;
+		// }
 
-		if (Input.IsActionPressed("move_up"))
-		{
-			velocity.Y -= 1;
-		}
+		// if (Input.IsActionPressed("move_up"))
+		// {
+		// 	velocity.Y -= 1;
+		// }
 
-		var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		// var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		
-		if (velocity.Length() > 0)
-		{
-			velocity = velocity.Normalized() * Speed;
-			animatedSprite2D.Play();
-		}
-		else
-		{
-			animatedSprite2D.Play("Idle");
-		}
+		// if (velocity.Length() > 0)
+		// {
+		// 	velocity = velocity.Normalized() * Speed;
+		// 	animatedSprite2D.Play();
+		// }
+		// else
+		// {
+		// 	animatedSprite2D.Play("Idle");
+		// }
 		 
-		if (velocity.X != 0 || velocity.Y != 0)
-		{
-			animatedSprite2D.Animation = "right";
-			animatedSprite2D.FlipH = velocity.X < 0;
-		}
+		// if (velocity.X != 0 || velocity.Y != 0)
+		// {
+		// 	animatedSprite2D.Animation = "right";
+		// 	animatedSprite2D.FlipH = velocity.X < 0;
+		// }
 		
-		Position += velocity * (float)delta;
+		// Position += velocity * (float)delta;
 		
 		GetXp();
 		MoveAttackZone();
 		Attack();
 		RegenHealth();
+	}
+
+	private void handleInput()
+	{
+		currentVelocity = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+		currentVelocity *= Speed;
 	}
 
 	private void MoveAttackZone()
@@ -191,22 +201,27 @@ public partial class Player : Area2D
 	}
 
 	public void GetXp()
+{
+	foreach (Node2D body in pickUpZone.GetOverlappingBodies())
 	{
-		foreach (RigidBody2D xpdrop in pickUpZone.GetOverlappingBodies())
+		if (body is Xpdrop xpdrop)
 		{
-			if(xpdrop is Xpdrop)
+			// Use the safe cast and check for null
+			RigidBody2D rigidBody = xpdrop as RigidBody2D;
+			if (rigidBody != null)
 			{
-				Xpdrop expdrop = (Xpdrop)xpdrop;
-				experience += expdrop.red_xp;
+				experience += xpdrop.red_xp;
 				if (experience >= experienceForNextLevel)
 				{
 					LevelUp();
 				}
-				expdrop.Despawn();
+
+				xpdrop.Despawn();
 				GD.Print(experience);
 			}
 		}
 	}
+}
 
 	private void LevelUp()
 	{

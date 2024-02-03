@@ -225,10 +225,14 @@ radius = 36.0139
 [sub_resource type="CircleShape2D" id="CircleShape2D_siena"]
 radius = 96.0
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
 position = Vector2(962, 542)
-collision_layer = 3
-collision_mask = 3
+collision_layer = 0
+collision_mask = 0
+collision_priority = 10.0
+motion_mode = 1
+wall_min_slide_angle = 0.0
+safe_margin = 0.001
 script = ExtResource("1_yvt51")
 metadata/_edit_group_ = true
 
@@ -282,6 +286,8 @@ frame_progress = 1.0
 
 [node name="AttackZone" type="Area2D" parent="."]
 position = Vector2(-117, 14)
+collision_layer = 128
+collision_mask = 128
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]

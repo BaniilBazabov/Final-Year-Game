@@ -43,12 +43,16 @@ public partial class Mob : RigidBody2D
 		Vector2 velocity = direction * (float)(speed * delta);
 		GlobalPosition += velocity;
 
-		foreach (Node2D player in mobHitbox.GetOverlappingAreas())
+		foreach (Node2D body in mobHitbox.GetOverlappingBodies())
 		{
-			if (player is Player)
-			{
-				Attack();
-			}
+			CharacterBody2D characterBody = body as CharacterBody2D;
+			if (characterBody != null)
+				{
+					if (characterBody is Player)
+					{
+						Attack();
+					}
+				}
 		}
 
 	}
