@@ -64,8 +64,8 @@ public partial class LevelUpScreen : Control
 		new Upgrade("res://Art/Skills/GoldenHands.png", "Golden Hands", "Increases your Pick Up Range by 10%", 0, 5),
 		new Upgrade("res://Art/Skills/SpeedyFit.png", "Fashion Statement", "Increases your Movement Speed by 10%", 0, 5),
 		new Upgrade("res://Art/Skills/HairPreservedRegen.png", "Hair Regeneration", "Increases your HP Regeneration by 5", 0, 5),
-		new Upgrade("res://Art/Skills/AreaOfAttack.png", "Bonking Area", "Increases your Attack area of effect by 10%", 0, 5),
-		new Upgrade("res://icon.svg", "Placeholder 3", "ToBeReplaced 3", 0, 5),
+		new Upgrade("res://Art/Skills/AreaOfAttack.png", "Bonking Area", "Increases your Attack Area of effect by 10%", 0, 5),
+		new Upgrade("res://Art/Skills/AttackRange.png", "Bonking Range", "Increases your Attack Range by 15%", 0, 5),
 	};
 
 	private List<Upgrade> availableUpgrades = new List<Upgrade>();
@@ -176,6 +176,10 @@ public partial class LevelUpScreen : Control
 
 			case "Bonking Area":
 			player.IncreaseAttackRadius();
+			break;
+
+			case "Bonking Range":
+			player.AttackRange *= 1.15f;
 			break;
 
 
