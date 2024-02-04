@@ -11,7 +11,8 @@ public partial class Player : CharacterBody2D
 	public float health;
 	public float RegenAmount { get; set; } = 5f;
 	public float AttackRange { get; set; } = 220.0f;
-	public Vector2 pickUpRangeScale = new(1.15f, 1.15f);
+	private Vector2 pickUpRangeScale = new(1.15f, 1.15f);
+	private Vector2 attackZoneScale = new(1.15f, 1.15f);
 	public float Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
 	ProgressBar bar;
 
@@ -19,6 +20,7 @@ public partial class Player : CharacterBody2D
 	private LevelUpMenu levelUpMenu;
 	private LevelUpScreen levelUpScreen;
 	private Area2D pickUpZone;
+	private Area2D attackZone;
 	private  Vector2 currentVelocity;
 	
 
@@ -50,6 +52,7 @@ public partial class Player : CharacterBody2D
 		levelUpMenu = GetNode<LevelUpMenu>("LevelUpMenu");
 		levelUpScreen = levelUpMenu.GetNode<LevelUpScreen>("LevelUpScreen");
 		pickUpZone = GetNode<Area2D>("PickUpZone");
+		attackZone = GetNode<Area2D>("AttackZone");
 	}
 	
 	public void Start(Vector2 position)
@@ -101,7 +104,6 @@ public partial class Player : CharacterBody2D
 	private void MoveAttackZone()
 	{
 		AnimatedSprite2D attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
-		Area2D attackZone = GetNode<Area2D>("AttackZone");
 
 		Vector2 mousePosition = GetGlobalMousePosition();
 		Vector2 playerPosition = GlobalPosition;
@@ -119,7 +121,6 @@ public partial class Player : CharacterBody2D
 		if (AttackCooldown.IsStopped())
 		{
 			AnimatedSprite2D attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
-			Area2D attackZone = GetNode<Area2D>("AttackZone");
 			foreach (Node2D mob in attackZone.GetOverlappingBodies())
 			{
 				if (mob is Mob)
@@ -174,8 +175,11 @@ public partial class Player : CharacterBody2D
 	public void IncreasePickUpRange()
 	{
 		pickUpZone.Scale *= pickUpRangeScale;
-		
+	}
 
+	public void IncreaseAttackRadius()
+	{
+		attackZone.Scale *= attackZoneScale;
 	}
 
 	public void GetXp()

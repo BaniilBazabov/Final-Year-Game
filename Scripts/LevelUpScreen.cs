@@ -58,13 +58,13 @@ public partial class LevelUpScreen : Control
 
 	private List<Upgrade> allUpgrades = new List<Upgrade>
 	{
-		new Upgrade("res://Art/Skills/BonkHammer.png", "Bonking Hammer", "Increases your damage from all sources by 10%", 0, 5),
+		new Upgrade("res://Art/Skills/BonkHammer.png", "Bonking Hammer", "Increases your Damage from all sources by 10%", 0, 5),
 		new Upgrade("res://Art/Skills/hairPreservedSprinkles.png", "Hair Preserved", "Increases your HP by 10%", 0, 5),
 		new Upgrade("res://Art/Skills/BonkHammerAS.png", "Bonking Speed", "Increases your Attack Speed by 10%", 0, 5),
 		new Upgrade("res://Art/Skills/GoldenHands.png", "Golden Hands", "Increases your Pick Up Range by 10%", 0, 5),
 		new Upgrade("res://Art/Skills/SpeedyFit.png", "Fashion Statement", "Increases your Movement Speed by 10%", 0, 5),
-		new Upgrade("res://Art/Skills/HairPreservedRegen.png", "Hair Regeneration", "Increases your HP regeneration by 5", 0, 5),
-		new Upgrade("res://icon.svg", "Placeholder 2", "ToBeReplaced 2", 0, 5),
+		new Upgrade("res://Art/Skills/HairPreservedRegen.png", "Hair Regeneration", "Increases your HP Regeneration by 5", 0, 5),
+		new Upgrade("res://Art/Skills/AreaOfAttack.png", "Bonking Area", "Increases your Attack area of effect by 10%", 0, 5),
 		new Upgrade("res://icon.svg", "Placeholder 3", "ToBeReplaced 3", 0, 5),
 	};
 
@@ -152,32 +152,33 @@ public partial class LevelUpScreen : Control
 		{
 			case "Bonking Hammer":
 			player.damage *= 1.1f;
-			GD.Print("More dmg addded");
 			break;
 
 			case "Hair Preserved":
 			player.health *= 1.1f;
-			GD.Print("More HP addded");
 			break;
 
 			case "Bonking Speed":
-			GD.Print(player.DecreaseAttackCooldown(.25f));
+			player.DecreaseAttackCooldown(.25f);
 			break;
 
 			case "Fashion Statement":
-			GD.Print(player.Speed *= 1.1f);
+			player.Speed *= 1.1f;
 			break;
 
 			case "Hair Regeneration":
-			GD.Print(player.RegenAmount += 5f);
-			GD.Print("Player Regen = " + player.RegenAmount);
+			player.RegenAmount += 5f;
 			break;
 
 			case "Golden Hands":
 			player.IncreasePickUpRange();
-			GD.Print("Increased pickuprange by 10%");
 			break;
-			
+
+			case "Bonking Area":
+			player.IncreaseAttackRadius();
+			break;
+
+
 			default:
 			break;
 		}
