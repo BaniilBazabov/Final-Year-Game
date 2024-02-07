@@ -21,19 +21,10 @@ public partial class Hud : CanvasLayer
 		GetNode<Timer>("MessageTimer").Start();
 	}
 
-	async public void ShowGameOver()
+	public void ShowGameOver()
 	{
-		ShowMessage("Game Over");
-
-		var roundTime = GetNode<Timer>("MessageTimer");
-		await ToSignal(roundTime, Timer.SignalName.Timeout);
-
-		var message = GetNode<Label>("Message");
-		message.Text = "Press the Start button to begin!";
-		message.Show();
-
-		await ToSignal(GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
-		GetNode<Button>("Start").Show();
+		ShowMessage("Game Over, you lost, take L");
+		GetTree().ChangeSceneToFile("res://Scripts/mainMenu.tscn");
 	}
 
 	public void UpdateScore(int score)
@@ -44,14 +35,6 @@ public partial class Hud : CanvasLayer
 	private void _on_message_timer_timeout()
 	{
 		GetNode<Label>("Message").Hide();
-	}
-
-
-	private void _on_start_pressed()
-	{
-		GetNode<Button>("Start").Hide();
-		GetTree().Root.GetNode<Game>("Game").NewGame();
-		
 	}
 }
 

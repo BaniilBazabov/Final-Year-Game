@@ -8,13 +8,22 @@ public partial class Game : Node
 	private int _score;
 	Player player;
 	private bool paused =  false;
+	Hud hud;
 	PauseMenu pauseMenu;
+	Timer scoreTimer, mobTimer, startTimer;
 
 	public override void _Ready()
 	{
 		player = GetNode<Player>("Player");
 		pauseMenu = GetNode<PauseMenu>("PauseMenu");
 		pauseMenu.Hide();
+
+		hud = GetNode<Hud>("HUD");
+		mobTimer = GetNode<Timer>("MobTimer");
+		scoreTimer = GetNode<Timer>("ScoreTimer");
+		startTimer = GetNode<Timer>("StartTimer");
+
+		NewGame();
 		
 	}
 
@@ -43,24 +52,23 @@ public partial class Game : Node
 	}
 	public void GameOver()
 	{
-		GetNode<Hud>("HUD").ShowGameOver();
-		GetNode<Timer>("MobTimer").Stop();
-		GetNode<Timer>("ScoreTimer").Stop();
+		hud.ShowGameOver();
+		mobTimer.Stop();
+		scoreTimer.Stop();
 		player.Hide();
 	}
 	public void NewGame()
 	{
-		var hud = GetNode<Hud>("HUD");
-		hud.UpdateScore(_score);
-		hud.ShowMessage("Get Ready!");
 		_score = 0;
+		hud.UpdateScore(_score);
+		
 
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		player.Start(startPosition.Position);
 		player.health = player.Max_health;
 		player.Show();
 		
-		GetNode<Timer>("StartTimer").Start();
+		startTimer.Start();
 	}
 	private void _on_mob_timer_timeout()
 	{
@@ -103,7 +111,7 @@ public partial class Game : Node
 	private void _on_score_timer_timeout()
 	{
 		_score++;
-		GetNode<Hud>("HUD").UpdateScore(_score);
+		hud.UpdateScore(_score);
 	}
 
 
