@@ -52,10 +52,10 @@ public partial class Game : Node
 	}
 	public void GameOver()
 	{
-		hud.ShowGameOver();
 		mobTimer.Stop();
 		scoreTimer.Stop();
 		player.Hide();
+		hud.ShowGameOver();
 	}
 	public void NewGame()
 	{
@@ -86,7 +86,7 @@ public partial class Game : Node
 
 	private Vector2 CalculateRandomSpawnPosition(Rect2 viewportRect, Vector2 playerPosition)
 	{
-		float bufferDistance = 150.0f;
+		float bufferDistance = 500.0f;
 
 		Rect2 spawnArea = new Rect2(
 			viewportRect.Position - new Vector2(bufferDistance, bufferDistance),

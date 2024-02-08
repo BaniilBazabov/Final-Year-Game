@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://2shreuh5056u"]
+[gd_scene load_steps=4 format=3 uid="uid://2shreuh5056u"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_dltjv"]
+[ext_resource type="Texture2D" uid="uid://bnt67ctydk12u" path="res://Art/Main character/Asmongold Character HD.png" id="2_jk236"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_be2c4"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,7 +16,14 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_dltjv")
 
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1078.0
+texture = ExtResource("2_jk236")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
+material = SubResource("CanvasItemMaterial_be2c4")
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
