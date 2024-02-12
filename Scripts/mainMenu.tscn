@@ -21,9 +21,10 @@ script = ExtResource("1_dltjv")
 
 [node name="BackgroundMain" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 1921.0
+offset_right = 1912.0
 offset_bottom = 1092.0
 texture = ExtResource("2_pbqjm")
+stretch_mode = 6
 
 [node name="backgroundMountain" type="TextureRect" parent="."]
 layout_mode = 0
