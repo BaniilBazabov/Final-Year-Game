@@ -13,7 +13,7 @@ config_version=5
 config/name="Final-year-game"
 run/main_scene="res://Scripts/mainMenu.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Art/Main character/asmonFace.png"
 
 [display]
 
@@ -21,6 +21,8 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/initial_position_type=0
 window/stretch/mode="viewport"
+window/icon="res://icon.svg"
+window/canvas_textures/default_texture_filter=1
 
 [dotnet]
 
