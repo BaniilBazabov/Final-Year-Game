@@ -23,8 +23,7 @@ public partial class Hud : CanvasLayer
 
 	public void ShowGameOver()
 	{
-		ShowMessage("Game Over, you lost, take L");
-		GetTree().ChangeSceneToFile("res://Scripts/mainMenu.tscn");
+		GetTree().ChangeSceneToFile("res://Scripts/deathScreen.tscn");
 	}
 
 	public void UpdateScore(int score)

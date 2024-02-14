@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxq67av205kf5"]
+
+[ext_resource type="Script" path="res://Scripts/deathScreen.cs" id="1_pmse5"]
+[ext_resource type="Texture2D" uid="uid://byupfuaw2mywg" path="res://Art/Bgs/nightForest.png" id="1_t4y7r"]
+[ext_resource type="Theme" uid="uid://bwhwap5oekw1s" path="res://Art/Buttons/buttons1.tres" id="2_hly17"]
+[ext_resource type="FontFile" uid="uid://dqw8hblxqfp1y" path="res://Fonts/Pixelme.ttf" id="3_bxyjk"]
+
+[node name="DeathScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pmse5")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = -2.0
+offset_right = 621.0
+offset_bottom = 361.0
+scale = Vector2(3.09228, 2.97562)
+texture = ExtResource("1_t4y7r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 573.0
+offset_top = 325.0
+offset_right = 787.0
+offset_bottom = 422.0
+scale = Vector2(3.78027, 4.0197)
+theme = ExtResource("2_hly17")
+alignment = 1
+
+[node name="DeathLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_bxyjk")
+text = "YOU'VE DIED"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="MainMenuButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit to the Main Menu
+"
+
+[connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
