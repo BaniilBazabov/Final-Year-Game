@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://fywihr44jjjn"]
+
+[ext_resource type="Texture2D" uid="uid://byupfuaw2mywg" path="res://Art/Bgs/nightForest.png" id="1_yv77e"]
+[ext_resource type="Theme" uid="uid://bwhwap5oekw1s" path="res://Art/Buttons/buttons1.tres" id="2_nsnjc"]
+
+[node name="DeathScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 8.0
+offset_right = 623.0
+offset_bottom = 368.0
+scale = Vector2(3.09228, 2.97562)
+texture = ExtResource("1_yv77e")
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 797.0
+offset_top = 395.0
+offset_right = 887.0
+offset_bottom = 461.0
+scale = Vector2(3.78027, 4.0197)
+theme = ExtResource("2_nsnjc")
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "czxczxczxc"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "sadaassa
+"
