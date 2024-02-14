@@ -155,7 +155,7 @@ public partial class LevelUpScreen : Control
 			break;
 
 			case "Hair Preserved":
-			player.health *= 1.1f;
+			player.IncreaseHP();
 			break;
 
 			case "Bonking Speed":

@@ -8,6 +8,7 @@ public partial class Player : CharacterBody2D
 
 	public float Max_health { get; set; } = 1000f;
 	public Label HpLabel;
+	public Label killLabel;
 	public float health;
 	public float RegenAmount { get; set; } = 5f;
 	public float AttackRange { get; set; } = 220.0f;
@@ -27,7 +28,8 @@ public partial class Player : CharacterBody2D
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private float level = 1f;
-	float experience = 0f;
+	private float experience = 0f;
+	private float kills = 0f;
 	private float experienceForNextLevel = 100f;
 	private float experienceScalingFactor = 1.15f;
 
@@ -50,11 +52,14 @@ public partial class Player : CharacterBody2D
 		AttackCooldown = GetNode<Timer>("AttackCooldown");
 		RegenCooldown = GetNode<Timer>("RegenCooldown");
 		HpLabel = GetNode<Label>("HealthLabel");
+		killLabel = GetNode<Label>("KillLabel");
 		levelUpMenu = GetNode<LevelUpMenu>("LevelUpMenu");
 		levelUpScreen = levelUpMenu.GetNode<LevelUpScreen>("LevelUpScreen");
 		pickUpZone = GetNode<Area2D>("PickUpZone");
 		attackZone = GetNode<Area2D>("AttackZone");
 		attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
+
+		killLabel.Text = "Kills: 0";
 	}
 	
 	public void Start(Vector2 position)
@@ -162,6 +167,12 @@ public partial class Player : CharacterBody2D
 		bar.Value = healthPercentage;
 	}
 
+	public void IncreaseHP()
+	{
+		Max_health *= 1.1f;
+		HpLabel.Text = "Hair Preserved: " + $"{health}/{Max_health}";
+	}
+
 	private void RegenHealth()
 	{
 		if (RegenCooldown.IsStopped() && health != Max_health && health < Max_health)
@@ -186,27 +197,27 @@ public partial class Player : CharacterBody2D
 	}
 
 	public void GetXp()
-{
-	foreach (Node2D body in pickUpZone.GetOverlappingBodies())
 	{
-		if (body is Xpdrop xpdrop)
+		foreach (Node2D body in pickUpZone.GetOverlappingBodies())
 		{
-			// Use the safe cast and check for null
-			RigidBody2D rigidBody = xpdrop as RigidBody2D;
-			if (rigidBody != null)
+			if (body is Xpdrop xpdrop)
 			{
-				experience += xpdrop.red_xp;
-				if (experience >= experienceForNextLevel)
+				// Use the safe cast and check for null
+				RigidBody2D rigidBody = xpdrop as RigidBody2D;
+				if (rigidBody != null)
 				{
-					LevelUp();
-				}
+					experience += xpdrop.red_xp;
+					if (experience >= experienceForNextLevel)
+					{
+						LevelUp();
+					}
 
-				xpdrop.Despawn();
-				GD.Print(experience);
+					xpdrop.Despawn();
+					GD.Print(experience);
+				}
 			}
 		}
 	}
-}
 
 	private void LevelUp()
 	{
@@ -218,6 +229,11 @@ public partial class Player : CharacterBody2D
 		experienceForNextLevel = experienceScalingFactor * experienceForNextLevel;
 		GD.Print($"Experience Required for Next Level: {experienceForNextLevel}");
 		GD.Print($"Damage:{damage} and Health: {health}");
+	}
+
+	public void IncreaseKillCount()
+	{
+		killLabel.Text = "Kills: " + $"{kills++}";
 	}
 
 	private void ShowLevelUpMenu()

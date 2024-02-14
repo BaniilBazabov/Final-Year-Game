@@ -57,26 +57,6 @@ public partial class Mob : RigidBody2D
 
 	}
 
-	// public void Attack()
-	// {
-	// 	if (AttackCooldown.IsStopped())
-	// 	{
-	// 		AnimatedSprite2D attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
-	// 		Area2D attackZone = GetNode<Area2D>("AttackZone");
-	// 		foreach (Node2D mob in attackZone.GetOverlappingBodies())
-	// 		{
-	// 			if (mob is Mob)
-	// 			{
-	// 				Mob mobInstance = (Mob)mob;
-	// 				mobInstance.Damage(damage);
-	// 			}
-	// 		}
-
-	// 		attackAnimation.Play("oneshot");
-	// 		AttackCooldown.Start();
-	// 	}
-	// }
-
 	public void Attack()
 	{
 		if(attackCooldown.IsStopped())
@@ -103,6 +83,7 @@ public partial class Mob : RigidBody2D
 			GetNode<Game>("../").AddChild(xpdrop);
 			xpdrop.GlobalPosition = GlobalPosition;
 			Despawn();
+			player.IncreaseKillCount();
 			xpdropped = true;
 		}
 	}
