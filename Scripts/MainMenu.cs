@@ -21,7 +21,7 @@ public partial class MainMenu : Control
 
 	private void _on_settings_pressed()
 	{
-		// Replace with function body.
+		GetTree().ChangeSceneToFile("res://Scripts/playerBase1.tscn");
 	}
 
 
