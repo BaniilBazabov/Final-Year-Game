@@ -1,10 +1,20 @@
-[gd_scene load_steps=19 format=3 uid="uid://0brj35t25kmh"]
+[gd_scene load_steps=25 format=3 uid="uid://0brj35t25kmh"]
 
+[ext_resource type="Script" path="res://Scripts/playerBase1.cs" id="1_jjrwa"]
 [ext_resource type="Texture2D" uid="uid://b373yp1qfa42a" path="res://Art/TilesetPack/TX Tileset Grass.png" id="1_ncd8q"]
 [ext_resource type="Texture2D" uid="uid://bek6vout3gfar" path="res://Art/NPCTraders/Decorations.png" id="2_b63vb"]
+[ext_resource type="PackedScene" uid="uid://cjc1yph6eueua" path="res://Scripts/pauseMenu.tscn" id="2_l7kdd"]
 [ext_resource type="Texture2D" uid="uid://cwfrcpks06uta" path="res://Art/TilesetPack/TX Tileset Wall.png" id="3_amvsk"]
+[ext_resource type="Texture2D" uid="uid://82gofupv01kt" path="res://Art/Bgs/parallax-mountain-bg.png" id="3_nj1ft"]
 [ext_resource type="Texture2D" uid="uid://bktfd38dif41i" path="res://Art/TilesetPack/TX Props.png" id="3_r5byr"]
 [ext_resource type="PackedScene" uid="uid://cm2tyoya3d5cj" path="res://Scripts/player.tscn" id="4_hicag"]
+[ext_resource type="Theme" uid="uid://bwhwap5oekw1s" path="res://Art/Buttons/buttons1.tres" id="4_k0trh"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_g6bud"]
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_flqxh"]
+events = [SubResource("InputEventKey_g6bud")]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3jgpf"]
 texture = ExtResource("1_ncd8q")
@@ -2781,6 +2791,53 @@ sources/0 = SubResource("TileSetAtlasSource_cp7h3")
 distance = -1286.0
 
 [node name="PlayerBase1" type="Node2D"]
+script = ExtResource("1_jjrwa")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_l7kdd")]
+metadata/_edit_group_ = true
+
+[node name="Background" type="TextureRect" parent="PauseMenu"]
+offset_right = 1921.0
+offset_bottom = 1080.0
+texture = ExtResource("3_nj1ft")
+
+[node name="MarginContainer2" type="MarginContainer" parent="PauseMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="MenuLabel" type="Label" parent="PauseMenu/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Pause Menu"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="PauseMenu/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_k0trh")
+shortcut = SubResource("Shortcut_flqxh")
+text = "Continue Playing
+"
+
+[node name="Exit" type="Button" parent="PauseMenu/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_k0trh")
+text = "Exit"
 
 [node name="Grass" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_cta8x")
@@ -2830,4 +2887,8 @@ layer_0/tile_data = PackedInt32Array(2097174, 1048576, 6, 2162710, 1048576, 7, 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_7br20")
 
+[connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Continue" to="." method="_UnpauseGame"]
+[connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Exit" to="." method="_CloseGame"]
+
+[editable path="PauseMenu"]
 [editable path="Player"]
