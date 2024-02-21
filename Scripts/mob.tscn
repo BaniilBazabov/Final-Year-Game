@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bpfcbmbhb0pw0"]
+[gd_scene load_steps=18 format=3 uid="uid://bpfcbmbhb0pw0"]
 
 [ext_resource type="Texture2D" uid="uid://duvhbc716jy5e" path="res://Art/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="1_ajugw"]
 [ext_resource type="Script" path="res://Scripts/Mob.cs" id="1_bd88h"]
 [ext_resource type="PackedScene" uid="uid://cy5dp63vmnt1n" path="res://Scripts/xpdrop.tscn" id="2_kjqc7"]
+[ext_resource type="PackedScene" uid="uid://baqdg5lhmql11" path="res://Scripts/coin.tscn" id="3_7mmto"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajnq1"]
 bg_color = Color(0.882353, 0.258824, 1, 1)
@@ -98,6 +99,7 @@ gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_bd88h")
 XpScene = ExtResource("2_kjqc7")
+coinScene = ExtResource("3_7mmto")
 
 [node name="MobHealthBar" type="ProgressBar" parent="."]
 offset_left = -68.0

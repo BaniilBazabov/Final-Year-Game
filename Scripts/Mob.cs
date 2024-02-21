@@ -6,6 +6,8 @@ public partial class Mob : RigidBody2D
 {
 	[Export]
 	public PackedScene XpScene { get; set; }
+	[Export]
+	public PackedScene coinScene { get; set; }
 	private Player player;
 	private double speed = 50.0;
 	private float damage = 50f;
@@ -79,6 +81,15 @@ public partial class Mob : RigidBody2D
 		bar.Value = healthPercentage;
 		if (healthPercentage == 0f && !xpdropped)
 		{
+			float coinDrop = (float)GD.RandRange(0,1);
+
+			if(coinDrop<0.03f)
+			{
+				coin coin = coinScene.Instantiate<coin>();
+				GetNode<Game>("../").AddChild(coin);
+				coin.GlobalPosition = GlobalPosition;
+			}
+			//xp drop handled with death logic
 			Xpdrop xpdrop = XpScene.Instantiate<Xpdrop>();
 			GetNode<Game>("../").AddChild(xpdrop);
 			xpdrop.GlobalPosition = GlobalPosition;

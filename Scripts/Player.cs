@@ -97,7 +97,7 @@ public partial class Player : CharacterBody2D
 			animatedSprite2D.FlipH = Velocity.X < 0;
 		}
 		
-		GetXp();
+		GetXpAndCoins();
 		MoveAttackZone();
 		Attack();
 		RegenHealth();
@@ -197,7 +197,7 @@ public partial class Player : CharacterBody2D
 		attackAnimation.Scale *= attackAnimationScale;
 	}
 
-	public void GetXp()
+	public void GetXpAndCoins()
 	{
 		foreach (Node2D body in pickUpZone.GetOverlappingBodies())
 		{
@@ -214,7 +214,7 @@ public partial class Player : CharacterBody2D
 					}
 
 					xpdrop.Despawn();
-					GD.Print(experience);
+					
 				}
 			}
 			else if (body is coin coin)
@@ -223,6 +223,8 @@ public partial class Player : CharacterBody2D
 				if(rigidBody!= null)
 				{
 					gold += coin.amount;
+					coin.Despawn();
+					GD.Print(gold);
 				}
 			}
 		}
