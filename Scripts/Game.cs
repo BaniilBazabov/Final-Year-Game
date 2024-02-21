@@ -81,6 +81,7 @@ public partial class Game : Node
 
 		Mob mob = MobScene.Instantiate<Mob>();
 		mob.Position = SpawnPosition;
+		mob.Visible = true;
 		AddChild(mob);
 	}
 
