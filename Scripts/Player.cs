@@ -29,6 +29,7 @@ public partial class Player : CharacterBody2D
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private float level = 1f;
 	private float experience = 0f;
+	private float gold = 0f;
 	private float kills = 0f;
 	private float experienceForNextLevel = 100f;
 	private float experienceScalingFactor = 1.15f;
@@ -214,6 +215,14 @@ public partial class Player : CharacterBody2D
 
 					xpdrop.Despawn();
 					GD.Print(experience);
+				}
+			}
+			else if (body is coin coin)
+			{
+				RigidBody2D rigidBody = coin as RigidBody2D;
+				if(rigidBody!= null)
+				{
+					gold += coin.amount;
 				}
 			}
 		}
