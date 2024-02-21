@@ -81,9 +81,9 @@ public partial class Mob : RigidBody2D
 		bar.Value = healthPercentage;
 		if (healthPercentage == 0f && !xpdropped)
 		{
-			float coinDrop = (float)GD.RandRange(0,1);
+			float coinDropRate = (float)GD.RandRange(1,100);
 
-			if(coinDrop<0.03f)
+			if(coinDropRate==1)
 			{
 				coin coin = coinScene.Instantiate<coin>();
 				GetNode<Game>("../").AddChild(coin);
