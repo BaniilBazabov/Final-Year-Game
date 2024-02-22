@@ -1,0 +1,96 @@
+[gd_scene load_steps=14 format=3 uid="uid://b6tc7siv3mqp0"]
+
+[ext_resource type="Texture2D" uid="uid://clpa57h6d5vxp" path="res://Art/Zombie v1/Sprite Sheet/Zombie_v1_Sheet_No effect.png" id="1_emn0k"]
+[ext_resource type="Script" path="res://Scripts/Zombie.cs" id="1_t1cg2"]
+[ext_resource type="PackedScene" uid="uid://cy5dp63vmnt1n" path="res://Scripts/xpdrop.tscn" id="2_po7a8"]
+[ext_resource type="PackedScene" uid="uid://baqdg5lhmql11" path="res://Scripts/coin.tscn" id="3_1ustj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7tfwt"]
+radius = 16.0
+height = 80.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3tlf"]
+atlas = ExtResource("1_emn0k")
+region = Rect2(0, 210, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1c6q7"]
+atlas = ExtResource("1_emn0k")
+region = Rect2(130, 210, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02a66"]
+atlas = ExtResource("1_emn0k")
+region = Rect2(260, 210, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k7v3"]
+atlas = ExtResource("1_emn0k")
+region = Rect2(390, 210, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5s2y8"]
+atlas = ExtResource("1_emn0k")
+region = Rect2(520, 210, 130, 70)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q3hjx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3tlf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1c6q7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02a66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k7v3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5s2y8")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwegk"]
+bg_color = Color(0.882353, 0.258824, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu7an"]
+size = Vector2(31, 72.5)
+
+[node name="Zombie" type="RigidBody2D"]
+collision_layer = 0
+mass = 0.01
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_t1cg2")
+XpScene = ExtResource("2_po7a8")
+coinScene = ExtResource("3_1ustj")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7tfwt")
+
+[node name="ZombieWalk" type="AnimatedSprite2D" parent="."]
+position = Vector2(10, 0)
+sprite_frames = SubResource("SpriteFrames_q3hjx")
+animation = &"right"
+frame_progress = 0.413255
+
+[node name="ZombieHealthBar" type="ProgressBar" parent="."]
+offset_left = -68.0
+offset_top = -45.0
+offset_right = 52.0
+offset_bottom = -32.0
+theme_override_styles/background = SubResource("StyleBoxFlat_gwegk")
+fill_mode = 1
+show_percentage = false
+
+[node name="ZombieHitbox" type="Area2D" parent="."]
+position = Vector2(-6, 7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZombieHitbox"]
+position = Vector2(6.5, -4.75)
+shape = SubResource("RectangleShape2D_gu7an")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+one_shot = true

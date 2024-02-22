@@ -125,23 +125,23 @@ public partial class Player : CharacterBody2D
 	}
 
 	public void Attack()
+{
+	if (AttackCooldown.IsStopped())
 	{
-		if (AttackCooldown.IsStopped())
+		foreach (Node2D mobNode in attackZone.GetOverlappingBodies())
 		{
-			
-			foreach (Node2D mob in attackZone.GetOverlappingBodies())
-			{
-				if (mob is Mob)
-				{
-					Mob mobInstance = (Mob)mob;
-					mobInstance.Damage(damage);
-				}
+			if (mobNode is IEnemy)
+			{	GD.Print("enemy spotted");
+				IEnemy enemy = (IEnemy)mobNode;
+				enemy.Damage(damage);
 			}
-
-			attackAnimation.Play("oneshot");
-			AttackCooldown.Start();
 		}
+
+		// Play attack animation
+		attackAnimation.Play("oneshot");
+		AttackCooldown.Start();
 	}
+}
 
 	public float DecreaseAttackCooldown(float amount)
 	{

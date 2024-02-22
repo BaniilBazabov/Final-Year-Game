@@ -1,10 +1,20 @@
 using Godot;
 using System;
 
+public enum SpawningState
+	{
+		SkeletonOnly,
+		ZombieOnly,
+		Both
+	}
 public partial class Game : Node
 {
 	[Export]
-	public PackedScene MobScene { get; set; }
+	public PackedScene SkeletonScene { get; set; }
+
+	[Export]
+	public PackedScene ZombieScene { get; set; }
+	private SpawningState currentSpawningState = SpawningState.SkeletonOnly;
 	private int _score;
 	Player player;
 	private bool paused =  false;
@@ -79,10 +89,40 @@ public partial class Game : Node
 
 		Vector2 SpawnPosition = CalculateRandomSpawnPosition(viewportRect, playerPosition);
 
-		Mob mob = MobScene.Instantiate<Mob>();
-		mob.Position = SpawnPosition;
-		mob.Visible = true;
-		AddChild(mob);
+		SpawnMobs(SpawnPosition);
+	}
+
+	private void SpawnMobs(Vector2 spawnPosition)
+	{
+		switch (currentSpawningState)
+		{
+			case SpawningState.SkeletonOnly:
+				SpawnSkeleton(spawnPosition);
+				break;
+			case SpawningState.ZombieOnly:
+				SpawnZombie(spawnPosition);
+				break;
+			case SpawningState.Both:
+				SpawnSkeleton(spawnPosition);
+				SpawnZombie(spawnPosition);
+				break;
+		}
+	}
+
+	private void SpawnSkeleton(Vector2 spawnPosition)
+	{
+		Skeleton skeletonInstance = SkeletonScene.Instantiate<Skeleton>();
+		skeletonInstance.Position = spawnPosition;
+		skeletonInstance.Visible = true;
+		AddChild(skeletonInstance);
+	}
+
+	private void SpawnZombie(Vector2 spawnPosition)
+	{
+		Zombie zombieInstance = ZombieScene.Instantiate<Zombie>();
+		zombieInstance.Position = spawnPosition;
+		zombieInstance.Visible = true;
+		AddChild(zombieInstance);
 	}
 
 	private Vector2 CalculateRandomSpawnPosition(Rect2 viewportRect, Vector2 playerPosition)
