@@ -160,6 +160,26 @@ public partial class Game : Node
 	{
 		GetNode<Timer>("MobTimer").Start();
 		GetNode<Timer>("ScoreTimer").Start();
+
+		GetNode<Timer>("OneMinuteTimer").Start();
+	}
+
+	private void _on_one_minute_timer_timeout()
+	{
+		currentSpawningState = SpawningState.ZombieOnly;
+	}
+
+	private void _on_two_minute_timer_timeout()
+	{
+		currentSpawningState = SpawningState.Both;
+	}
+
+	private void _on_three_minute_timer_timeout()
+	{	// Stop further state changes beyond 3 minutes
+		GetNode<Timer>("OneMinuteTimer").Stop();
+		GetNode<Timer>("TwoMinuteTimer").Stop();
+		GetNode<Timer>("ThreeMinuteTimer").Stop();
 	}
 	
 }
+

@@ -2852,7 +2852,6 @@ layer_0/tile_data = PackedInt32Array(2293784, 1441792, 17, 2359320, 1441792, 18,
 
 [node name="Player" parent="." instance=ExtResource("4_hicag")]
 position = Vector2(973, 539)
-collision_layer = 1
 collision_mask = 1
 
 [node name="LevelUpMenu" parent="Player" index="11"]

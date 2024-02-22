@@ -4,7 +4,7 @@ using System;
 public partial class Skeleton : RigidBody2D, IEnemy
 {
 	private Player player;
-	private double speed = 100.0;
+	private double speed = 75.0;
 	private float damage = 50f;
 	private Timer attackCooldown;
 	private float maxHealth = 100f;

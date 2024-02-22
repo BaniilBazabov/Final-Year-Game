@@ -227,8 +227,8 @@ radius = 96.0
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(962, 542)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 32769
+collision_mask = 32769
 collision_priority = 10.0
 motion_mode = 1
 wall_min_slide_angle = 0.0
@@ -292,8 +292,8 @@ frame_progress = 1.0
 
 [node name="AttackZone" type="Area2D" parent="."]
 position = Vector2(-117, 14)
-collision_layer = 128
-collision_mask = 128
+collision_layer = 64
+collision_mask = 64
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]

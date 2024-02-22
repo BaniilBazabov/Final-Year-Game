@@ -29,7 +29,7 @@ public partial class Zombie : RigidBody2D, IEnemy
 		UpdateMobHealthBar();
 
 		// Play Zombie animation
-		animatedSprite.Play("ZombieWalk");
+		animatedSprite.Play();
 	}
 
 	public override void _Process(double delta)

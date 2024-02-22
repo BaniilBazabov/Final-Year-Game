@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6tc7siv3mqp0"]
+[gd_scene load_steps=14 format=3 uid="uid://ca6iev34gm7j0"]
 
 [ext_resource type="Texture2D" uid="uid://clpa57h6d5vxp" path="res://Art/Zombie v1/Sprite Sheet/Zombie_v1_Sheet_No effect.png" id="1_emn0k"]
 [ext_resource type="Script" path="res://Scripts/Zombie.cs" id="1_t1cg2"]
@@ -59,7 +59,8 @@ bg_color = Color(0.882353, 0.258824, 1, 1)
 size = Vector2(31, 72.5)
 
 [node name="Zombie" type="RigidBody2D"]
-collision_layer = 0
+collision_layer = 64
+collision_mask = 32768
 mass = 0.01
 gravity_scale = 0.0
 lock_rotation = true
@@ -68,15 +69,17 @@ XpScene = ExtResource("2_po7a8")
 coinScene = ExtResource("3_1ustj")
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_7tfwt")
 
 [node name="ZombieWalk" type="AnimatedSprite2D" parent="."]
 position = Vector2(10, 0)
 sprite_frames = SubResource("SpriteFrames_q3hjx")
 animation = &"right"
-frame_progress = 0.413255
+frame_progress = 0.370502
 
 [node name="ZombieHealthBar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -68.0
 offset_top = -45.0
 offset_right = 52.0
@@ -86,7 +89,10 @@ fill_mode = 1
 show_percentage = false
 
 [node name="ZombieHitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(-6, 7)
+collision_layer = 32768
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZombieHitbox"]
 position = Vector2(6.5, -4.75)
