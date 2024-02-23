@@ -41,6 +41,15 @@ public partial class Zombie : RigidBody2D, IEnemy
 		Vector2 velocity = direction * (float)(speed * delta);
 		GlobalPosition += velocity;
 
+		if(velocity.X > 0)
+		{
+			animatedSprite.FlipH = false;
+		}
+		else if(velocity.X < 0)
+		{
+			animatedSprite.FlipH = true;
+		}
+
 		foreach (Node2D body in zombieHitbox.GetOverlappingBodies())
 		{
 			CharacterBody2D characterBody = body as CharacterBody2D;

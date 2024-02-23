@@ -39,7 +39,7 @@ public partial class Player : CharacterBody2D
 	private Timer AttackCooldown { get; set; }
 	private Timer RegenCooldown { get; set; }
 	AnimatedSprite2D attackAnimation;
-	public float damage { get; set; } = 50;
+	public float damage { get; set; } = 100;
 
 	public Vector2 ScreenSize; // Size of the game window.
 	// Called when the node enters the scene tree for the first time.

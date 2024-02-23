@@ -5,7 +5,7 @@ public enum SpawningState
 	{
 		SkeletonOnly,
 		ZombieOnly,
-		Both
+		BossZombieOnly
 	}
 public partial class Game : Node
 {
@@ -14,6 +14,8 @@ public partial class Game : Node
 
 	[Export]
 	public PackedScene ZombieScene { get; set; }
+	[Export]
+	public PackedScene BossZombieScene { get; set; }
 	private SpawningState currentSpawningState = SpawningState.SkeletonOnly;
 	private int _score;
 	Player player;
@@ -102,9 +104,9 @@ public partial class Game : Node
 			case SpawningState.ZombieOnly:
 				SpawnZombie(spawnPosition);
 				break;
-			case SpawningState.Both:
-				SpawnSkeleton(spawnPosition);
-				SpawnZombie(spawnPosition);
+			case SpawningState.BossZombieOnly:
+				Vector2 playerPosition = GetNode<Player>("Player").Position;
+				SpawnBossZombie(CalculateBossSpawnPosition(playerPosition));
 				break;
 		}
 	}
@@ -123,6 +125,14 @@ public partial class Game : Node
 		zombieInstance.Position = spawnPosition;
 		zombieInstance.Visible = true;
 		AddChild(zombieInstance);
+	}
+
+	private void SpawnBossZombie(Vector2 spawnPosition)
+	{
+		BossZombie bossZombie = BossZombieScene.Instantiate<BossZombie>();
+		bossZombie.Position = spawnPosition;
+		bossZombie.Visible = true;
+		AddChild(bossZombie);
 	}
 
 	private Vector2 CalculateRandomSpawnPosition(Rect2 viewportRect, Vector2 playerPosition)
@@ -146,7 +156,18 @@ public partial class Game : Node
 		return spawnPosition;
 	}
 
+	private Vector2 CalculateBossSpawnPosition(Vector2 playerPosition)
+	{
+		float spawnDistance = 400.0f; // Distance from the player to spawn the boss
 
+		// Calculate a random angle around the player
+		float angle = (float)GD.RandRange(0, Mathf.Pi * 2);
+
+		// Calculate the spawn position based on the angle and spawn distance
+		Vector2 spawnPosition = playerPosition + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * spawnDistance;
+
+		return spawnPosition;
+	}
 
 
 	private void _on_score_timer_timeout()
@@ -160,18 +181,35 @@ public partial class Game : Node
 	{
 		GetNode<Timer>("MobTimer").Start();
 		GetNode<Timer>("ScoreTimer").Start();
-
 		GetNode<Timer>("OneMinuteTimer").Start();
 	}
 
 	private void _on_one_minute_timer_timeout()
 	{
 		currentSpawningState = SpawningState.ZombieOnly;
+		GetNode<Timer>("TwoMinuteTimer").Start();
 	}
 
 	private void _on_two_minute_timer_timeout()
 	{
-		currentSpawningState = SpawningState.Both;
+		currentSpawningState = SpawningState.BossZombieOnly;
+		DespawnEnemies();
+		
+	}
+	private async void DespawnEnemies()
+	{
+		// Iterate through the children of the node
+		foreach (Node node in GetChildren())
+		{
+			// Check if the child node is an enemy
+			if (node is Skeleton || node is Zombie)
+			{
+				// Remove the enemy from the scene
+				node.QueueFree();
+			}
+		}
+		await ToSignal(GetTree().CreateTimer(0.2), "timeout");
+		mobTimer.Stop();
 	}
 
 	private void _on_three_minute_timer_timeout()

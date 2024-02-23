@@ -1,51 +1,80 @@
-[gd_scene load_steps=14 format=3 uid="uid://ca6iev34gm7j0"]
+[gd_scene load_steps=19 format=3 uid="uid://ca6iev34gm7j0"]
 
 [ext_resource type="Texture2D" uid="uid://clpa57h6d5vxp" path="res://Art/Zombie v1/Sprite Sheet/Zombie_v1_Sheet_No effect.png" id="1_emn0k"]
 [ext_resource type="Script" path="res://Scripts/Zombie.cs" id="1_t1cg2"]
 [ext_resource type="PackedScene" uid="uid://cy5dp63vmnt1n" path="res://Scripts/xpdrop.tscn" id="2_po7a8"]
 [ext_resource type="PackedScene" uid="uid://baqdg5lhmql11" path="res://Scripts/coin.tscn" id="3_1ustj"]
+[ext_resource type="Texture2D" uid="uid://ugavhu51k0i2" path="res://Art/Zombie v1/Sprite Sheet/Zombie_v1_Sheet.png" id="5_5brwg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7tfwt"]
 radius = 16.0
-height = 80.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f3tlf"]
-atlas = ExtResource("1_emn0k")
-region = Rect2(0, 210, 130, 70)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1c6q7"]
-atlas = ExtResource("1_emn0k")
-region = Rect2(130, 210, 130, 70)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_02a66"]
-atlas = ExtResource("1_emn0k")
-region = Rect2(260, 210, 130, 70)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5k7v3"]
-atlas = ExtResource("1_emn0k")
-region = Rect2(390, 210, 130, 70)
+height = 70.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5s2y8"]
 atlas = ExtResource("1_emn0k")
 region = Rect2(520, 210, 130, 70)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0mcg"]
+atlas = ExtResource("5_5brwg")
+region = Rect2(0, 210, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsw5l"]
+atlas = ExtResource("5_5brwg")
+region = Rect2(130, 210, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vryj4"]
+atlas = ExtResource("5_5brwg")
+region = Rect2(260, 210, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0gxo"]
+atlas = ExtResource("5_5brwg")
+region = Rect2(390, 210, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlwpy"]
+atlas = ExtResource("5_5brwg")
+region = Rect2(520, 210, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iigkc"]
+atlas = ExtResource("5_5brwg")
+region = Rect2(650, 210, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0uvk"]
+atlas = ExtResource("5_5brwg")
+region = Rect2(780, 210, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut5ng"]
+atlas = ExtResource("5_5brwg")
+region = Rect2(910, 210, 130, 70)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_q3hjx"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f3tlf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1c6q7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_02a66")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5k7v3")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_5s2y8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0mcg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsw5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vryj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0gxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlwpy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iigkc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0uvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ut5ng")
 }],
 "loop": true,
 "name": &"right",
@@ -56,7 +85,7 @@ animations = [{
 bg_color = Color(0.882353, 0.258824, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu7an"]
-size = Vector2(31, 72.5)
+size = Vector2(31, 64)
 
 [node name="Zombie" type="RigidBody2D"]
 collision_layer = 64
@@ -69,17 +98,16 @@ XpScene = ExtResource("2_po7a8")
 coinScene = ExtResource("3_1ustj")
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_7tfwt")
 
 [node name="ZombieWalk" type="AnimatedSprite2D" parent="."]
-position = Vector2(10, 0)
+position = Vector2(10, 1)
+scale = Vector2(1, 1.02857)
 sprite_frames = SubResource("SpriteFrames_q3hjx")
 animation = &"right"
-frame_progress = 0.370502
+frame_progress = 0.0717376
 
 [node name="ZombieHealthBar" type="ProgressBar" parent="."]
-visible = false
 offset_left = -68.0
 offset_top = -45.0
 offset_right = 52.0
@@ -89,13 +117,12 @@ fill_mode = 1
 show_percentage = false
 
 [node name="ZombieHitbox" type="Area2D" parent="."]
-visible = false
 position = Vector2(-6, 7)
 collision_layer = 32768
 collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZombieHitbox"]
-position = Vector2(6.5, -4.75)
+position = Vector2(7, -3)
 shape = SubResource("RectangleShape2D_gu7an")
 
 [node name="AttackCooldown" type="Timer" parent="."]
