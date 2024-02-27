@@ -15,13 +15,13 @@ public partial class MainMenu : Control
 
 	private void _on_play_pressed()
 	{
-		GetTree().ChangeSceneToFile("res://Scripts/map.tscn");
+		GetTree().ChangeSceneToFile("res://Scripts/playerBase1.tscn");
 	}
 
 
 	private void _on_settings_pressed()
 	{
-		GetTree().ChangeSceneToFile("res://Scripts/playerBase1.tscn");
+		
 	}
 
 
