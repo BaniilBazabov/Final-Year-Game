@@ -84,7 +84,7 @@ public partial class Zombie : RigidBody2D, IEnemy
 		if (healthPercentage == 0f && !xpDropped)
 		{
 			float coinDropRate = (float)GD.RandRange(1, 100);
-			if (coinDropRate == 1)
+			if (coinDropRate <= 10)
 			{
 				coin coin = coinScene.Instantiate<coin>();
 				GetNode<Game>("../").AddChild(coin);

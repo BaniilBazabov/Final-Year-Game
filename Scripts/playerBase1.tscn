@@ -2801,6 +2801,7 @@ distance = -1286.0
 script = ExtResource("1_jjrwa")
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_l7kdd")]
+visible = false
 metadata/_edit_group_ = true
 
 [node name="Background" type="TextureRect" parent="PauseMenu"]
@@ -2870,6 +2871,9 @@ layer_1/tile_data = PackedInt32Array(2359322, 1310720, 16, 2424858, 1310720, 17,
 position = Vector2(973, 539)
 collision_mask = 1
 
+[node name="LevelUpMenu" parent="Player" index="11"]
+visible = false
+
 [node name="TravellingMerchantAssets" type="TileMap" parent="."]
 scale = Vector2(3, 3)
 tile_set = SubResource("TileSet_obd6d")
@@ -2904,6 +2908,13 @@ shape = SubResource("WorldBoundaryShape2D_7br20")
 position = Vector2(863, 1227)
 scale = Vector2(3.13942, 2.56667)
 texture = ExtResource("10_2dthc")
+
+[node name="PlayerGoldLabel" type="Label" parent="."]
+offset_left = 1060.0
+offset_top = 446.0
+offset_right = 1127.0
+offset_bottom = 475.0
+text = "$300"
 
 [connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Continue" to="." method="_UnpauseGame"]
 [connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Exit" to="." method="_CloseGame"]

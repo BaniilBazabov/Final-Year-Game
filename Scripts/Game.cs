@@ -9,6 +9,7 @@ public enum SpawningState
 	}
 public partial class Game : Node
 {
+	public static Game Instance;
 	[Export]
 	public PackedScene SkeletonScene { get; set; }
 
@@ -18,6 +19,7 @@ public partial class Game : Node
 	public PackedScene BossZombieScene { get; set; }
 	private SpawningState currentSpawningState = SpawningState.SkeletonOnly;
 	private int _score;
+	public float playerGold = 0;
 	Player player;
 	private bool paused =  false;
 	Hud hud;
@@ -26,6 +28,14 @@ public partial class Game : Node
 
 	public override void _Ready()
 	{
+		if(Instance == null)
+		{
+			Instance = this;
+		} 
+		else
+		{
+			QueueFree();
+		}
 		player = GetNode<Player>("Player");
 		pauseMenu = GetNode<PauseMenu>("PauseMenu");
 		pauseMenu.Hide();
@@ -82,6 +92,14 @@ public partial class Game : Node
 		
 		startTimer.Start();
 	}
+
+	public void UpdatePlayerGold()
+	{
+		playerGold += player.gold;
+		SaveLoadManager.SaveGame("TheOneAndOnlySave");
+		GD.Print("Well, i am in UpdatePlayerGold");
+	}
+
 	private void _on_mob_timer_timeout()
 	{
 		Vector2 playerPosition = GetNode<Player>("Player").Position;
@@ -186,10 +204,10 @@ public partial class Game : Node
 
 	private void _on_one_minute_timer_timeout()
 	{
+		currentSpawningState = SpawningState.BossZombieOnly;
+		DespawnEnemies();
 		// currentSpawningState = SpawningState.ZombieOnly;
 		// GetNode<Timer>("TwoMinuteTimer").Start();
-		currentSpawningState = SpawningState.ZombieOnly;
-		DespawnEnemies();
 	}
 
 	private void _on_two_minute_timer_timeout()

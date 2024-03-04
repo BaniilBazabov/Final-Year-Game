@@ -326,4 +326,9 @@ show_percentage = false
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
 
+[node name="RoundEndCountdown" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="animation_finished" from="BossZombieWalk" to="." method="_on_boss_zombie_walk_animation_finished"]
+[connection signal="timeout" from="RoundEndCountdown" to="." method="_on_round_end_countdown_timeout"]

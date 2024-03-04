@@ -1,19 +1,11 @@
 using Godot;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
-public partial class SaveLoadManager : Node
+public static class SaveLoadManager 
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
-	public void SaveGame(string name)
+	public static void SaveGame(string name)
 	{
 		DirAccess dir = DirAccess.Open("user://");
 		if(!dir.DirExists("SavedGames"))
@@ -22,9 +14,27 @@ public partial class SaveLoadManager : Node
 		}
 
 		dir = DirAccess.Open("user://SavedGames");
-		if(!dir.DirExists(name))
+
+		Dictionary<string, string> saveGameData = new Dictionary<string, string>();
+		saveGameData.Add("PlayerGold", Game.Instance.playerGold.ToString());
+
+		string savedDataJson = JsonConvert.SerializeObject(saveGameData);
+
+		FileAccess file = FileAccess.Open($"user://SavedGames/{name}.json", FileAccess.ModeFlags.Write);
+		file.StoreString(savedDataJson);
+		file.Close();
+	}
+
+	public static void LoadGame(string name)
+	{
+		string filePath = $"user://SavedGames/{name}.json";
+		if(FileAccess.FileExists(filePath))
 		{
-			dir.MakeDir(name);	
+			FileAccess file = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);
+			string content = file.GetAsText();
+			Dictionary<string, string> data = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
+			Game.Instance.playerGold = float.Parse(data["PlayerGold"]);
 		}
+		else return;
 	}
 }

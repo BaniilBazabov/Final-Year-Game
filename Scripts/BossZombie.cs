@@ -14,6 +14,7 @@ public partial class BossZombie : RigidBody2D, IEnemy
 	private double speed = 100.0;
 	private float damage = 200f;
 	private Timer attackCooldown;
+	private Timer roundEndCountdown;
 	private float maxHealth = 1500f;
 	private float health;
 	private Area2D bossZombieHitbox;
@@ -29,6 +30,7 @@ public partial class BossZombie : RigidBody2D, IEnemy
 	{
 		player = GetTree().Root.GetNode<Player>("Game/Player");
 		attackCooldown = GetNode<Timer>("AttackCooldown");
+		roundEndCountdown = GetNode<Timer>("RoundEndCountdown");
 		health = maxHealth;
 		bossZombieHitbox = GetNode<Area2D>("BossZombieHitbox");
 		bar = GetNode<ProgressBar>("BossZombieHealthBar");
@@ -129,12 +131,13 @@ public partial class BossZombie : RigidBody2D, IEnemy
 		Xpdrop xpdrop = XpScene.Instantiate<Xpdrop>();
 		GetNode<Game>("../").AddChild(xpdrop);
 		xpdrop.GlobalPosition = GlobalPosition;
+		Game.Instance.UpdatePlayerGold();
 		Despawn();
 	}
+
 	private void Despawn()
 	{
 		QueueFree();
 	}	
 }
-
 

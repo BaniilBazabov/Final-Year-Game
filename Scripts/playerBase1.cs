@@ -6,6 +6,8 @@ public partial class playerBase1 : Node2D
 	Area2D teleportArea;
 	PauseMenu pauseMenu;
 	private Sprite2D e;
+	private float playerGold;
+	private Label goldLabel;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -14,6 +16,7 @@ public partial class playerBase1 : Node2D
 		teleportArea = GetNode<Area2D>("TeleportArea");
 		pauseMenu = GetNode<PauseMenu>("PauseMenu");
 		pauseMenu.Hide();
+		goldLabel = GetNode<Label>("PlayerGoldLabel");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,9 +44,10 @@ public partial class playerBase1 : Node2D
 		// Teleportation logic
 		if (isInTeleportArea && Input.IsActionJustPressed("interact"))
 		{
-			
 			GetTree().ChangeSceneToFile("res://Scripts/map.tscn");
 		}
+
+		goldLabel.Text = Game.Instance.playerGold.ToString();
 	}
 	private void _PauseGame()
 	{
