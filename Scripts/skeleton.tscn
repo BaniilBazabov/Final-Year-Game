@@ -92,8 +92,8 @@ bg_color = Color(0.882353, 0.258824, 1, 1)
 size = Vector2(35, 63)
 
 [node name="Skeleton" type="RigidBody2D"]
-collision_layer = 64
-collision_mask = 32768
+collision_layer = 2147483712
+collision_mask = 2147516416
 mass = 0.01
 gravity_scale = 0.0
 lock_rotation = true
@@ -123,8 +123,8 @@ show_percentage = false
 
 [node name="SkeletonHitbox" type="Area2D" parent="."]
 position = Vector2(-6, 7)
-collision_layer = 32768
-collision_mask = 32768
+collision_layer = 2147516416
+collision_mask = 2147516416
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SkeletonHitbox"]
 position = Vector2(9.5, -8)
