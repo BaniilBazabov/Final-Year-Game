@@ -24,7 +24,7 @@ public partial class SaveLoadManager : Node
 		dir = DirAccess.Open("user://SavedGames");
 		if(!dir.DirExists(name))
 		{
-			dir.MakeDir(name);
+			dir.MakeDir(name);	
 		}
 	}
 }
