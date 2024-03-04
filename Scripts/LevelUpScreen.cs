@@ -19,6 +19,8 @@ public partial class LevelUpScreen : Control
 	public override void _Ready()
 	{
 		Hide();
+		if(GetTree().CurrentScene is Game)
+		{
 		upgradeButton1 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/Skill1");
 		upgradeButton2 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/Skill2");
 		upgradeButton3 = GetNode<Button>("/root/Game/Player/LevelUpMenu/LevelUpScreen/Panel/VBoxContainer/Skill3");
@@ -30,7 +32,7 @@ public partial class LevelUpScreen : Control
 		upgradeButton4.Connect(Button.SignalName.Pressed, new Callable(this, MethodName._onUpgradeButtonPressed4));
 
 		player = GetTree().Root.GetNode<Player>("Game/Player");
-		
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

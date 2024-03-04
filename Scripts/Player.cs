@@ -126,7 +126,7 @@ public partial class Player : CharacterBody2D
 
 	public void Attack()
 	{
-		if (AttackCooldown.IsStopped())
+		if (AttackCooldown.IsStopped()&& GetTree().CurrentScene is Game)
 		{
 			foreach (Node2D mobNode in attackZone.GetOverlappingBodies())
 			{

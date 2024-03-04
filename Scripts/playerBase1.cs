@@ -41,6 +41,7 @@ public partial class playerBase1 : Node2D
 		// Teleportation logic
 		if (isInTeleportArea && Input.IsActionJustPressed("interact"))
 		{
+			
 			GetTree().ChangeSceneToFile("res://Scripts/map.tscn");
 		}
 	}
