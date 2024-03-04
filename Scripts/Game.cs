@@ -186,8 +186,10 @@ public partial class Game : Node
 
 	private void _on_one_minute_timer_timeout()
 	{
+		// currentSpawningState = SpawningState.ZombieOnly;
+		// GetNode<Timer>("TwoMinuteTimer").Start();
 		currentSpawningState = SpawningState.ZombieOnly;
-		GetNode<Timer>("TwoMinuteTimer").Start();
+		DespawnEnemies();
 	}
 
 	private void _on_two_minute_timer_timeout()
@@ -208,7 +210,7 @@ public partial class Game : Node
 				node.QueueFree();
 			}
 		}
-		await ToSignal(GetTree().CreateTimer(0.2), "timeout");
+		await ToSignal(GetTree().CreateTimer(1), "timeout");
 		mobTimer.Stop();
 	}
 
