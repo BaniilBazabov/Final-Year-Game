@@ -34,19 +34,25 @@ alignment = 1
 
 [node name="DeathLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.776471, 0, 0, 1)
+theme_override_colors/font_color = Color(0.999842, 0.346783, 0.28021, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_bxyjk")
-text = "YOU'VE DIED"
+text = "You've died. Weakling."
 horizontal_alignment = 1
 
 [node name="RestartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Restart"
+text = "Try again"
+
+[node name="PlayerBaseButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Return to player base"
 
 [node name="MainMenuButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Exit to the Main Menu
+text = "Return to reality
 "
 
 [connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/PlayerBaseButton" to="." method="_on_player_base_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

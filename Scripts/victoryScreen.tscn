@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://cykxe2h7tqifp"]
+
+[ext_resource type="Script" path="res://Scripts/VictoryScreen.cs" id="1_7ut0v"]
+[ext_resource type="Texture2D" uid="uid://byupfuaw2mywg" path="res://Art/Bgs/nightForest.png" id="1_fckpt"]
+[ext_resource type="Theme" uid="uid://bwhwap5oekw1s" path="res://Art/Buttons/buttons1.tres" id="2_v12ad"]
+[ext_resource type="FontFile" uid="uid://dqw8hblxqfp1y" path="res://Fonts/Pixelme.ttf" id="3_sgk04"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s6cm0"]
+font = ExtResource("3_sgk04")
+font_color = Color(1, 1, 0, 1)
+outline_size = 1
+outline_color = Color(0, 1, 1, 1)
+
+[node name="VictoryScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_7ut0v")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = -2.0
+offset_right = 621.0
+offset_bottom = 361.0
+scale = Vector2(3.09228, 2.97562)
+texture = ExtResource("1_fckpt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 573.0
+offset_top = 325.0
+offset_right = 787.0
+offset_bottom = 422.0
+scale = Vector2(3.78027, 4.0197)
+theme = ExtResource("2_v12ad")
+alignment = 1
+
+[node name="VictoryLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_sgk04")
+text = "You've Survived!"
+label_settings = SubResource("LabelSettings_s6cm0")
+horizontal_alignment = 1
+
+[node name="PlayerBaseButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Return to the Base"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Return to real world.
+"
+
+[connection signal="pressed" from="VBoxContainer/PlayerBaseButton" to="." method="_on_player_base_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

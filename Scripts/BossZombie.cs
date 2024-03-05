@@ -132,13 +132,14 @@ public partial class BossZombie : RigidBody2D, IEnemy
 		GetNode<Game>("../").AddChild(xpdrop);
 		xpdrop.GlobalPosition = GlobalPosition;
 		PlayerRecords.UpdatePlayerRecords(player.gold, player.kills);
-		player.gold =0f; player.kills = 0;
+		player.gold = 0f; player.kills = 0f;
 		Despawn();
 	}
 
 	private void Despawn()
 	{
 		QueueFree();
+		GetTree().ChangeSceneToFile("res://Scripts/victoryScreen.tscn");
 	}	
 }
 

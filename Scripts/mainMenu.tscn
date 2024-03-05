@@ -74,16 +74,11 @@ size_flags_vertical = 4
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_qokt7")
-text = "Play"
-
-[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Settings"
+text = "Fun time"
 
 [node name="QuitGame" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Exit to the Desktop"
+text = "Return to reality"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]

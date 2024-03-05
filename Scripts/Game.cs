@@ -116,8 +116,7 @@ public partial class Game : Node
 				SpawnZombie(spawnPosition);
 				break;
 			case SpawningState.BossZombieOnly:
-				Vector2 playerPosition = GetNode<Player>("Player").Position;
-				SpawnBossZombie(CalculateBossSpawnPosition(playerPosition));
+				SpawnBossZombie(CalculateBossSpawnPosition(spawnPosition));
 				break;
 		}
 	}
@@ -197,19 +196,21 @@ public partial class Game : Node
 
 	private void _on_one_minute_timer_timeout()
 	{
-		currentSpawningState = SpawningState.BossZombieOnly;
-		DespawnEnemies();
-		// currentSpawningState = SpawningState.ZombieOnly;
-		// GetNode<Timer>("TwoMinuteTimer").Start();
+		// currentSpawningState = SpawningState.BossZombieOnly;
+		// DespawnEnemies();
+		currentSpawningState = SpawningState.ZombieOnly;
+		GetNode<Timer>("TwoMinuteTimer").Start();
 	}
 
 	private void _on_two_minute_timer_timeout()
 	{
 		currentSpawningState = SpawningState.BossZombieOnly;
 		DespawnEnemies();
+		Vector2 playerPosition = GetNode<Player>("Player").Position;
+		SpawnMobs(CalculateBossSpawnPosition(playerPosition));
 		
 	}
-	private async void DespawnEnemies()
+	private void DespawnEnemies()
 	{
 		// Iterate through the children of the node
 		foreach (Node node in GetChildren())
@@ -221,7 +222,6 @@ public partial class Game : Node
 				node.QueueFree();
 			}
 		}
-		await ToSignal(GetTree().CreateTimer(1), "timeout");
 		mobTimer.Stop();
 	}
 
