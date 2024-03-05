@@ -131,6 +131,7 @@ public partial class BossZombie : RigidBody2D, IEnemy
 		Xpdrop xpdrop = XpScene.Instantiate<Xpdrop>();
 		GetNode<Game>("../").AddChild(xpdrop);
 		xpdrop.GlobalPosition = GlobalPosition;
+		xpdrop.SetXpType("BossZombie");
 		PlayerRecords.UpdatePlayerRecords(player.gold, player.kills);
 		player.gold = 0f; player.kills = 0f;
 		Despawn();

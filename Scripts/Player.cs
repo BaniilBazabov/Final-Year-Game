@@ -207,7 +207,7 @@ public partial class Player : CharacterBody2D
 				RigidBody2D rigidBody = xpdrop as RigidBody2D;
 				if (rigidBody != null)
 				{
-					experience += xpdrop.red_xp;
+					experience += xpdrop.xpValue;
 					if (experience >= experienceForNextLevel)
 					{
 						LevelUp();

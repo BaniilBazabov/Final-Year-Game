@@ -95,6 +95,7 @@ public partial class Skeleton : RigidBody2D, IEnemy
 			Xpdrop xpdrop = XpScene.Instantiate<Xpdrop>();
 			GetNode<Game>("../").AddChild(xpdrop);
 			xpdrop.GlobalPosition = GlobalPosition;
+			xpdrop.SetXpType("Skeleton");
 
 			Despawn();
 			player.IncreaseKillCount();

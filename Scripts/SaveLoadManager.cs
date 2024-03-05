@@ -36,6 +36,7 @@ public static class SaveLoadManager
 			Dictionary<string, string> data = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
 			PlayerRecords.PlayerTotalGold = float.Parse(data["PlayerTotalGold"]);
 			PlayerRecords.PlayerTotalKills = float.Parse(data["PlayerTotalKills"]);
+			file.Close();
 		}
 		else
 		{
