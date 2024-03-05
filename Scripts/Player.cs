@@ -30,7 +30,7 @@ public partial class Player : CharacterBody2D
 	private float level = 1f;
 	private float experience = 0f;
 	public float gold = 0f;
-	private float kills = 0f;
+	public float kills = 0f;
 	private float experienceForNextLevel = 100f;
 	private float experienceScalingFactor = 1.15f;
 
@@ -40,7 +40,6 @@ public partial class Player : CharacterBody2D
 	private Timer RegenCooldown { get; set; }
 	AnimatedSprite2D attackAnimation;
 	public float damage { get; set; } = 100;
-
 	public Vector2 ScreenSize; // Size of the game window.
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -61,6 +60,7 @@ public partial class Player : CharacterBody2D
 		attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
 
 		killLabel.Text = "Kills: 0";
+
 	}
 	
 	public void Start(Vector2 position)

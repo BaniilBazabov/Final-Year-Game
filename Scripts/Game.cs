@@ -93,13 +93,6 @@ public partial class Game : Node
 		startTimer.Start();
 	}
 
-	public void UpdatePlayerGold()
-	{
-		playerGold += player.gold;
-		SaveLoadManager.SaveGame("TheOneAndOnlySave");
-		GD.Print("Well, i am in UpdatePlayerGold");
-	}
-
 	private void _on_mob_timer_timeout()
 	{
 		Vector2 playerPosition = GetNode<Player>("Player").Position;

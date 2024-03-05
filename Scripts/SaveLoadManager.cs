@@ -16,7 +16,8 @@ public static class SaveLoadManager
 		dir = DirAccess.Open("user://SavedGames");
 
 		Dictionary<string, string> saveGameData = new Dictionary<string, string>();
-		saveGameData.Add("PlayerGold", Game.Instance.playerGold.ToString());
+		saveGameData.Add("PlayerTotalGold", PlayerRecords.PlayerTotalGold.ToString());
+		saveGameData.Add("PlayerTotalKills", PlayerRecords.PlayerTotalKills.ToString());
 
 		string savedDataJson = JsonConvert.SerializeObject(saveGameData);
 
@@ -33,8 +34,13 @@ public static class SaveLoadManager
 			FileAccess file = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);
 			string content = file.GetAsText();
 			Dictionary<string, string> data = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
-			Game.Instance.playerGold = float.Parse(data["PlayerGold"]);
+			PlayerRecords.PlayerTotalGold = float.Parse(data["PlayerTotalGold"]);
+			PlayerRecords.PlayerTotalKills = float.Parse(data["PlayerTotalKills"]);
 		}
-		else return;
+		else
+		{
+		SaveGame("TheOneAndOnlySave");
+		LoadGame("TheOneAndOnlySave");
+		}
 	}
 }

@@ -127,11 +127,12 @@ public partial class BossZombie : RigidBody2D, IEnemy
 		coin.GlobalPosition = GlobalPosition;
 		
 
-		// XP drop handled with death logic
+		// XP drop handled with death logic + saving data at the round end.
 		Xpdrop xpdrop = XpScene.Instantiate<Xpdrop>();
 		GetNode<Game>("../").AddChild(xpdrop);
 		xpdrop.GlobalPosition = GlobalPosition;
-		Game.Instance.UpdatePlayerGold();
+		PlayerRecords.UpdatePlayerRecords(player.gold, player.kills);
+		player.gold =0f; player.kills = 0;
 		Despawn();
 	}
 

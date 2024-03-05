@@ -47,7 +47,7 @@ public partial class playerBase1 : Node2D
 			GetTree().ChangeSceneToFile("res://Scripts/map.tscn");
 		}
 
-		goldLabel.Text = Game.Instance.playerGold.ToString();
+		goldLabel.Text = PlayerRecords.PlayerTotalGold.ToString() + " gold";
 	}
 	private void _PauseGame()
 	{
