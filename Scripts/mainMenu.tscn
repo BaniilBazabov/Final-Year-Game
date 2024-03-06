@@ -75,7 +75,7 @@ size_flags_vertical = 4
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_qokt7")
-text = "Fun time"
+text = "Play"
 
 [node name="QuitGame" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

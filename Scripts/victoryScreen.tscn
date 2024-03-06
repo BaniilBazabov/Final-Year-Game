@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cykxe2h7tqifp"]
+[gd_scene load_steps=6 format=3 uid="uid://c0t4toetqc7uq"]
 
 [ext_resource type="Script" path="res://Scripts/VictoryScreen.cs" id="1_7ut0v"]
 [ext_resource type="Texture2D" uid="uid://byupfuaw2mywg" path="res://Art/Bgs/nightForest.png" id="1_fckpt"]
