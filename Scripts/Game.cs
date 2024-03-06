@@ -24,7 +24,7 @@ public partial class Game : Node
 	private bool paused =  false;
 	Hud hud;
 	PauseMenu pauseMenu;
-	Timer scoreTimer, mobTimer, startTimer;
+	Timer scoreTimer, mobTimer, startTimer, oneMinuteTimer, twoMinuteTimer, threeMinuteTimer;
 
 	public override void _Ready()
 	{
@@ -32,10 +32,7 @@ public partial class Game : Node
 		{
 			Instance = this;
 		} 
-		else
-		{
-			QueueFree();
-		}
+		
 		player = GetNode<Player>("Player");
 		pauseMenu = GetNode<PauseMenu>("PauseMenu");
 		pauseMenu.Hide();
@@ -44,6 +41,9 @@ public partial class Game : Node
 		mobTimer = GetNode<Timer>("MobTimer");
 		scoreTimer = GetNode<Timer>("ScoreTimer");
 		startTimer = GetNode<Timer>("StartTimer");
+		oneMinuteTimer = GetNode<Timer>("OneMinuteTimer");
+		twoMinuteTimer = GetNode<Timer>("TwoMinuteTimer");
+		threeMinuteTimer = GetNode<Timer>("ThreeMinuteTimer");
 
 		NewGame();
 		
@@ -189,9 +189,9 @@ public partial class Game : Node
 
 	private void _on_start_timer_timeout()
 	{
-		GetNode<Timer>("MobTimer").Start();
-		GetNode<Timer>("ScoreTimer").Start();
-		GetNode<Timer>("OneMinuteTimer").Start();
+		mobTimer.Start();
+		scoreTimer.Start();
+		oneMinuteTimer.Start();
 	}
 
 	private void _on_one_minute_timer_timeout()
@@ -199,7 +199,7 @@ public partial class Game : Node
 		// currentSpawningState = SpawningState.BossZombieOnly;
 		// DespawnEnemies();
 		currentSpawningState = SpawningState.ZombieOnly;
-		GetNode<Timer>("TwoMinuteTimer").Start();
+		twoMinuteTimer.Start();
 	}
 
 	private void _on_two_minute_timer_timeout()
@@ -227,9 +227,9 @@ public partial class Game : Node
 
 	private void _on_three_minute_timer_timeout()
 	{	// Stop further state changes beyond 3 minutes
-		GetNode<Timer>("OneMinuteTimer").Stop();
-		GetNode<Timer>("TwoMinuteTimer").Stop();
-		GetNode<Timer>("ThreeMinuteTimer").Stop();
+		oneMinuteTimer.Stop();
+		twoMinuteTimer.Stop();
+		threeMinuteTimer.Stop();
 	}
 	
 }

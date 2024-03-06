@@ -28,6 +28,7 @@ public partial class playerBase1 : Node2D
 		}
 
 		bool isInTeleportArea = false;
+		goldLabel.Text = PlayerRecords.PlayerTotalGold.ToString() + " gold";
 
 		foreach (Node2D body in teleportArea.GetOverlappingBodies())
 		{
@@ -46,8 +47,6 @@ public partial class playerBase1 : Node2D
 		{
 			GetTree().ChangeSceneToFile("res://Scripts/map.tscn");
 		}
-
-		goldLabel.Text = PlayerRecords.PlayerTotalGold.ToString() + " gold";
 	}
 	private void _PauseGame()
 	{
