@@ -93,9 +93,9 @@ public partial class Zombie : RigidBody2D, IEnemy
 
 			// XP drop handled with death logic
 			Xpdrop xpdrop = XpScene.Instantiate<Xpdrop>();
+			xpdrop.SetXpType("Zombie");
 			GetNode<Game>("../").AddChild(xpdrop);
 			xpdrop.GlobalPosition = GlobalPosition;
-			xpdrop.SetXpType("Zombie");
 			Despawn();
 			player.IncreaseKillCount();
 			xpDropped = true;

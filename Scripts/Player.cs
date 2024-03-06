@@ -208,6 +208,7 @@ public partial class Player : CharacterBody2D
 				if (rigidBody != null)
 				{
 					experience += xpdrop.xpValue;
+					GD.Print("I gained exp: " + experience);
 					if (experience >= experienceForNextLevel)
 					{
 						LevelUp();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy5dp63vmnt1n"]
+[gd_scene load_steps=10 format=3 uid="uid://cy5dp63vmnt1n"]
 
 [ext_resource type="Script" path="res://Scripts/Xpdrop.cs" id="1_hioo6"]
 [ext_resource type="Texture2D" uid="uid://lxee8wbs8ub0" path="res://Art/Droppables/xpRed.png" id="1_p1rmt"]
@@ -7,6 +7,45 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xvu2"]
 size = Vector2(20, 33.4167)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8b3s"]
+atlas = ExtResource("2_f8ndn")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1ov5"]
+atlas = ExtResource("1_p1rmt")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akbb3"]
+atlas = ExtResource("4_mfsy4")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e15sc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8b3s")
+}],
+"loop": true,
+"name": &"Blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1ov5")
+}],
+"loop": true,
+"name": &"Red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akbb3")
+}],
+"loop": true,
+"name": &"Yellow",
+"speed": 5.0
+}]
 
 [node name="XpDrop" type="RigidBody2D"]
 position = Vector2(44, 14)
@@ -26,7 +65,8 @@ metadata/_edit_group_ = true
 position = Vector2(0, 7.95831)
 shape = SubResource("RectangleShape2D_3xvu2")
 
-[node name="DropSkin" type="Sprite2D" parent="."]
+[node name="DropSkin" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 10)
 scale = Vector2(1, 0.88)
-texture = ExtResource("2_f8ndn")
+sprite_frames = SubResource("SpriteFrames_e15sc")
+animation = &"Yellow"

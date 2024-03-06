@@ -129,9 +129,9 @@ public partial class BossZombie : RigidBody2D, IEnemy
 
 		// XP drop handled with death logic + saving data at the round end.
 		Xpdrop xpdrop = XpScene.Instantiate<Xpdrop>();
+		xpdrop.SetXpType("BossZombie");
 		GetNode<Game>("../").AddChild(xpdrop);
 		xpdrop.GlobalPosition = GlobalPosition;
-		xpdrop.SetXpType("BossZombie");
 		PlayerRecords.UpdatePlayerRecords(player.gold, player.kills);
 		player.gold = 0f; player.kills = 0f;
 		Despawn();
