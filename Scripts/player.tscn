@@ -325,7 +325,8 @@ script = ExtResource("7_ao8wp")
 
 [node name="PlayerHurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_dmohh")
-volume_db = -10.0
+volume_db = -20.0
 
 [node name="PlayerAttacking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_tu67u")
+volume_db = -10.0
