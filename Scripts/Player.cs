@@ -33,7 +33,7 @@ public partial class Player : CharacterBody2D
 	public float kills = 0f;
 	private float experienceForNextLevel = 100f;
 	private float experienceScalingFactor = 1.15f;
-
+	private AudioStreamPlayer playerAttacking, playerHurt;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	private Timer AttackCooldown { get; set; }
@@ -58,6 +58,9 @@ public partial class Player : CharacterBody2D
 		pickUpZone = GetNode<Area2D>("PickUpZone");
 		attackZone = GetNode<Area2D>("AttackZone");
 		attackAnimation = GetNode<AnimatedSprite2D>("AttackAnimation");
+
+		playerAttacking = GetNode<AudioStreamPlayer>("PlayerAttacking");
+		playerHurt = GetNode<AudioStreamPlayer>("PlayerHurt");
 
 		killLabel.Text = "Kills: 0";
 
@@ -139,6 +142,7 @@ public partial class Player : CharacterBody2D
 
 			// Play attack animation
 			attackAnimation.Play("oneshot");
+			playerAttacking.Play();
 			AttackCooldown.Start();
 		}
 	}
@@ -152,6 +156,7 @@ public partial class Player : CharacterBody2D
 	public void Damage(float damage) 
 	{
 		health -= damage;
+		playerHurt.Play();
 
 		if(health <= 0)
 		{

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://0brj35t25kmh"]
+[gd_scene load_steps=28 format=3 uid="uid://0brj35t25kmh"]
 
 [ext_resource type="Script" path="res://Scripts/playerBase1.cs" id="1_jjrwa"]
 [ext_resource type="Texture2D" uid="uid://b373yp1qfa42a" path="res://Art/TilesetPack/TX Tileset Grass.png" id="1_ncd8q"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cm2tyoya3d5cj" path="res://Scripts/player.tscn" id="4_hicag"]
 [ext_resource type="Theme" uid="uid://bwhwap5oekw1s" path="res://Art/Buttons/buttons1.tres" id="4_k0trh"]
 [ext_resource type="Texture2D" uid="uid://bixq0gtuchqcx" path="res://Art/Letter E.png" id="10_2dthc"]
+[ext_resource type="AudioStream" uid="uid://d1kkuyptp4mxd" path="res://Sounds/PlayerBase.wav" id="11_d03xe"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_g6bud"]
 keycode = 4194305
@@ -2915,6 +2916,11 @@ offset_top = 446.0
 offset_right = 1127.0
 offset_bottom = 475.0
 text = "$300"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_d03xe")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Continue" to="." method="_UnpauseGame"]
 [connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Exit" to="." method="_CloseGame"]
