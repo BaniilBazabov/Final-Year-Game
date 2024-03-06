@@ -81,10 +81,11 @@ text = "Fun time"
 layout_mode = 2
 text = "Return to reality"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MainMenuAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_5utue")
 volume_db = -10.0
 autoplay = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]
+[connection signal="finished" from="MainMenuAudio" to="." method="_on_main_menu_audio_finished"]

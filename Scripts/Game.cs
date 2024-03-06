@@ -25,6 +25,7 @@ public partial class Game : Node
 	Hud hud;
 	PauseMenu pauseMenu;
 	Timer scoreTimer, mobTimer, startTimer, oneMinuteTimer, twoMinuteTimer, threeMinuteTimer;
+	AudioStreamPlayer gameAudio;
 
 	public override void _Ready()
 	{
@@ -44,6 +45,8 @@ public partial class Game : Node
 		oneMinuteTimer = GetNode<Timer>("OneMinuteTimer");
 		twoMinuteTimer = GetNode<Timer>("TwoMinuteTimer");
 		threeMinuteTimer = GetNode<Timer>("ThreeMinuteTimer");
+
+		gameAudio = GetNode<AudioStreamPlayer>("GameMusic");
 
 		NewGame();
 		
@@ -210,6 +213,11 @@ public partial class Game : Node
 		SpawnMobs(CalculateBossSpawnPosition(playerPosition));
 		
 	}
+
+	private void _on_audio_stream_player_finished()
+	{
+		gameAudio.Play();
+	}
 	private void DespawnEnemies()
 	{
 		// Iterate through the children of the node
@@ -233,4 +241,3 @@ public partial class Game : Node
 	}
 	
 }
-

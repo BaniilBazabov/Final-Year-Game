@@ -217,6 +217,7 @@ public partial class Player : CharacterBody2D
 					if (experience >= experienceForNextLevel)
 					{
 						LevelUp();
+						experience = 0f;
 					}
 
 					xpdrop.Despawn();

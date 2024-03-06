@@ -2917,13 +2917,14 @@ offset_right = 1127.0
 offset_bottom = 475.0
 text = "$300"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="PlayerBase1Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_d03xe")
 volume_db = -10.0
 autoplay = true
 
 [connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Continue" to="." method="_UnpauseGame"]
 [connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Exit" to="." method="_CloseGame"]
+[connection signal="finished" from="PlayerBase1Audio" to="." method="_on_player_base_1_audio_finished"]
 
 [editable path="PauseMenu"]
 [editable path="Player"]

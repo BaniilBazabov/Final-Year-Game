@@ -3,15 +3,11 @@ using System;
 
 public partial class MainMenu : Control
 {
+	AudioStreamPlayer audio;
 	public override void _Ready()
 	{
-		
 		SaveLoadManager.LoadGame("TheOneAndOnlySave");
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
+		audio = GetNode<AudioStreamPlayer>("MainMenuAudio");
 	}
 
 	private void _on_play_pressed()
@@ -30,7 +26,10 @@ public partial class MainMenu : Control
 	{
 		GetTree().Quit();
 	}
+
+	private void _on_main_menu_audio_finished()
+	{
+		audio.Play();
+	}
 }
-
-
 

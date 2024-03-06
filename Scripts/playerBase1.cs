@@ -8,6 +8,7 @@ public partial class playerBase1 : Node2D
 	private Sprite2D e;
 	private float playerGold;
 	private Label goldLabel;
+	private AudioStreamPlayer audio;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -17,6 +18,7 @@ public partial class playerBase1 : Node2D
 		pauseMenu = GetNode<PauseMenu>("PauseMenu");
 		pauseMenu.Hide();
 		goldLabel = GetNode<Label>("PlayerGoldLabel");
+		audio = GetNode<AudioStreamPlayer>("PlayerBase1Audio");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -62,5 +64,10 @@ public partial class playerBase1 : Node2D
 	private void _CloseGame()
 	{
 		GetTree().Quit();
+	}
+
+	private void _on_player_base_1_audio_finished()
+	{
+		audio.Play();
 	}
 }
