@@ -19,7 +19,6 @@ config/icon="res://Art/Main character/asmonFace.png"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/initial_position_type=0
 window/stretch/mode="viewport"
 window/icon="res://icon.svg"
 window/canvas_textures/default_texture_filter=1
