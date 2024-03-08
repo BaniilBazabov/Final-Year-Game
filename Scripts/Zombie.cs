@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Zombie : RigidBody2D, IEnemy
+public partial class Zombie : RigidBody2D, IEnemy //this file manages the enemies that are zombies.
 {
 	private Player player;
 	private double speed = 50.0;

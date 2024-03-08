@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-public static class SaveLoadManager 
+public static class SaveLoadManager //this file manages the saving and loading of the game using Newtonsoft json package.
 {
 	public static void SaveGame(string name)
 	{

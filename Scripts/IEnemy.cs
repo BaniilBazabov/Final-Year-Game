@@ -1,6 +1,6 @@
 using Godot;
 using System;
-public interface IEnemy
+public interface IEnemy //interface for enemies that they all share
 {
     void Damage(float amount);
 }
