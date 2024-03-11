@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class deathScreen : Control
+public partial class deathScreen : Control //this file manages the screen that appears when the player dies.
 {
 	private void _on_restart_button_pressed()
 	{

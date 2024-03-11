@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class playerBase1 : Node2D
+public partial class playerBase1 : Node2D //This file manages the player base and all of its mechanics.
 {
 	Area2D teleportArea;
 	PauseMenu pauseMenu;

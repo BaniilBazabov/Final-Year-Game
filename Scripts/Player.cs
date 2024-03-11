@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Player : CharacterBody2D
+public partial class Player : CharacterBody2D //this file manages the player and every aspect of it.
 {
 	[Signal]
 	public delegate void HitEventHandler();

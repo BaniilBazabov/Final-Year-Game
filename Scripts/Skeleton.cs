@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Skeleton : RigidBody2D, IEnemy
+public partial class Skeleton : RigidBody2D, IEnemy //this class manages the enemy Skeletons
 {
 	private Player player;
 	private double speed = 75.0;

@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class LevelUpScreen : Control
+public partial class LevelUpScreen : Control //this file manages the upgrades that are availible to player when they level up.
 {
 	Button upgradeButton1;
 	Button upgradeButton2;
@@ -33,11 +33,6 @@ public partial class LevelUpScreen : Control
 
 		player = GetTree().Root.GetNode<Player>("Game/Player");
 		}
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 
 	public class Upgrade

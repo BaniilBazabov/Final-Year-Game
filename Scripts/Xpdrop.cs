@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Xpdrop : RigidBody2D
+public partial class Xpdrop : RigidBody2D //this file manages the experience that the player can pick up on enemy death.
 {
 	public float xpValue = 0f;
 

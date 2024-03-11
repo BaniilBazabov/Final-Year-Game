@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class MainMenu : Control
+public partial class MainMenu : Control //this class manages the main menu and loads the game from the save.
 {
 	AudioStreamPlayer audio;
 	public override void _Ready()

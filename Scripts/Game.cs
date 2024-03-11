@@ -7,8 +7,8 @@ public enum SpawningState
 		ZombieOnly,
 		BossZombieOnly
 	}
-public partial class Game : Node
-{
+public partial class Game : Node //this file manages all the events that happen during the gameplay. Decided the position of enemies spawning, the time they spawn at and what time and which enemy appears.
+{                                //Also, contains logic regarding starting/ending/pausing the game and the timers
 	public static Game Instance;
 	[Export]
 	public PackedScene SkeletonScene { get; set; }

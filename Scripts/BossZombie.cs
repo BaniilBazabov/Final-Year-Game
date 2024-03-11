@@ -26,6 +26,7 @@ public partial class BossZombie : RigidBody2D, IEnemy
 	[Export]
 	public PackedScene coinScene { get; set; }
 
+	//load all the nodes
 	public override void _Ready()
 	{
 		player = GetTree().Root.GetNode<Player>("Game/Player");
@@ -42,7 +43,7 @@ public partial class BossZombie : RigidBody2D, IEnemy
 	public override void _Process(double delta)
 	{
 		UpdateMobHealthBar();
-
+		//based on the state, decide what animation to play/ what action to take
 		switch(state)
 		{
 			case BossState.Spawning:
@@ -77,7 +78,7 @@ public partial class BossZombie : RigidBody2D, IEnemy
 				break;
 		}
 	}
-
+	//when animation is finished, change state/run a function.
 	private void _on_boss_zombie_walk_animation_finished()
 	{
 		if (BossZombieAnimation.Animation == "Arising")
@@ -91,7 +92,7 @@ public partial class BossZombie : RigidBody2D, IEnemy
 	}
 
 
-
+	// attack player
 	public void Attack()
 	{
 		if (attackCooldown.IsStopped())
@@ -100,7 +101,7 @@ public partial class BossZombie : RigidBody2D, IEnemy
 			attackCooldown.Start();
 		}
 	}
-
+	//reduce health when hit
 	public void Damage(float damage) 
 	{
 		health -= damage;
@@ -108,6 +109,7 @@ public partial class BossZombie : RigidBody2D, IEnemy
 	}
 
 	private bool xpDropped = false;
+	//update the healthbar
 	private void UpdateMobHealthBar()
 	{
 		float healthPercentage = Mathf.Clamp(health / maxHealth * 100, 0, 100);
@@ -120,6 +122,7 @@ public partial class BossZombie : RigidBody2D, IEnemy
 			xpDropped = true;
 		}
 	}
+	//drop the loot and remove the enemy
 	private void dropLootAndDespawn()
 	{
 		coin coin = coinScene.Instantiate<coin>();
