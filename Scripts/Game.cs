@@ -75,6 +75,12 @@ public partial class Game : Node //this file manages all the events that happen 
 	{
 		GetTree().Quit();
 	}
+
+	public void ReturnToMainMenu()
+	{
+		_UnpauseGame();
+		GetTree().ChangeSceneToFile("res://Scripts/playerBase1.tscn");
+	}
 	public void GameOver()
 	{
 		mobTimer.Stop();
