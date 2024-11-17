@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://0brj35t25kmh"]
+[gd_scene load_steps=49 format=3 uid="uid://0brj35t25kmh"]
 
 [ext_resource type="Script" path="res://Scripts/playerBase1.cs" id="1_jjrwa"]
 [ext_resource type="Texture2D" uid="uid://b373yp1qfa42a" path="res://Art/TilesetPack/TX Tileset Grass.png" id="1_ncd8q"]
@@ -11,6 +11,9 @@
 [ext_resource type="Theme" uid="uid://bwhwap5oekw1s" path="res://Art/Buttons/buttons1.tres" id="4_k0trh"]
 [ext_resource type="Texture2D" uid="uid://bixq0gtuchqcx" path="res://Art/Letter E.png" id="10_2dthc"]
 [ext_resource type="AudioStream" uid="uid://d1kkuyptp4mxd" path="res://Sounds/PlayerBase.wav" id="11_d03xe"]
+[ext_resource type="Texture2D" uid="uid://bp8dja2y1l8o4" path="res://Art/NPCTraders/Herbalist/Idle Adding.png" id="12_gbmnd"]
+[ext_resource type="Script" path="res://Scripts/PotionMaster.cs" id="12_qsw36"]
+[ext_resource type="Texture2D" uid="uid://dqfawkxgfq8jv" path="res://Art/NPCTraders/Herbalist/Idle Mixing.png" id="13_opy7t"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_g6bud"]
 keycode = 4194305
@@ -3217,6 +3220,130 @@ sources/0 = SubResource("TileSetAtlasSource_cp7h3")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7br20"]
 distance = -1286.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_m30m7"]
+atlas = ExtResource("12_gbmnd")
+region = Rect2(0, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_voilu"]
+atlas = ExtResource("12_gbmnd")
+region = Rect2(25, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foj56"]
+atlas = ExtResource("12_gbmnd")
+region = Rect2(50, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkb4u"]
+atlas = ExtResource("12_gbmnd")
+region = Rect2(75, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwhmx"]
+atlas = ExtResource("12_gbmnd")
+region = Rect2(100, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qtqu"]
+atlas = ExtResource("12_gbmnd")
+region = Rect2(125, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gif1m"]
+atlas = ExtResource("12_gbmnd")
+region = Rect2(150, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4btnl"]
+atlas = ExtResource("12_gbmnd")
+region = Rect2(175, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ns3gg"]
+atlas = ExtResource("13_opy7t")
+region = Rect2(0, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocbpk"]
+atlas = ExtResource("13_opy7t")
+region = Rect2(25, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wk6"]
+atlas = ExtResource("13_opy7t")
+region = Rect2(50, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycewe"]
+atlas = ExtResource("13_opy7t")
+region = Rect2(75, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw6mo"]
+atlas = ExtResource("13_opy7t")
+region = Rect2(100, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixf5n"]
+atlas = ExtResource("13_opy7t")
+region = Rect2(125, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68oia"]
+atlas = ExtResource("13_opy7t")
+region = Rect2(150, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51ejh"]
+atlas = ExtResource("13_opy7t")
+region = Rect2(175, 0, 25, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8nx8c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m30m7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_voilu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_foj56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkb4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwhmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qtqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gif1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4btnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ns3gg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocbpk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycewe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw6mo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixf5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68oia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51ejh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lh8qt"]
+radius = 66.0
+height = 160.0
+
 [node name="PlayerBase1" type="Node2D"]
 script = ExtResource("1_jjrwa")
 
@@ -3325,8 +3452,8 @@ position = Vector2(15, 6)
 shape = SubResource("WorldBoundaryShape2D_7br20")
 
 [node name="E" type="Sprite2D" parent="."]
-position = Vector2(863, 1227)
-scale = Vector2(3.13942, 2.56667)
+position = Vector2(458, 510)
+scale = Vector2(3.13942, 2.875)
 texture = ExtResource("10_2dthc")
 
 [node name="PlayerGoldLabel" type="Label" parent="."]
@@ -3340,6 +3467,19 @@ text = "$300"
 stream = ExtResource("11_d03xe")
 volume_db = -10.0
 autoplay = true
+
+[node name="PotionMaster" type="Area2D" parent="."]
+script = ExtResource("12_qsw36")
+
+[node name="Animation" type="AnimatedSprite2D" parent="PotionMaster"]
+position = Vector2(782.063, 347.625)
+scale = Vector2(2.5, 3.061)
+sprite_frames = SubResource("SpriteFrames_8nx8c")
+frame_progress = 0.180559
+
+[node name="HitBox" type="CollisionShape2D" parent="PotionMaster"]
+position = Vector2(784, 358)
+shape = SubResource("CapsuleShape2D_lh8qt")
 
 [connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Continue" to="." method="_UnpauseGame"]
 [connection signal="pressed" from="PauseMenu/MarginContainer2/VBoxContainer/Exit" to="." method="_CloseGame"]

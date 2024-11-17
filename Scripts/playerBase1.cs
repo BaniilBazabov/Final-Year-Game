@@ -4,6 +4,7 @@ using System;
 public partial class playerBase1 : Node2D //This file manages the player base and all of its mechanics.
 {
 	Area2D teleportArea;
+	Area2D potionMasterArea;
 	PauseMenu pauseMenu;
 	private Sprite2D e;
 	private float playerGold;
@@ -14,6 +15,7 @@ public partial class playerBase1 : Node2D //This file manages the player base an
 	{
 		e = GetNode<Sprite2D>("E");
 		e.Visible = false;
+		potionMasterArea = GetNode<Area2D>("PotionMaster");
 		teleportArea = GetNode<Area2D>("TeleportArea");
 		pauseMenu = GetNode<PauseMenu>("PauseMenu");
 		pauseMenu.Hide();
@@ -30,6 +32,7 @@ public partial class playerBase1 : Node2D //This file manages the player base an
 		}
 
 		bool isInTeleportArea = false;
+		bool isInPotionMasterArea = false;
 		goldLabel.Text = PlayerRecords.PlayerTotalGold.ToString() + " gold";
 
 		foreach (Node2D body in teleportArea.GetOverlappingBodies())
@@ -41,8 +44,27 @@ public partial class playerBase1 : Node2D //This file manages the player base an
 			}
 		}
 
+		foreach (Node2D body in potionMasterArea.GetOverlappingBodies())
+		{
+			if (body is Player)
+			{
+				isInPotionMasterArea = true;
+				break;
+			}
+		}
+
 		// Set the visibility of the "E" sprite based on player's position
-		e.Visible = isInTeleportArea;
+		if(isInTeleportArea)
+		{
+			e.Position = new Vector2(863, 1227);
+			e.Visible = true;
+		}
+		else if(isInPotionMasterArea)
+		{
+			e.Position = new Vector2(783, 419);
+			e.Visible = true;
+		}
+		else {e.Visible = false;}
 
 		// Teleportation logic
 		if (isInTeleportArea && Input.IsActionJustPressed("interact"))

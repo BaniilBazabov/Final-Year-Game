@@ -18,6 +18,15 @@ public partial class Player : CharacterBody2D //this file manages the player and
 	public float Speed { get; set; } = 300; // How fast the player will move (pixels/sec).
 	ProgressBar bar;
 
+	//permanent upgrades
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public float damageShopUpgrade { get; set; } = 0;
+	public float attackSpeedShopUpgrade { get; set;} = 0;
+	public float healthShopUpgrade { get; set; } = 0;
+	public float coinDropChangeShopUpgrade { get; set; } = 0;
+	public Vector2 pickUpRangeShopUpgrade { get; set;} = new(0, 0);
+
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private LevelUpMenu levelUpMenu;
 	private LevelUpScreen levelUpScreen;
