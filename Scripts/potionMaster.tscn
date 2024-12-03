@@ -1,0 +1,221 @@
+[gd_scene load_steps=30 format=3 uid="uid://dx6fbfgn2ktv5"]
+
+[ext_resource type="Script" path="res://Scripts/PotionMaster.cs" id="1_v6xbc"]
+[ext_resource type="Texture2D" uid="uid://bp8dja2y1l8o4" path="res://Art/NPCTraders/Herbalist/Idle Adding.png" id="2_2o6py"]
+[ext_resource type="Texture2D" uid="uid://dqfawkxgfq8jv" path="res://Art/NPCTraders/Herbalist/Idle Mixing.png" id="3_rvljg"]
+[ext_resource type="Texture2D" uid="uid://cbfunueyy3x5t" path="res://Art/Skills/BonkHammer.png" id="4_um8q6"]
+[ext_resource type="Texture2D" uid="uid://d37ad5vpomlsp" path="res://Art/Skills/BonkHammerAS.png" id="5_6ef1a"]
+[ext_resource type="Texture2D" uid="uid://bqeamijf23sdu" path="res://Art/Skills/AttackRange.png" id="6_0422k"]
+[ext_resource type="Texture2D" uid="uid://ckdp640mc46rf" path="res://Art/Skills/SpeedyFit.png" id="7_hvy2f"]
+[ext_resource type="Texture2D" uid="uid://dq4ngw6oe5n4h" path="res://Art/Skills/AreaOfAttack.png" id="8_i78dl"]
+[ext_resource type="Texture2D" uid="uid://b7y5eubn1yphd" path="res://Art/Skills/GoldenHands.png" id="9_8jrtw"]
+[ext_resource type="Texture2D" uid="uid://bocfxr5dn5wyo" path="res://Art/Skills/HairPreservedRegen.png" id="10_phgtt"]
+[ext_resource type="Texture2D" uid="uid://c6m5bocf0p0sc" path="res://Art/Skills/hairPreservedSprinkles.png" id="11_taadx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m30m7"]
+atlas = ExtResource("2_2o6py")
+region = Rect2(0, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_voilu"]
+atlas = ExtResource("2_2o6py")
+region = Rect2(25, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foj56"]
+atlas = ExtResource("2_2o6py")
+region = Rect2(50, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkb4u"]
+atlas = ExtResource("2_2o6py")
+region = Rect2(75, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwhmx"]
+atlas = ExtResource("2_2o6py")
+region = Rect2(100, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qtqu"]
+atlas = ExtResource("2_2o6py")
+region = Rect2(125, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gif1m"]
+atlas = ExtResource("2_2o6py")
+region = Rect2(150, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4btnl"]
+atlas = ExtResource("2_2o6py")
+region = Rect2(175, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ns3gg"]
+atlas = ExtResource("3_rvljg")
+region = Rect2(0, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocbpk"]
+atlas = ExtResource("3_rvljg")
+region = Rect2(25, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wk6"]
+atlas = ExtResource("3_rvljg")
+region = Rect2(50, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycewe"]
+atlas = ExtResource("3_rvljg")
+region = Rect2(75, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw6mo"]
+atlas = ExtResource("3_rvljg")
+region = Rect2(100, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixf5n"]
+atlas = ExtResource("3_rvljg")
+region = Rect2(125, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68oia"]
+atlas = ExtResource("3_rvljg")
+region = Rect2(150, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51ejh"]
+atlas = ExtResource("3_rvljg")
+region = Rect2(175, 0, 25, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8nx8c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m30m7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_voilu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_foj56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkb4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwhmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qtqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gif1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4btnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ns3gg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocbpk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycewe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw6mo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixf5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68oia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51ejh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lh8qt"]
+radius = 66.0
+height = 160.0
+
+[node name="PotionMaster" type="Area2D"]
+script = ExtResource("1_v6xbc")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(782.063, 347.625)
+scale = Vector2(2.5, 3.061)
+sprite_frames = SubResource("SpriteFrames_8nx8c")
+frame_progress = 0.345319
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(784, 358)
+shape = SubResource("CapsuleShape2D_lh8qt")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 181.0
+offset_top = 115.0
+offset_right = 1123.0
+offset_bottom = 576.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 15.0
+offset_right = 947.0
+offset_bottom = 433.0
+
+[node name="GridContainer" type="GridContainer" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 2.0
+offset_right = 872.0
+offset_bottom = 429.0
+columns = 3
+
+[node name="DmgButton" type="Button" parent="Control/Panel/GridContainer"]
+layout_mode = 2
+text = "Potion of Insane
+Attack Damage"
+icon = ExtResource("4_um8q6")
+
+[node name="ASButton" type="Button" parent="Control/Panel/GridContainer"]
+layout_mode = 2
+text = "Potion of Crazy
+Attack Speed"
+icon = ExtResource("5_6ef1a")
+
+[node name="AttackRangeButton" type="Button" parent="Control/Panel/GridContainer"]
+layout_mode = 2
+text = "Potion of Infinite
+Attack Range"
+icon = ExtResource("6_0422k")
+
+[node name="MSButton" type="Button" parent="Control/Panel/GridContainer"]
+layout_mode = 2
+text = "Potion of *change
+the placeholder*"
+icon = ExtResource("7_hvy2f")
+
+[node name="AttackRadiusButton" type="Button" parent="Control/Panel/GridContainer"]
+layout_mode = 2
+text = "Potion of Massive
+Bonk"
+icon = ExtResource("8_i78dl")
+
+[node name="PickUpRangeButton" type="Button" parent="Control/Panel/GridContainer"]
+layout_mode = 2
+text = "Potion of Shockingly
+Long Hands"
+icon = ExtResource("9_8jrtw")
+
+[node name="HealthRegenButton" type="Button" parent="Control/Panel/GridContainer"]
+layout_mode = 2
+text = "Potion of Superior 
+Hair Regrowth"
+icon = ExtResource("10_phgtt")
+
+[node name="HealthButton" type="Button" parent="Control/Panel/GridContainer"]
+layout_mode = 2
+text = "Potion of Amazing
+Hair Strength"
+icon = ExtResource("11_taadx")

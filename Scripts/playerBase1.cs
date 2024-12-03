@@ -71,6 +71,10 @@ public partial class playerBase1 : Node2D //This file manages the player base an
 		{
 			GetTree().ChangeSceneToFile("res://Scripts/map.tscn");
 		}
+		if(isInPotionMasterArea && Input.IsActionJustPressed("interact"))
+		{
+			potionMasterShop.Show();
+		}
 	}
 	private void _PauseGame()
 	{
